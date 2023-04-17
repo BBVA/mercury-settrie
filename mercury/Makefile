@@ -1,15 +1,15 @@
 help:
 	@echo ""
 	@echo "make [void],"
-	@echo "make help       : Show this help."
+	@echo "make help    : Show this help."
 	@echo ""
-	@echo "make set_trie   : Make the RELEASE SetTrie c++ executable"
-	@echo "make tset_trie  : Make the DEBUG&TEST SetTrie executable."
-	@echo "make link_gram  : Make the RELEASE LinkGrammar c++ executable"
-	@echo "make tlink_gram : Make the DEBUG&TEST LinkGrammar executable."
+	@echo "make settrie : Make the command line settrie executable"
+	@echo "make test    : Make the DEBUG&TEST settrie executable."
+	@echo "make doc_cpp : Build the settrie C++ documentation."
+	@echo "make doc_py  : Build the settrie Python documentation."
 	@echo ""
-	@echo "make clean      : Clean up all files not stored in the repo."
-	@echo "make package    : Clean, compile all and build the mercury-dynamics package."
+	@echo "make clean   : Clean up all files not stored in the repo."
+	@echo "make package : Clean, compile all and build the Python settrie package."
 
 	@echo ""
 
