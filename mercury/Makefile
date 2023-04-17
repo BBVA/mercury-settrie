@@ -24,14 +24,12 @@ ifneq ("$(wildcard mode_test)","")
 	CPPFLAGS := $(TFLAGS)
 endif
 
-CXXFLAGS := -std=c++11 -ILinkGrammar -ISetTrie -Icatch2
+CXXFLAGS := -std=c++11 -Isettrie -Icatch2
 
-VPATH = LinkGrammar SetTrie catch2
+VPATH = settrie catch2
 
-st_main.o: st_main.h SetTrie.h
-SetTrie.o: SetTrie.h
-lg_main.o: lg_main.h LinkGrammar.h
-LinkGrammar.o: LinkGrammar.h
+st_main.o: st_main.h settrie.h
+settrie.o: settrie.h
 
 mode_release:
 	@echo "Switching to mode RELEASE ..."
@@ -45,21 +43,13 @@ mode_test:
 	@touch mode_test
 	$(eval CPPFLAGS = $(TFLAGS))
 
-set_trie: mode_release st_main.o SetTrie.o
-	@echo "Making SetTrie as set_trie ..."
-	g++ -o set_trie st_main.o SetTrie.o
+settrie: mode_release st_main.o settrie.o
+	@echo "Making settrie as settrie_cli ..."
+	g++ -o settrie_cli st_main.o settrie.o
 
-tset_trie: mode_test st_main.o SetTrie.o
-	@echo "Making SetTrie as tset_trie ..."
-	g++ -o tset_trie st_main.o SetTrie.o
-
-link_gram: mode_release lg_main.o LinkGrammar.o
-	@echo "Making LinkGrammar as link_gram ..."
-	g++ -o link_gram lg_main.o LinkGrammar.o
-
-tlink_gram: mode_test lg_main.o LinkGrammar.o
-	@echo "Making LinkGrammar as tlink_gram ..."
-	g++ -o tlink_gram lg_main.o LinkGrammar.o
+test: mode_test st_main.o settrie.o
+	@echo "Making settrie as settrie_test ..."
+	g++ -o settrie_test st_main.o settrie.o
 
 .PHONY : clean
 clean  :
