@@ -1,6 +1,5 @@
 # Towards a full release
 
-  * Complete "make doc_cpp"
   * Complete "make doc_py"
   * Complete pyproject.toml
   * Complete _custombuild.py
