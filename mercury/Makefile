@@ -61,6 +61,11 @@ clean  :
 	@find . | grep __pycache__ | xargs rm -rf
 	@find . | grep -e ".ipynb_checkpoints$" | xargs rm -rf
 
-.PHONY  : package
-package :
-	cd reels && swig -python py_reels.i
+.PHONY	: package
+package: mode_release
+	g++ -c -fpic -O3 -std=c++11 -Isettrie -DNDEBUG -o settrie.o settrie/settrie.cpp
+	cd settrie && swig -python py_settrie.i && mv py_settrie.py __init__.py && cat imports.py >>__init__.py
+	g++ -c -fpic -O3 settrie/py_settrie_wrap.c -Dpython -I/usr/include/python3.8 -I/usr/include/python3.10
+	g++ -shared settrie.o py_settrie_wrap.o -o settrie/_py_settrie.so
+	@printf "\nPython 3.x package was built locally in the folder './settrie'.\n"
+	@printf "\nYou can run 'import settrie' for here or ./test.sh to test it!\n"

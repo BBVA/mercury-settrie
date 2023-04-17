@@ -8,8 +8,6 @@
  * interface file instead.
  * ----------------------------------------------------------------------------- */
 
-#include "settrie.h"
-
 
 #ifndef SWIGPYTHON
 #define SWIGPYTHON
