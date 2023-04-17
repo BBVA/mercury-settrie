@@ -60,6 +60,16 @@ clean:
 	@find . | grep .ipynb_checkpoints | xargs rm -rf
 	@rm -rf ../reference
 
+.PHONY	: doc_cpp
+doc_cpp:
+	@doxygen 2>errors.log 1>/dev/null
+	@cat errors.log
+
+.PHONY	: doc_py
+doc_py:
+	@mkdocs build 2>errors.log 1>/dev/null
+	@cat errors.log | grep -vE 'No type or annotation for'
+
 .PHONY	: package
 package: mode_release
 	g++ -c -fpic -O3 -std=c++11 -Isettrie -DNDEBUG -o settrie.o settrie/settrie.cpp
