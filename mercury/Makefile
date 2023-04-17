@@ -52,14 +52,13 @@ test: mode_test st_main.o settrie.o
 	g++ -o settrie_test st_main.o settrie.o
 
 .PHONY : clean
-clean  :
+clean:
 	@echo "Cleaning up all files not stored in the repo ..."
-	@rm -f *.o SetTrie/*.o
-	@rm -f set_trie tset_trie link_gram tlink_gram
-	@rm -f mode_*
-	@rm -f SetTrie/*.so
+	@rm -f *.o settrie_cli settrie_test mode_* errors.log .coverage
+	@rm -f settrie/*.so settrie/*.o
 	@find . | grep __pycache__ | xargs rm -rf
-	@find . | grep -e ".ipynb_checkpoints$" | xargs rm -rf
+	@find . | grep .ipynb_checkpoints | xargs rm -rf
+	@rm -rf ../reference
 
 .PHONY	: package
 package: mode_release
