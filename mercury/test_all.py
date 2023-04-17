@@ -20,7 +20,7 @@
 
 import os, pickle
 
-from mercury.dynamics.settrie import SetTrie, destroy_settrie
+from settrie import SetTrie, destroy_settrie
 
 
 def test_basic():
@@ -143,10 +143,3 @@ def test_force_errors():
 
     s = SetTrie()
     assert not s.load_from_binary_image(['Load this, please.'])
-
-
-test_basic()
-test_one_page_save_load()
-test_multi_page_save_load()
-test_pickle_save_load()
-test_force_errors()
