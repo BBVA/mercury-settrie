@@ -59,7 +59,7 @@ clean:
 	@rm -f logs/*
 	@find . | grep __pycache__ | xargs rm -rf
 	@find . | grep .ipynb_checkpoints | xargs rm -rf
-	@rm -rf ../reference ../build ../dist ../mercury_settrie.egg-info ../src/mercury_settrie.egg-info
+	@rm -rf ../reference ../build ../dist ../mercury_settrie.egg-info mercury_settrie.egg-info ../.pytest_cache ../notebooks/.ipynb*
 
 .PHONY	: doc_cpp
 doc_cpp:
@@ -74,7 +74,7 @@ doc_py:
 .PHONY	: package
 package: mode_release
 	g++ -c -fpic -O3 -std=c++11 -Isettrie -DNDEBUG -o settrie.o settrie/settrie.cpp
-	cd settrie && swig -python -o py_settrie_wrap.cpp py_settrie.i && mv py_settrie.py __init__.py && cat imports.in >>__init__.py
+	cd settrie && swig -python -o py_settrie_wrap.cpp py_settrie.i && mv py_settrie.py __init__.py && cat ../version.py >>__init__.py && cat imports.in >>__init__.py
 	g++ -c -fpic -O3 settrie/py_settrie_wrap.cpp -Dpython -I/usr/include/python3.8 -I/usr/include/python3.10
 	g++ -shared settrie.o py_settrie_wrap.o -o settrie/_py_settrie.so
 	@printf "\nPython 3.x package was built locally in the folder './settrie'.\n"
