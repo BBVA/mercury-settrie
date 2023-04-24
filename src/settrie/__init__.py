@@ -106,3 +106,4 @@ def destroy_binary_image(image_id):
 
 
 from settrie.SetTrie import SetTrie
+from settrie.SetTrie import Result
