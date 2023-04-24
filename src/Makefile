@@ -59,7 +59,8 @@ clean:
 	@rm -f logs/*
 	@find . | grep __pycache__ | xargs rm -rf
 	@find . | grep .ipynb_checkpoints | xargs rm -rf
-	@rm -rf ../reference ../build ../dist ../mercury_settrie.egg-info mercury_settrie.egg-info ../.pytest_cache ../notebooks/.ipynb*
+	@rm -rf ../reference ../build ../dist ../mercury_settrie.egg-info mercury_settrie.egg-info ../.pytest_cache
+	@rm -rf ../notebooks/.ipynb* ../notebooks/data
 
 .PHONY	: doc_cpp
 doc_cpp:
