@@ -62,7 +62,7 @@ To work with Settrie command line or develop Settrie, you can set up an environm
 
 ```bash
 git clone https://github.com/BBVA/mercury-settrie.git
-cd mercury-settrie/mercury
+cd mercury-settrie/src
 
 make
 ```
