@@ -38,11 +38,12 @@ query result in much less than typing speed.
 
 It is about 200 times faster and 20 times more memory efficient that a pure Python implementation.
 
-## Try it without any installation on Google Colab
+## Try it without any installation in Google Colab
 
 The API is very easy to use. You can see this benchmark notebook for reference.
 
-  * [Benchmark: Comparing two Settrie implementations](__doc__/notebooks/Settrie_benchmark.ipynb)
+  * Benchmark: Comparing two Settrie implementations [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/156_GZrOXR3kgwRRdGTcJqvNjJ65nzHFs)
+
 
 ## Install
 
@@ -71,8 +72,8 @@ Make without arguments gives help. Try all the options. Everything should work a
 
 ## Documentation
 
-  * [Python API](__doc__/reference/python/settrie/)
-  * [C++ API](__doc__/reference/html/index.html)
+  * [Python API](https://bbva.github.io/mercury-settrie/reference/python/reference/settrie/)
+  * [C++ API](https://bbva.github.io/mercury-settrie/reference/html/classSetTrie.html)
   * [Algorithm description: Index Data Structure for Fast Subset and Superset Queries](https://osebje.famnit.upr.si/~savnik/papers/cdares13.pdf)
 
 ## License
