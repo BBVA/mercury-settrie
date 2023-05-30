@@ -42,7 +42,7 @@ It is about 200 times faster and 20 times more memory efficient that a pure Pyth
 
 The API is very easy to use. You can see this benchmark notebook for reference.
 
-  * Benchmark: Comparing two Settrie implementations [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/156_GZrOXR3kgwRRdGTcJqvNjJ65nzHFs)
+  * Benchmark: Comparing two Settrie implementations [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/BBVA/mercury-settrie/blob/master/notebooks/settrie_benchmark_colab.ipynb)
 
 
 ## Install
