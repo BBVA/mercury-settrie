@@ -4,7 +4,7 @@ build-backend	= 'setuptools.build_meta'
 
 [project]
 name			= 'mercury-settrie'
-version			= '1.4.2'
+version			= '1.4.3'
 description		= 'A SetTrie is a container of sets that performs efficient subset and superset queries.'
 license			= {file = "LICENSE.txt"}
 requires-python = '>=3.8'

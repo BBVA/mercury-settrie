@@ -106,7 +106,7 @@ def destroy_binary_image(image_id):
 
 
 # The source version file is <proj>/src/version.py, anything else is auto generated.
-__version__ = '1.4.2'
+__version__ = '1.4.3'
 
 from settrie.SetTrie import SetTrie
 from settrie.SetTrie import Result
