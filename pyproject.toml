@@ -2,7 +2,34 @@
 requires		= ['setuptools>=61.0']
 build-backend	= 'setuptools.build_meta'
 
-
 [project]
-authors			= [{ name = 'Mercury Team', email = 'mercury.group@bbva.com' }]
+name			= 'mercury-settrie'
+version			= '1.4.2'
+description		= 'A SetTrie is a container of sets that performs efficient subset and superset queries.'
+license			= {file = "LICENSE.txt"}
+requires-python = '>=3.8'
+classifiers		= ['Programming Language :: Python :: 3',
+					'License :: OSI Approved :: Apache Software License',
+					'Operating System :: OS Independent']
+keywords		= ['event detection', 'event prediction', 'time series']
+authors			= [{name = 'Mercury Team', email = 'mercury.group@bbva.com'}]
 readme			= 'README.md'
+
+[tool.setuptools]
+package-dir		= {'' = 'src'}
+
+[tool.setuptools.packages.find]
+where			= ['src']
+
+
+# setuptools.setup(
+# ...
+#	long_description = """    Settrie was born from the need of a better implementation of the algorithm for our recommender system. It has
+#		direct application to text indexing for search in logarithmic time of documents containing a set of words. Think of a collection of
+#		documents as a container of the set of words that each document has. Finding all the documents that contain a set of words is
+#		finding the superset of the set of words in the query. A SetTrie will give you the answer --the list of document names-- in
+#		logarithmic time. The data structure is also used in auto-complete applications.""",
+#	url				 = 'https://github.com/BBVA/mercury-settrie',
+# 	platforms		 = ['Linux', 'MacOS', 'Windows'],
+# ...
+# )
