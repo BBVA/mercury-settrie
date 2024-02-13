@@ -81,6 +81,8 @@ class SetTrie {
 		bool	  load		(pBinaryImage &p_bi);
 		bool	  save		(pBinaryImage &p_bi);
 
+		IdMap	   id	  = {};
+
 #ifndef TEST
 	private:
 #endif
@@ -243,6 +245,5 @@ class SetTrie {
 	IdList	   result = {};
 	BinaryTree tree	  = {};
 	StringName name	  = {};
-	IdMap	   id	  = {};
 };
 #endif

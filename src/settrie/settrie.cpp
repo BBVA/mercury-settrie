@@ -860,6 +860,45 @@ int elements (int st_id, int set_id) {
 }
 
 
+/** Return the integer set_id of the next set stored in a SetTrie after a given set_id to iterate over all the sets in the object.
+
+	\param st_id  The st_id returned by a previous new_settrie() call.
+	\param set_id A valid set_id returned by previous call or the constant -1 to return the first set. Note that 0 may be the set_id of
+				  the empty set in case the empty set is in the SetTrie.
+
+	\return		  A unique integer set_id that can be used for iterating, calling set_name() or elements(). On error, it will return -3
+				  if the st_id or the set_id is invalid and -2 if the set_id given is the last set in the object or the object is empty.
+*/
+int next_set_id (int st_id, int set_id) {
+
+	SetTrieServer::iterator it = instance.find(st_id);
+
+	if (it == instance.end())
+		return -3;
+
+	if (set_id == -1) {
+		if (it->second->id.size() == 0)
+			return -2;
+
+		IdMap::iterator jt = it->second->id.begin();
+
+		return jt->first;
+	}
+
+	IdMap::iterator jt = it->second->id.find(set_id);
+
+	if (jt == it->second->id.end())
+		return -3;
+
+	++jt;
+
+	if (jt == it->second->id.end())
+		return -2;
+
+	return jt->first;
+}
+
+
 /** Return the number of unread items in an iterator (returned by subsets() or supersets()).
 
 	\param iter_id  The iter_id returned by a previous subsets() or supersets() call.
