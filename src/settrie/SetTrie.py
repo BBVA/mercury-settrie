@@ -24,6 +24,9 @@ from . import insert
 from . import find
 from . import supersets
 from . import subsets
+from . import elements
+from . import next_set_id
+from . import set_name
 from . import iterator_size
 from . import iterator_next
 from . import destroy_iterator
