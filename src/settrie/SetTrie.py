@@ -18,6 +18,8 @@
 #     See the License for the specific language governing permissions and
 #     limitations under the License.
 
+import re
+
 from . import new_settrie
 from . import destroy_settrie
 from . import insert
@@ -36,7 +38,6 @@ from . import binary_image_size
 from . import binary_image_next
 from . import destroy_binary_image
 
-
 from typing import Set
 
 
@@ -44,8 +45,13 @@ class Result:
     """ Container holding the results of several operations of SetTrie.
     It behaves, basically, like an iterator.
     """
-    def __init__(self, iter_id):
+    def __init__(self, iter_id, auto_serialize = False):
         self.iter_id = iter_id
+        self.as_is   = True
+        if auto_serialize:
+            self.as_is     = False
+            self.to_string = re.compile("^'(.+)'$")
+            self.to_float  = re.compile('^.*\\..*$')
 
     def __del__(self):
         destroy_iterator(self.iter_id)
@@ -55,7 +61,19 @@ class Result:
 
     def __next__(self):
         if iterator_size(self.iter_id) > 0:
-            return iterator_next(self.iter_id)
+            if self.as_is:
+                return iterator_next(self.iter_id)
+
+            s = iterator_next(self.iter_id)
+
+            if self.to_string.match(s):
+                return self.to_string.sub('\\1', s)
+
+            if self.to_float.match(s):
+                return float(s)
+
+            return int(s)
+
         else:
             raise StopIteration
 
