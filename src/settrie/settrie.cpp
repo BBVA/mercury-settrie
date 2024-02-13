@@ -899,6 +899,30 @@ int next_set_id (int st_id, int set_id) {
 }
 
 
+/** Return the name (Python id) of a set stored in a SetTrie identified by its binary (int) set_id.
+
+	\param st_id  The st_id returned by a previous new_settrie() call.
+	\param set_id A valid set_id returned by a successful next_set_id() call.
+
+	\return		  An empty string on any error and the Python id of the set if both st_id and set_id are valid.
+*/
+char *set_name (int st_id, int set_id) {
+
+	SetTrieServer::iterator it = instance.find(st_id);
+
+	answer_buffer[0] = 0;
+
+	if (it != instance.end()) {
+		IdMap::iterator jt = it->second->id.find(set_id);
+
+		if (jt != it->second->id.end())
+			strcpy(answer_buffer, jt->second.c_str());
+	}
+
+	return answer_buffer;
+}
+
+
 /** Return the number of unread items in an iterator (returned by subsets() or supersets()).
 
 	\param iter_id  The iter_id returned by a previous subsets() or supersets() call.
