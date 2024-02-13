@@ -363,6 +363,28 @@ StringSet SetTrie::subsets (String str, char split) {
 }
 
 
+StringSet SetTrie::elements	(int idx) {
+
+	StringSet ret = {};
+
+	if (idx > 0 && idx < tree.size() && tree[idx].is_flagged) {
+		String elem;
+		while (idx > 0) {
+			ElementHash hh = tree[idx].value;
+
+			StringName::iterator it = name.find(hh);
+
+			if (it != name.end())
+				ret.push_back(it->second);
+
+			idx = tree[idx].idx_parent;
+		}
+	}
+
+	return ret;
+}
+
+
 bool SetTrie::load (pBinaryImage &p_bi) {
 
 	int c_block = 0, c_ofs = 0;

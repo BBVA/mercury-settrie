@@ -77,6 +77,7 @@ class SetTrie {
 		StringSet supersets	(String str, char split);
 		StringSet subsets	(StringSet set);
 		StringSet subsets	(String str, char split);
+		StringSet elements	(int idx);
 		bool	  load		(pBinaryImage &p_bi);
 		bool	  save		(pBinaryImage &p_bi);
 
