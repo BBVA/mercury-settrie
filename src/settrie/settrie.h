@@ -44,7 +44,7 @@ struct SetNode {
 
 	int idx_next, idx_child;
 
-	bool is_flaged;
+	bool is_flagged;
 };
 
 typedef std::vector<SetNode>			BinaryTree;
@@ -127,7 +127,7 @@ class SetTrie {
 		int size = set.size();
 
 		if (size == 0) {
-			tree[0].is_flaged = true;
+			tree[0].is_flagged = true;
 
 			return 0;
 		}
@@ -135,7 +135,7 @@ class SetTrie {
 		for (int i = 0; i < size; i++)
 			idx	= insert(idx, set[i]);
 
-		tree[idx].is_flaged = true;
+		tree[idx].is_flagged = true;
 
 		return idx;
 	}
@@ -169,7 +169,7 @@ class SetTrie {
 	inline void all_supersets(int t_idx) {
 
 		while (t_idx != 0) {
-			if (tree[t_idx].is_flaged)
+			if (tree[t_idx].is_flagged)
 				result.push_back(t_idx);
 
 			if (int ci = tree[t_idx].idx_child)
@@ -189,7 +189,7 @@ class SetTrie {
 			if ((t_value = tree[t_idx].value) == (q_value = query[s_idx])) {
 				if (s_idx == last_query_idx) {
 
-					if (tree[t_idx].is_flaged)
+					if (tree[t_idx].is_flagged)
 						result.push_back(t_idx);
 
 					if (int ci = tree[t_idx].idx_child)
@@ -220,7 +220,7 @@ class SetTrie {
 					ns_idx++;
 
 				if (query[ns_idx] == t_value) {
-					if (tree[t_idx].is_flaged)
+					if (tree[t_idx].is_flagged)
 						result.push_back(t_idx);
 
 					int ni;

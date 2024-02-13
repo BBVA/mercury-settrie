@@ -239,7 +239,7 @@ String SetTrie::find (StringSet set) {
 
 	int idx = find(b_set);
 
-	if (idx == 0 || !tree[idx].is_flaged)
+	if (idx == 0 || !tree[idx].is_flagged)
 		return "";
 
 	return id[idx];
@@ -763,7 +763,7 @@ char *find (int st_id, char *set) {
 	\param set	  A Python set serialized by a str() call.
 
 	\return		  0 if no sets were found, or an iter_id > 0 that can be used to retrieve the result using iterator_next()/iterator_size()
-				  and must be explicitely destroyed via destroy_iterator()
+				  and must be explicitly destroyed via destroy_iterator()
 */
 int supersets (int st_id, char *set) {
 
@@ -789,7 +789,7 @@ int supersets (int st_id, char *set) {
 	\param set	  A Python set serialized by a str() call.
 
 	\return		  0 if no sets were found, or an iter_id > 0 that can be used to retrieve the result using iterator_next()/iterator_size()
-				  and must be explicitely destroyed via destroy_iterator()
+				  and must be explicitly destroyed via destroy_iterator()
 */
 int subsets (int st_id, char *set) {
 
