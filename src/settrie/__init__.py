@@ -80,6 +80,15 @@ def supersets(st_id, set):
 def subsets(st_id, set):
     return _py_settrie.subsets(st_id, set)
 
+def elements(st_id, set_id):
+    return _py_settrie.elements(st_id, set_id)
+
+def next_set_id(st_id, set_id):
+    return _py_settrie.next_set_id(st_id, set_id)
+
+def set_name(st_id, set_id):
+    return _py_settrie.set_name(st_id, set_id)
+
 def iterator_size(iter_id):
     return _py_settrie.iterator_size(iter_id)
 
