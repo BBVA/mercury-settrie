@@ -42,7 +42,7 @@ typedef std::map<int, String>			IdMap;
 struct SetNode {
 	ElementHash value;
 
-	int idx_next, idx_child;
+	int idx_next, idx_child, idx_parent;
 
 	bool is_flagged;
 };
@@ -65,7 +65,7 @@ class SetTrie {
 	public:
 
 		SetTrie() {
-			SetNode root = {0, 0, 0, false};
+			SetNode root = {0, 0, 0, -1, false};
 			tree.push_back(root);
 		}
 
@@ -87,8 +87,7 @@ class SetTrie {
 	inline int insert(int idx, ElementHash value) {
 
 		if (tree[idx].idx_child == 0) {
-
-			SetNode node = {value, 0, 0, false};
+			SetNode node = {value, 0, 0, idx, false};
 
 			tree.push_back(node);
 
@@ -106,7 +105,7 @@ class SetTrie {
 				return idx;
 
 			if (tree[idx].idx_next == 0) {
-				SetNode node = {value, 0, 0, false};
+				SetNode node = {value, 0, 0, tree[idx].idx_parent, false};
 
 				tree.push_back(node);
 
