@@ -831,6 +831,35 @@ int subsets (int st_id, char *set) {
 }
 
 
+/** Return all the elements in a set from a SetTrie identified by set_id as an iterator of strings.
+
+	\param st_id  The st_id returned by a previous new_settrie() call.
+	\param set_id A valid set_id returned by a successful next_set_id() call.
+
+	\return		  0 on error or the empty set, or an iter_id > 0 that can be used to retrieve the result using
+				  iterator_next()/iterator_size() and must be explicitly destroyed via destroy_iterator()
+*/
+int elements (int st_id, int set_id) {
+
+	if (set_id == 0)
+		return 0;
+
+	SetTrieServer::iterator it = instance.find(st_id);
+
+	if (it == instance.end())
+		return 0;
+
+	StringSet ret = it->second->elements(set_id);
+
+	if (ret.size() == 0)
+		return 0;
+
+	iterator[++instance_iter] = new StringSet(ret);
+
+	return instance_iter;
+}
+
+
 /** Return the number of unread items in an iterator (returned by subsets() or supersets()).
 
 	\param iter_id  The iter_id returned by a previous subsets() or supersets() call.
