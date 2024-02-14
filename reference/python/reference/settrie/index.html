@@ -340,6 +340,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#settrie.SetTrie.TreeSet" class="md-nav__link">
+    TreeSet
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -468,6 +475,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#settrie.SetTrie.TreeSet" class="md-nav__link">
+    TreeSet
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -522,7 +536,7 @@
 
 
 <h3 id="settrie.SetTrie.Result" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">Result</span><span class="p">(</span><span class="n">iter_id</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">Result</span><span class="p">(</span><span class="n">iter_id</span><span class="p">,</span> <span class="n">auto_serialize</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 </h3>
 
@@ -536,9 +550,19 @@ It behaves, basically, like an iterator.</p>
 
           <details class="quote">
             <summary>Source code in <code>settrie/SetTrie.py</code></summary>
-            <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">44</span>
-<span class="normal">45</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iter_id</span><span class="p">):</span>
+            <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iter_id</span><span class="p">,</span> <span class="n">auto_serialize</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">iter_id</span> <span class="o">=</span> <span class="n">iter_id</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">as_is</span>   <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">if</span> <span class="n">auto_serialize</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">as_is</span>     <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">to_string</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;^&#39;(.+)&#39;$&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">to_float</span>  <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;^.*</span><span class="se">\\</span><span class="s1">..*$&#39;</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
           </details>
 
@@ -581,22 +605,59 @@ for values associated to subsets or supersets of stored key sets.</p>
 
 <details class="example">
   <summary>Example</summary>
-  <div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">mercury.dynamics.SetTrie</span> <span class="kn">import</span> <span class="n">SetTrie</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="n">SetTrie</span><span class="p">()</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">s</span><span class="o">.</span><span class="n">insert</span><span class="p">({</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">},</span> <span class="s1">&#39;id1&#39;</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">s</span><span class="o">.</span><span class="n">insert</span><span class="p">({</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">},</span> <span class="s1">&#39;id2&#39;</span><span class="p">)</span>
+  <div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">settrie</span> <span class="kn">import</span> <span class="n">SetTrie</span>
+<span class="o">&gt;&gt;&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="c1"># Create a SetTrie object</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">stt</span> <span class="o">=</span> <span class="n">SetTrie</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="c1"># Insert some sets</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">stt</span><span class="o">.</span><span class="n">insert</span><span class="p">({</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">},</span> <span class="s1">&#39;id1&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">stt</span><span class="o">.</span><span class="n">insert</span><span class="p">({</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">4.4</span><span class="p">},</span> <span class="s1">&#39;id2&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">stt</span><span class="o">.</span><span class="n">insert</span><span class="p">({</span><span class="s1">&#39;Mon&#39;</span><span class="p">,</span> <span class="s1">&#39;Tue&#39;</span><span class="p">},</span> <span class="s1">&#39;days&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="c1"># Find id by set</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">stt</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}))</span>
+<span class="o">&gt;&gt;&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="c1"># Find ids of all supersets</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="nb">id</span> <span class="ow">in</span> <span class="n">stt</span><span class="o">.</span><span class="n">supersets</span><span class="p">({</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}):</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="nb">print</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="c1"># Find ids of all subsets</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="nb">id</span> <span class="ow">in</span> <span class="n">stt</span><span class="o">.</span><span class="n">subsets</span><span class="p">({</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}):</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="nb">print</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="c1"># Nested iteration over the sets and elements</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">st</span> <span class="ow">in</span> <span class="n">stt</span><span class="p">:</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">st</span><span class="o">.</span><span class="n">elements</span><span class="p">:</span>
+<span class="o">&gt;&gt;&gt;</span>         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  &#39;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="c1"># Store as a pickle file file</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">pickle</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;my_settrie.pickle&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">stt</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="c1"># Load from a pickle file</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;my_settrie.pickle&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="n">tt</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="c1"># Check that they are identical</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">t</span><span class="p">,</span> <span class="n">st</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">tt</span><span class="p">,</span> <span class="n">stt</span><span class="p">):</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="k">assert</span> <span class="n">t</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">st</span><span class="o">.</span><span class="n">id</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="k">for</span> <span class="n">et</span><span class="p">,</span> <span class="n">est</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">elements</span><span class="p">,</span> <span class="n">st</span><span class="o">.</span><span class="n">elements</span><span class="p">):</span>
+<span class="o">&gt;&gt;&gt;</span>         <span class="k">assert</span> <span class="n">et</span> <span class="o">==</span> <span class="n">est</span>
 </code></pre></div>
 </details>
 
           <details class="quote">
             <summary>Source code in <code>settrie/SetTrie.py</code></summary>
-            <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">73</span>
-<span class="normal">74</span>
-<span class="normal">75</span>
-<span class="normal">76</span>
-<span class="normal">77</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">binary_image</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">st_id</span> <span class="o">=</span> <span class="n">new_settrie</span><span class="p">()</span>
-
+            <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">binary_image</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">st_id</span>  <span class="o">=</span> <span class="n">new_settrie</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">set_id</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
     <span class="k">if</span> <span class="n">binary_image</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">load_from_binary_image</span><span class="p">(</span><span class="n">binary_image</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
@@ -630,10 +691,10 @@ for values associated to subsets or supersets of stored key sets.</p>
 
       <details class="quote">
         <summary>Source code in <code>settrie/SetTrie.py</code></summary>
-        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">82</span>
-<span class="normal">83</span>
-<span class="normal">84</span>
-<span class="normal">85</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">__getstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">__getstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Used by pickle.dump() (See https://docs.python.org/3/library/pickle.html)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">save_as_binary_image</span><span class="p">()</span>
@@ -659,11 +720,11 @@ for values associated to subsets or supersets of stored key sets.</p>
 
       <details class="quote">
         <summary>Source code in <code>settrie/SetTrie.py</code></summary>
-        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">87</span>
-<span class="normal">88</span>
-<span class="normal">89</span>
-<span class="normal">90</span>
-<span class="normal">91</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">__setstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">__setstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Used by pickle.load() (See https://docs.python.org/3/library/pickle.html)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">st_id</span> <span class="o">=</span> <span class="n">new_settrie</span><span class="p">()</span>
@@ -731,15 +792,15 @@ for values associated to subsets or supersets of stored key sets.</p>
 
       <details class="quote">
         <summary>Source code in <code>settrie/SetTrie.py</code></summary>
-        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">102</span>
-<span class="normal">103</span>
-<span class="normal">104</span>
-<span class="normal">105</span>
-<span class="normal">106</span>
-<span class="normal">107</span>
-<span class="normal">108</span>
-<span class="normal">109</span>
-<span class="normal">110</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">find</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">set</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">find</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">set</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Finds the ID of the set matching the one provided.</span>
 
 <span class="sd">    Args:</span>
@@ -794,7 +855,7 @@ for values associated to subsets or supersets of stored key sets.</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>String representind the ID for the test</p></td>
+          <td><p>String representing the ID for the test</p></td>
           <td>
               <em>required</em>
           </td>
@@ -804,19 +865,19 @@ for values associated to subsets or supersets of stored key sets.</p>
 
       <details class="quote">
         <summary>Source code in <code>settrie/SetTrie.py</code></summary>
-        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 93</span>
-<span class="normal"> 94</span>
-<span class="normal"> 95</span>
-<span class="normal"> 96</span>
-<span class="normal"> 97</span>
-<span class="normal"> 98</span>
-<span class="normal"> 99</span>
-<span class="normal">100</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">insert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">set</span><span class="p">:</span> <span class="n">Set</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">insert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">set</span><span class="p">:</span> <span class="n">Set</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Inserts a new set into a SetTrie object.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        set: Set to add</span>
-<span class="sd">        id: String representind the ID for the test</span>
+<span class="sd">        id: String representing the ID for the test</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">insert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">st_id</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="nb">set</span><span class="p">),</span> <span class="nb">id</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
@@ -882,32 +943,34 @@ for values associated to subsets or supersets of stored key sets.</p>
 
       <details class="quote">
         <summary>Source code in <code>settrie/SetTrie.py</code></summary>
-        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">157</span>
-<span class="normal">158</span>
-<span class="normal">159</span>
-<span class="normal">160</span>
-<span class="normal">161</span>
-<span class="normal">162</span>
-<span class="normal">163</span>
-<span class="normal">164</span>
-<span class="normal">165</span>
-<span class="normal">166</span>
-<span class="normal">167</span>
-<span class="normal">168</span>
-<span class="normal">169</span>
-<span class="normal">170</span>
-<span class="normal">171</span>
-<span class="normal">172</span>
-<span class="normal">173</span>
-<span class="normal">174</span>
-<span class="normal">175</span>
-<span class="normal">176</span>
-<span class="normal">177</span>
-<span class="normal">178</span>
-<span class="normal">179</span>
-<span class="normal">180</span>
-<span class="normal">181</span>
-<span class="normal">182</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">load_from_binary_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">binary_image</span><span class="p">):</span>
+        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span>
+<span class="normal">276</span>
+<span class="normal">277</span>
+<span class="normal">278</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">load_from_binary_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">binary_image</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Load the state of the c++ SetTrie object from a binary_image</span>
 <span class="sd">        returned by a previous save_as_binary_image() call.</span>
 
@@ -926,6 +989,8 @@ for values associated to subsets or supersets of stored key sets.</p>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">failed</span><span class="p">:</span>
         <span class="n">failed</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">push_binary_image_block</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">st_id</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">set_id</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
 
     <span class="k">if</span> <span class="n">failed</span><span class="p">:</span>
         <span class="n">destroy_settrie</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">st_id</span><span class="p">)</span>
@@ -988,28 +1053,28 @@ for values associated to subsets or supersets of stored key sets.</p>
 
       <details class="quote">
         <summary>Source code in <code>settrie/SetTrie.py</code></summary>
-        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">134</span>
-<span class="normal">135</span>
-<span class="normal">136</span>
-<span class="normal">137</span>
-<span class="normal">138</span>
-<span class="normal">139</span>
-<span class="normal">140</span>
-<span class="normal">141</span>
-<span class="normal">142</span>
-<span class="normal">143</span>
-<span class="normal">144</span>
-<span class="normal">145</span>
-<span class="normal">146</span>
-<span class="normal">147</span>
-<span class="normal">148</span>
-<span class="normal">149</span>
-<span class="normal">150</span>
-<span class="normal">151</span>
-<span class="normal">152</span>
-<span class="normal">153</span>
-<span class="normal">154</span>
-<span class="normal">155</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">save_as_binary_image</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">save_as_binary_image</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Saves the state of the c++ SetTrie object as a Python</span>
 <span class="sd">        list of strings referred to a binary_image.</span>
 
@@ -1094,16 +1159,16 @@ for values associated to subsets or supersets of stored key sets.</p>
 
       <details class="quote">
         <summary>Source code in <code>settrie/SetTrie.py</code></summary>
-        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">123</span>
-<span class="normal">124</span>
-<span class="normal">125</span>
-<span class="normal">126</span>
-<span class="normal">127</span>
-<span class="normal">128</span>
-<span class="normal">129</span>
-<span class="normal">130</span>
-<span class="normal">131</span>
-<span class="normal">132</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">subsets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">set</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Result</span><span class="p">:</span>
+        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">subsets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">set</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Result</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Find all the subsets for a given set.</span>
 
 <span class="sd">    Args:</span>
@@ -1176,16 +1241,16 @@ for values associated to subsets or supersets of stored key sets.</p>
 
       <details class="quote">
         <summary>Source code in <code>settrie/SetTrie.py</code></summary>
-        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">112</span>
-<span class="normal">113</span>
-<span class="normal">114</span>
-<span class="normal">115</span>
-<span class="normal">116</span>
-<span class="normal">117</span>
-<span class="normal">118</span>
-<span class="normal">119</span>
-<span class="normal">120</span>
-<span class="normal">121</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">supersets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">set</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Result</span><span class="p">:</span>
+        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">supersets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">set</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Result</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Find all the supersets of a given set.</span>
 
 <span class="sd">    Args:</span>
@@ -1200,6 +1265,53 @@ for values associated to subsets or supersets of stored key sets.</p>
   </div>
 
 </div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="settrie.SetTrie.TreeSet" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">TreeSet</span><span class="p">(</span><span class="n">st_id</span><span class="p">,</span> <span class="n">set_id</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+
+  
+      <p>Class returned by the iterator of SetTrie to simplify iterating over the elements
+while not computing a list of strings (calling c++ elements()) unless it is required.</p>
+
+
+          <details class="quote">
+            <summary>Source code in <code>settrie/SetTrie.py</code></summary>
+            <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">st_id</span><span class="p">,</span> <span class="n">set_id</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">st_id</span>  <span class="o">=</span> <span class="n">st_id</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">set_id</span> <span class="o">=</span> <span class="n">set_id</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
 
 
 

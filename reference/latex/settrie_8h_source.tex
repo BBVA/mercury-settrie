@@ -46,9 +46,9 @@
 \DoxyCodeLine{42 \textcolor{keyword}{struct }\mbox{\hyperlink{structSetNode}{SetNode}} \{}
 \DoxyCodeLine{43     ElementHash value;}
 \DoxyCodeLine{44 }
-\DoxyCodeLine{45     \textcolor{keywordtype}{int} idx\_next, idx\_child;}
+\DoxyCodeLine{45     \textcolor{keywordtype}{int} idx\_next, idx\_child, idx\_parent;}
 \DoxyCodeLine{46 }
-\DoxyCodeLine{47     \textcolor{keywordtype}{bool} is\_flaged;}
+\DoxyCodeLine{47     \textcolor{keywordtype}{bool} is\_flagged;}
 \DoxyCodeLine{48 \};}
 \DoxyCodeLine{49 }
 \DoxyCodeLine{50 \textcolor{keyword}{typedef} std::vector<SetNode>            BinaryTree;}
@@ -69,7 +69,7 @@
 \DoxyCodeLine{65     \textcolor{keyword}{public}:}
 \DoxyCodeLine{66 }
 \DoxyCodeLine{67         \mbox{\hyperlink{classSetTrie}{SetTrie}}() \{}
-\DoxyCodeLine{68             \mbox{\hyperlink{structSetNode}{SetNode}} root = \{0, 0, 0, \textcolor{keyword}{false}\};}
+\DoxyCodeLine{68             \mbox{\hyperlink{structSetNode}{SetNode}} root = \{0, 0, 0, -\/1, \textcolor{keyword}{false}\};}
 \DoxyCodeLine{69             tree.push\_back(root);}
 \DoxyCodeLine{70         \}}
 \DoxyCodeLine{71 }
@@ -81,174 +81,175 @@
 \DoxyCodeLine{77         StringSet supersets (String str, \textcolor{keywordtype}{char} split);}
 \DoxyCodeLine{78         StringSet subsets   (StringSet set);}
 \DoxyCodeLine{79         StringSet subsets   (String str, \textcolor{keywordtype}{char} split);}
-\DoxyCodeLine{80         \textcolor{keywordtype}{bool}      load      (pBinaryImage \&p\_bi);}
-\DoxyCodeLine{81         \textcolor{keywordtype}{bool}      save      (pBinaryImage \&p\_bi);}
-\DoxyCodeLine{82 }
-\DoxyCodeLine{83 \textcolor{preprocessor}{\#ifndef TEST}}
-\DoxyCodeLine{84     \textcolor{keyword}{private}:}
-\DoxyCodeLine{85 \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{86 }
-\DoxyCodeLine{87     \textcolor{keyword}{inline} \textcolor{keywordtype}{int} insert(\textcolor{keywordtype}{int} idx, ElementHash value) \{}
-\DoxyCodeLine{88 }
-\DoxyCodeLine{89         \textcolor{keywordflow}{if} (tree[idx].idx\_child == 0) \{}
-\DoxyCodeLine{90 }
-\DoxyCodeLine{91             \mbox{\hyperlink{structSetNode}{SetNode}} node = \{value, 0, 0, \textcolor{keyword}{false}\};}
-\DoxyCodeLine{92 }
-\DoxyCodeLine{93             tree.push\_back(node);}
+\DoxyCodeLine{80         StringSet elements  (\textcolor{keywordtype}{int} idx);}
+\DoxyCodeLine{81         \textcolor{keywordtype}{bool}      load      (pBinaryImage \&p\_bi);}
+\DoxyCodeLine{82         \textcolor{keywordtype}{bool}      save      (pBinaryImage \&p\_bi);}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84         IdMap      \textcolor{keywordtype}{id}     = \{\};}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86 \textcolor{preprocessor}{\#ifndef TEST}}
+\DoxyCodeLine{87     \textcolor{keyword}{private}:}
+\DoxyCodeLine{88 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90     \textcolor{keyword}{inline} \textcolor{keywordtype}{int} insert(\textcolor{keywordtype}{int} idx, ElementHash value) \{}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92         \textcolor{keywordflow}{if} (tree[idx].idx\_child == 0) \{}
+\DoxyCodeLine{93             \mbox{\hyperlink{structSetNode}{SetNode}} node = \{value, 0, 0, idx, \textcolor{keyword}{false}\};}
 \DoxyCodeLine{94 }
-\DoxyCodeLine{95             \textcolor{keywordtype}{int} idx\_c = tree.size() -\/ 1;}
+\DoxyCodeLine{95             tree.push\_back(node);}
 \DoxyCodeLine{96 }
-\DoxyCodeLine{97             tree[idx].idx\_child = idx\_c;}
+\DoxyCodeLine{97             \textcolor{keywordtype}{int} idx\_c = tree.size() -\/ 1;}
 \DoxyCodeLine{98 }
-\DoxyCodeLine{99             \textcolor{keywordflow}{return} idx\_c;}
-\DoxyCodeLine{100         \}}
-\DoxyCodeLine{101 }
-\DoxyCodeLine{102         idx = tree[idx].idx\_child;}
+\DoxyCodeLine{99             tree[idx].idx\_child = idx\_c;}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101             \textcolor{keywordflow}{return} idx\_c;}
+\DoxyCodeLine{102         \}}
 \DoxyCodeLine{103 }
-\DoxyCodeLine{104         \textcolor{keywordflow}{while} (\textcolor{keyword}{true}) \{}
-\DoxyCodeLine{105             \textcolor{keywordflow}{if} (tree[idx].value == value)}
-\DoxyCodeLine{106                 \textcolor{keywordflow}{return} idx;}
-\DoxyCodeLine{107 }
-\DoxyCodeLine{108             \textcolor{keywordflow}{if} (tree[idx].idx\_next == 0) \{}
-\DoxyCodeLine{109                 \mbox{\hyperlink{structSetNode}{SetNode}} node = \{value, 0, 0, \textcolor{keyword}{false}\};}
-\DoxyCodeLine{110 }
-\DoxyCodeLine{111                 tree.push\_back(node);}
+\DoxyCodeLine{104         idx = tree[idx].idx\_child;}
+\DoxyCodeLine{105 }
+\DoxyCodeLine{106         \textcolor{keywordflow}{while} (\textcolor{keyword}{true}) \{}
+\DoxyCodeLine{107             \textcolor{keywordflow}{if} (tree[idx].value == value)}
+\DoxyCodeLine{108                 \textcolor{keywordflow}{return} idx;}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110             \textcolor{keywordflow}{if} (tree[idx].idx\_next == 0) \{}
+\DoxyCodeLine{111                 \mbox{\hyperlink{structSetNode}{SetNode}} node = \{value, 0, 0, tree[idx].idx\_parent, \textcolor{keyword}{false}\};}
 \DoxyCodeLine{112 }
-\DoxyCodeLine{113                 \textcolor{keywordtype}{int} idx\_c = tree.size() -\/ 1;}
+\DoxyCodeLine{113                 tree.push\_back(node);}
 \DoxyCodeLine{114 }
-\DoxyCodeLine{115                 tree[idx].idx\_next = idx\_c;}
+\DoxyCodeLine{115                 \textcolor{keywordtype}{int} idx\_c = tree.size() -\/ 1;}
 \DoxyCodeLine{116 }
-\DoxyCodeLine{117                 \textcolor{keywordflow}{return} idx\_c;}
-\DoxyCodeLine{118             \}}
-\DoxyCodeLine{119 }
-\DoxyCodeLine{120             idx = tree[idx].idx\_next;}
-\DoxyCodeLine{121         \}}
-\DoxyCodeLine{122     \}}
-\DoxyCodeLine{123 }
-\DoxyCodeLine{124     \textcolor{keyword}{inline} \textcolor{keywordtype}{int} insert(BinarySet set) \{}
+\DoxyCodeLine{117                 tree[idx].idx\_next = idx\_c;}
+\DoxyCodeLine{118 }
+\DoxyCodeLine{119                 \textcolor{keywordflow}{return} idx\_c;}
+\DoxyCodeLine{120             \}}
+\DoxyCodeLine{121 }
+\DoxyCodeLine{122             idx = tree[idx].idx\_next;}
+\DoxyCodeLine{123         \}}
+\DoxyCodeLine{124     \}}
 \DoxyCodeLine{125 }
-\DoxyCodeLine{126         \textcolor{keywordtype}{int} idx  = 0;}
-\DoxyCodeLine{127         \textcolor{keywordtype}{int} size = set.size();}
-\DoxyCodeLine{128 }
-\DoxyCodeLine{129         \textcolor{keywordflow}{if} (size == 0) \{}
-\DoxyCodeLine{130             tree[0].is\_flaged = \textcolor{keyword}{true};}
-\DoxyCodeLine{131 }
-\DoxyCodeLine{132             \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{133         \}}
-\DoxyCodeLine{134 }
-\DoxyCodeLine{135         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < size; i++)}
-\DoxyCodeLine{136             idx = insert(idx, set[i]);}
-\DoxyCodeLine{137 }
-\DoxyCodeLine{138         tree[idx].is\_flaged = \textcolor{keyword}{true};}
+\DoxyCodeLine{126     \textcolor{keyword}{inline} \textcolor{keywordtype}{int} insert(BinarySet set) \{}
+\DoxyCodeLine{127 }
+\DoxyCodeLine{128         \textcolor{keywordtype}{int} idx  = 0;}
+\DoxyCodeLine{129         \textcolor{keywordtype}{int} size = set.size();}
+\DoxyCodeLine{130 }
+\DoxyCodeLine{131         \textcolor{keywordflow}{if} (size == 0) \{}
+\DoxyCodeLine{132             tree[0].is\_flagged = \textcolor{keyword}{true};}
+\DoxyCodeLine{133 }
+\DoxyCodeLine{134             \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{135         \}}
+\DoxyCodeLine{136 }
+\DoxyCodeLine{137         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < size; i++)}
+\DoxyCodeLine{138             idx = insert(idx, set[i]);}
 \DoxyCodeLine{139 }
-\DoxyCodeLine{140         \textcolor{keywordflow}{return} idx;}
-\DoxyCodeLine{141     \}}
-\DoxyCodeLine{142 }
-\DoxyCodeLine{143     \textcolor{keyword}{inline} \textcolor{keywordtype}{int} find(\textcolor{keywordtype}{int} idx, ElementHash value) \{}
+\DoxyCodeLine{140         tree[idx].is\_flagged = \textcolor{keyword}{true};}
+\DoxyCodeLine{141 }
+\DoxyCodeLine{142         \textcolor{keywordflow}{return} idx;}
+\DoxyCodeLine{143     \}}
 \DoxyCodeLine{144 }
-\DoxyCodeLine{145         \textcolor{keywordflow}{if} ((idx = tree[idx].idx\_child) == 0)}
-\DoxyCodeLine{146             \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{147 }
-\DoxyCodeLine{148         \textcolor{keywordflow}{while} (\textcolor{keyword}{true}) \{}
-\DoxyCodeLine{149             \textcolor{keywordflow}{if} (tree[idx].value == value)}
-\DoxyCodeLine{150                 \textcolor{keywordflow}{return} idx;}
-\DoxyCodeLine{151 }
-\DoxyCodeLine{152             \textcolor{keywordflow}{if} ((idx = tree[idx].idx\_next) == 0)}
-\DoxyCodeLine{153                 \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{154         \}}
-\DoxyCodeLine{155     \}}
-\DoxyCodeLine{156 }
-\DoxyCodeLine{157     \textcolor{keyword}{inline} \textcolor{keywordtype}{int} find(BinarySet set) \{}
+\DoxyCodeLine{145     \textcolor{keyword}{inline} \textcolor{keywordtype}{int} find(\textcolor{keywordtype}{int} idx, ElementHash value) \{}
+\DoxyCodeLine{146 }
+\DoxyCodeLine{147         \textcolor{keywordflow}{if} ((idx = tree[idx].idx\_child) == 0)}
+\DoxyCodeLine{148             \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{149 }
+\DoxyCodeLine{150         \textcolor{keywordflow}{while} (\textcolor{keyword}{true}) \{}
+\DoxyCodeLine{151             \textcolor{keywordflow}{if} (tree[idx].value == value)}
+\DoxyCodeLine{152                 \textcolor{keywordflow}{return} idx;}
+\DoxyCodeLine{153 }
+\DoxyCodeLine{154             \textcolor{keywordflow}{if} ((idx = tree[idx].idx\_next) == 0)}
+\DoxyCodeLine{155                 \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{156         \}}
+\DoxyCodeLine{157     \}}
 \DoxyCodeLine{158 }
-\DoxyCodeLine{159         \textcolor{keywordtype}{int} idx  = 0;}
-\DoxyCodeLine{160         \textcolor{keywordtype}{int} size = set.size();}
-\DoxyCodeLine{161 }
-\DoxyCodeLine{162         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < size; i++)}
-\DoxyCodeLine{163             \textcolor{keywordflow}{if} ((idx = find(idx, set[i])) == 0)}
-\DoxyCodeLine{164                 \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{165 }
-\DoxyCodeLine{166         \textcolor{keywordflow}{return} idx;}
-\DoxyCodeLine{167     \}}
-\DoxyCodeLine{168 }
-\DoxyCodeLine{169     \textcolor{keyword}{inline} \textcolor{keywordtype}{void} all\_supersets(\textcolor{keywordtype}{int} t\_idx) \{}
+\DoxyCodeLine{159     \textcolor{keyword}{inline} \textcolor{keywordtype}{int} find(BinarySet set) \{}
+\DoxyCodeLine{160 }
+\DoxyCodeLine{161         \textcolor{keywordtype}{int} idx  = 0;}
+\DoxyCodeLine{162         \textcolor{keywordtype}{int} size = set.size();}
+\DoxyCodeLine{163 }
+\DoxyCodeLine{164         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < size; i++)}
+\DoxyCodeLine{165             \textcolor{keywordflow}{if} ((idx = find(idx, set[i])) == 0)}
+\DoxyCodeLine{166                 \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{167 }
+\DoxyCodeLine{168         \textcolor{keywordflow}{return} idx;}
+\DoxyCodeLine{169     \}}
 \DoxyCodeLine{170 }
-\DoxyCodeLine{171         \textcolor{keywordflow}{while} (t\_idx != 0) \{}
-\DoxyCodeLine{172             \textcolor{keywordflow}{if} (tree[t\_idx].is\_flaged)}
-\DoxyCodeLine{173                 result.push\_back(t\_idx);}
-\DoxyCodeLine{174 }
-\DoxyCodeLine{175             \textcolor{keywordflow}{if} (\textcolor{keywordtype}{int} ci = tree[t\_idx].idx\_child)}
-\DoxyCodeLine{176                 all\_supersets(ci);}
-\DoxyCodeLine{177 }
-\DoxyCodeLine{178             t\_idx = tree[t\_idx].idx\_next;}
-\DoxyCodeLine{179         \}}
-\DoxyCodeLine{180     \}}
-\DoxyCodeLine{181 }
-\DoxyCodeLine{182     \textcolor{keyword}{inline} \textcolor{keywordtype}{void} supersets(\textcolor{keywordtype}{int} t\_idx, \textcolor{keywordtype}{int} s\_idx) \{}
+\DoxyCodeLine{171     \textcolor{keyword}{inline} \textcolor{keywordtype}{void} all\_supersets(\textcolor{keywordtype}{int} t\_idx) \{}
+\DoxyCodeLine{172 }
+\DoxyCodeLine{173         \textcolor{keywordflow}{while} (t\_idx != 0) \{}
+\DoxyCodeLine{174             \textcolor{keywordflow}{if} (tree[t\_idx].is\_flagged)}
+\DoxyCodeLine{175                 result.push\_back(t\_idx);}
+\DoxyCodeLine{176 }
+\DoxyCodeLine{177             \textcolor{keywordflow}{if} (\textcolor{keywordtype}{int} ci = tree[t\_idx].idx\_child)}
+\DoxyCodeLine{178                 all\_supersets(ci);}
+\DoxyCodeLine{179 }
+\DoxyCodeLine{180             t\_idx = tree[t\_idx].idx\_next;}
+\DoxyCodeLine{181         \}}
+\DoxyCodeLine{182     \}}
 \DoxyCodeLine{183 }
-\DoxyCodeLine{184         \textcolor{keywordflow}{while} (t\_idx != 0) \{}
-\DoxyCodeLine{185             ElementHash t\_value, q\_value;}
-\DoxyCodeLine{186 }
-\DoxyCodeLine{187             \textcolor{keywordtype}{int} found = 0;}
+\DoxyCodeLine{184     \textcolor{keyword}{inline} \textcolor{keywordtype}{void} supersets(\textcolor{keywordtype}{int} t\_idx, \textcolor{keywordtype}{int} s\_idx) \{}
+\DoxyCodeLine{185 }
+\DoxyCodeLine{186         \textcolor{keywordflow}{while} (t\_idx != 0) \{}
+\DoxyCodeLine{187             ElementHash t\_value, q\_value;}
 \DoxyCodeLine{188 }
-\DoxyCodeLine{189             \textcolor{keywordflow}{if} ((t\_value = tree[t\_idx].value) == (q\_value = query[s\_idx])) \{}
-\DoxyCodeLine{190                 \textcolor{keywordflow}{if} (s\_idx == last\_query\_idx) \{}
-\DoxyCodeLine{191 }
-\DoxyCodeLine{192                     \textcolor{keywordflow}{if} (tree[t\_idx].is\_flaged)}
-\DoxyCodeLine{193                         result.push\_back(t\_idx);}
-\DoxyCodeLine{194 }
-\DoxyCodeLine{195                     \textcolor{keywordflow}{if} (\textcolor{keywordtype}{int} ci = tree[t\_idx].idx\_child)}
-\DoxyCodeLine{196                         all\_supersets(ci);}
-\DoxyCodeLine{197 }
-\DoxyCodeLine{198                 \} \textcolor{keywordflow}{else} \{}
-\DoxyCodeLine{199                     found = 1;}
-\DoxyCodeLine{200                     q\_value = query[s\_idx + 1];}
-\DoxyCodeLine{201                 \}}
-\DoxyCodeLine{202             \}}
-\DoxyCodeLine{203 }
-\DoxyCodeLine{204             \textcolor{keywordtype}{int} ni;}
-\DoxyCodeLine{205             \textcolor{keywordflow}{if} (t\_value < q\_value \&\& (ni = tree[t\_idx].idx\_child) != 0)}
-\DoxyCodeLine{206                 supersets(ni, s\_idx + found);}
-\DoxyCodeLine{207 }
-\DoxyCodeLine{208             t\_idx = tree[t\_idx].idx\_next;}
-\DoxyCodeLine{209         \}}
-\DoxyCodeLine{210     \}}
-\DoxyCodeLine{211 }
-\DoxyCodeLine{212     \textcolor{keyword}{inline} \textcolor{keywordtype}{void} subsets(\textcolor{keywordtype}{int} t\_idx, \textcolor{keywordtype}{int} s\_idx) \{}
+\DoxyCodeLine{189             \textcolor{keywordtype}{int} found = 0;}
+\DoxyCodeLine{190 }
+\DoxyCodeLine{191             \textcolor{keywordflow}{if} ((t\_value = tree[t\_idx].value) == (q\_value = query[s\_idx])) \{}
+\DoxyCodeLine{192                 \textcolor{keywordflow}{if} (s\_idx == last\_query\_idx) \{}
+\DoxyCodeLine{193 }
+\DoxyCodeLine{194                     \textcolor{keywordflow}{if} (tree[t\_idx].is\_flagged)}
+\DoxyCodeLine{195                         result.push\_back(t\_idx);}
+\DoxyCodeLine{196 }
+\DoxyCodeLine{197                     \textcolor{keywordflow}{if} (\textcolor{keywordtype}{int} ci = tree[t\_idx].idx\_child)}
+\DoxyCodeLine{198                         all\_supersets(ci);}
+\DoxyCodeLine{199 }
+\DoxyCodeLine{200                 \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{201                     found = 1;}
+\DoxyCodeLine{202                     q\_value = query[s\_idx + 1];}
+\DoxyCodeLine{203                 \}}
+\DoxyCodeLine{204             \}}
+\DoxyCodeLine{205 }
+\DoxyCodeLine{206             \textcolor{keywordtype}{int} ni;}
+\DoxyCodeLine{207             \textcolor{keywordflow}{if} (t\_value < q\_value \&\& (ni = tree[t\_idx].idx\_child) != 0)}
+\DoxyCodeLine{208                 supersets(ni, s\_idx + found);}
+\DoxyCodeLine{209 }
+\DoxyCodeLine{210             t\_idx = tree[t\_idx].idx\_next;}
+\DoxyCodeLine{211         \}}
+\DoxyCodeLine{212     \}}
 \DoxyCodeLine{213 }
-\DoxyCodeLine{214         \textcolor{keywordflow}{while} (t\_idx != 0) \{}
-\DoxyCodeLine{215             ElementHash t\_value;}
-\DoxyCodeLine{216             \textcolor{keywordflow}{if} ((t\_value = tree[t\_idx].value) >= query[s\_idx]) \{}
-\DoxyCodeLine{217                 \textcolor{keywordtype}{int} ns\_idx = s\_idx;}
-\DoxyCodeLine{218 }
-\DoxyCodeLine{219                 \textcolor{keywordflow}{while} (ns\_idx < last\_query\_idx \&\& query[ns\_idx] < t\_value)}
-\DoxyCodeLine{220                     ns\_idx++;}
-\DoxyCodeLine{221 }
-\DoxyCodeLine{222                 \textcolor{keywordflow}{if} (query[ns\_idx] == t\_value) \{}
-\DoxyCodeLine{223                     \textcolor{keywordflow}{if} (tree[t\_idx].is\_flaged)}
-\DoxyCodeLine{224                         result.push\_back(t\_idx);}
-\DoxyCodeLine{225 }
-\DoxyCodeLine{226                     \textcolor{keywordtype}{int} ni;}
-\DoxyCodeLine{227                     \textcolor{keywordflow}{if} ((ni = tree[t\_idx].idx\_child) != 0) \{}
-\DoxyCodeLine{228                         ns\_idx++;}
-\DoxyCodeLine{229 }
-\DoxyCodeLine{230                         \textcolor{keywordflow}{if} (ns\_idx <= last\_query\_idx)}
-\DoxyCodeLine{231                             subsets(ni, ns\_idx);}
-\DoxyCodeLine{232                     \}}
-\DoxyCodeLine{233                 \}}
-\DoxyCodeLine{234             \}}
-\DoxyCodeLine{235 }
-\DoxyCodeLine{236             t\_idx = tree[t\_idx].idx\_next;}
-\DoxyCodeLine{237         \}}
-\DoxyCodeLine{238     \}}
-\DoxyCodeLine{239 }
-\DoxyCodeLine{240     \textcolor{keywordtype}{int} last\_query\_idx;}
+\DoxyCodeLine{214     \textcolor{keyword}{inline} \textcolor{keywordtype}{void} subsets(\textcolor{keywordtype}{int} t\_idx, \textcolor{keywordtype}{int} s\_idx) \{}
+\DoxyCodeLine{215 }
+\DoxyCodeLine{216         \textcolor{keywordflow}{while} (t\_idx != 0) \{}
+\DoxyCodeLine{217             ElementHash t\_value;}
+\DoxyCodeLine{218             \textcolor{keywordflow}{if} ((t\_value = tree[t\_idx].value) >= query[s\_idx]) \{}
+\DoxyCodeLine{219                 \textcolor{keywordtype}{int} ns\_idx = s\_idx;}
+\DoxyCodeLine{220 }
+\DoxyCodeLine{221                 \textcolor{keywordflow}{while} (ns\_idx < last\_query\_idx \&\& query[ns\_idx] < t\_value)}
+\DoxyCodeLine{222                     ns\_idx++;}
+\DoxyCodeLine{223 }
+\DoxyCodeLine{224                 \textcolor{keywordflow}{if} (query[ns\_idx] == t\_value) \{}
+\DoxyCodeLine{225                     \textcolor{keywordflow}{if} (tree[t\_idx].is\_flagged)}
+\DoxyCodeLine{226                         result.push\_back(t\_idx);}
+\DoxyCodeLine{227 }
+\DoxyCodeLine{228                     \textcolor{keywordtype}{int} ni;}
+\DoxyCodeLine{229                     \textcolor{keywordflow}{if} ((ni = tree[t\_idx].idx\_child) != 0) \{}
+\DoxyCodeLine{230                         ns\_idx++;}
+\DoxyCodeLine{231 }
+\DoxyCodeLine{232                         \textcolor{keywordflow}{if} (ns\_idx <= last\_query\_idx)}
+\DoxyCodeLine{233                             subsets(ni, ns\_idx);}
+\DoxyCodeLine{234                     \}}
+\DoxyCodeLine{235                 \}}
+\DoxyCodeLine{236             \}}
+\DoxyCodeLine{237 }
+\DoxyCodeLine{238             t\_idx = tree[t\_idx].idx\_next;}
+\DoxyCodeLine{239         \}}
+\DoxyCodeLine{240     \}}
 \DoxyCodeLine{241 }
-\DoxyCodeLine{242     BinarySet  query  = \{\};}
-\DoxyCodeLine{243     IdList     result = \{\};}
-\DoxyCodeLine{244     BinaryTree tree   = \{\};}
-\DoxyCodeLine{245     StringName name   = \{\};}
-\DoxyCodeLine{246     IdMap      \textcolor{keywordtype}{id}     = \{\};}
-\DoxyCodeLine{247 \};}
-\DoxyCodeLine{248 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{242     \textcolor{keywordtype}{int} last\_query\_idx;}
+\DoxyCodeLine{243 }
+\DoxyCodeLine{244     BinarySet  query  = \{\};}
+\DoxyCodeLine{245     IdList     result = \{\};}
+\DoxyCodeLine{246     BinaryTree tree   = \{\};}
+\DoxyCodeLine{247     StringName name   = \{\};}
+\DoxyCodeLine{248 \};}
+\DoxyCodeLine{249 \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}
