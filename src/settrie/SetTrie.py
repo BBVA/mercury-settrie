@@ -107,10 +107,47 @@ class SetTrie:
 
     Example:
         ```python
-        >>> from mercury.dynamics.SetTrie import SetTrie
-        >>> s = SetTrie()
-        >>> s.insert({2,3}, 'id1')
-        >>> s.insert({2,3,4}, 'id2')
+        >>> from settrie import SetTrie
+        >>>
+        >>> # Create a SetTrie object
+        >>> stt = SetTrie()
+        >>>
+        >>> # Insert some sets
+        >>> stt.insert({2, 3}, 'id1')
+        >>> stt.insert({2, 3, 4.4}, 'id2')
+        >>> stt.insert({'Mon', 'Tue'}, 'days')
+        >>>
+        >>> # Find id by set
+        >>> print(stt.find({2, 3}))
+        >>>
+        >>> # Find ids of all supersets
+        >>> for id in stt.supersets({2, 3}):
+        >>>     print(id)
+        >>>
+        >>> # Find ids of all subsets
+        >>> for id in stt.subsets({2, 3}):
+        >>>     print(id)
+        >>>
+        >>> # Nested iteration over the sets and elements
+        >>> for st in stt:
+        >>>     print(st.id)
+        >>>     for e in st.elements:
+        >>>         print('  ', e)
+        >>>
+        >>> # Store as a pickle file file
+        >>> import pickle
+        >>> with open('my_settrie.pickle', 'wb') as f:
+        >>>     pickle.dump(stt, f)
+        >>>
+        >>> # Load from a pickle file
+        >>> with open('my_settrie.pickle', 'rb') as f:
+        >>>     tt = pickle.load(f)
+        >>>
+        >>> # Check that they are identical
+        >>> for t, st in zip(tt, stt):
+        >>>     assert t.id == st.id
+        >>>     for et, est in zip(t.elements, st.elements):
+        >>>         assert et == est
         ```
     """
     def __init__(self, binary_image=None):
@@ -152,7 +189,7 @@ class SetTrie:
 
         Args:
             set: Set to add
-            id: String representind the ID for the test
+            id: String representing the ID for the test
         """
         insert(self.st_id, str(set), id)
 
