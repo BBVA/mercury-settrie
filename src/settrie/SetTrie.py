@@ -78,6 +78,28 @@ class Result:
             raise StopIteration
 
 
+class TreeSet:
+    """ Class returned by the iterator of SetTrie to simplify iterating over the elements
+    while not computing a list of strings (calling c++ elements()) unless it is required.
+    """
+    def __init__(self, st_id, set_id):
+        self.st_id  = st_id
+        self.set_id = set_id
+
+    @property
+    def id(self):
+        return set_name(self.st_id, self.set_id)
+
+    @property
+    def elements(self):
+        iid = elements(self.st_id, self.set_id)
+
+        if iid == 0:
+            return None
+
+        return Result(iid, auto_serialize=True)
+
+
 class SetTrie:
     """ Mapping container for efficient storage of key-value pairs where
     the keys are sets. Uses an efficient trie implementation. Supports querying
