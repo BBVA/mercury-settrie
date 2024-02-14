@@ -239,7 +239,7 @@ String SetTrie::find (StringSet set) {
 
 	int idx = find(b_set);
 
-	if (idx == 0 || !tree[idx].is_flaged)
+	if (idx == 0 || !tree[idx].is_flagged)
 		return "";
 
 	return id[idx];
@@ -360,6 +360,28 @@ StringSet SetTrie::subsets (String str, char split) {
 		set.push_back(elem);
 
 	return subsets(set);
+}
+
+
+StringSet SetTrie::elements	(int idx) {
+
+	StringSet ret = {};
+
+	if (idx > 0 && idx < tree.size() && tree[idx].is_flagged) {
+		String elem;
+		while (idx > 0) {
+			ElementHash hh = tree[idx].value;
+
+			StringName::iterator it = name.find(hh);
+
+			if (it != name.end())
+				ret.push_back(it->second);
+
+			idx = tree[idx].idx_parent;
+		}
+	}
+
+	return ret;
 }
 
 
@@ -763,7 +785,7 @@ char *find (int st_id, char *set) {
 	\param set	  A Python set serialized by a str() call.
 
 	\return		  0 if no sets were found, or an iter_id > 0 that can be used to retrieve the result using iterator_next()/iterator_size()
-				  and must be explicitely destroyed via destroy_iterator()
+				  and must be explicitly destroyed via destroy_iterator()
 */
 int supersets (int st_id, char *set) {
 
@@ -789,7 +811,7 @@ int supersets (int st_id, char *set) {
 	\param set	  A Python set serialized by a str() call.
 
 	\return		  0 if no sets were found, or an iter_id > 0 that can be used to retrieve the result using iterator_next()/iterator_size()
-				  and must be explicitely destroyed via destroy_iterator()
+				  and must be explicitly destroyed via destroy_iterator()
 */
 int subsets (int st_id, char *set) {
 
@@ -806,6 +828,98 @@ int subsets (int st_id, char *set) {
 	iterator[++instance_iter] = new StringSet(ret);
 
 	return instance_iter;
+}
+
+
+/** Return all the elements in a set from a SetTrie identified by set_id as an iterator of strings.
+
+	\param st_id  The st_id returned by a previous new_settrie() call.
+	\param set_id A valid set_id returned by a successful next_set_id() call.
+
+	\return		  0 on error or the empty set, or an iter_id > 0 that can be used to retrieve the result using
+				  iterator_next()/iterator_size() and must be explicitly destroyed via destroy_iterator()
+*/
+int elements (int st_id, int set_id) {
+
+	if (set_id == 0)
+		return 0;
+
+	SetTrieServer::iterator it = instance.find(st_id);
+
+	if (it == instance.end())
+		return 0;
+
+	StringSet ret = it->second->elements(set_id);
+
+	if (ret.size() == 0)
+		return 0;
+
+	iterator[++instance_iter] = new StringSet(ret);
+
+	return instance_iter;
+}
+
+
+/** Return the integer set_id of the next set stored in a SetTrie after a given set_id to iterate over all the sets in the object.
+
+	\param st_id  The st_id returned by a previous new_settrie() call.
+	\param set_id A valid set_id returned by previous call or the constant -1 to return the first set. Note that 0 may be the set_id of
+				  the empty set in case the empty set is in the SetTrie.
+
+	\return		  A unique integer set_id that can be used for iterating, calling set_name() or elements(). On error, it will return -3
+				  if the st_id or the set_id is invalid and -2 if the set_id given is the last set in the object or the object is empty.
+*/
+int next_set_id (int st_id, int set_id) {
+
+	SetTrieServer::iterator it = instance.find(st_id);
+
+	if (it == instance.end())
+		return -3;
+
+	if (set_id == -1) {
+		if (it->second->id.size() == 0)
+			return -2;
+
+		IdMap::iterator jt = it->second->id.begin();
+
+		return jt->first;
+	}
+
+	IdMap::iterator jt = it->second->id.find(set_id);
+
+	if (jt == it->second->id.end())
+		return -3;
+
+	++jt;
+
+	if (jt == it->second->id.end())
+		return -2;
+
+	return jt->first;
+}
+
+
+/** Return the name (Python id) of a set stored in a SetTrie identified by its binary (int) set_id.
+
+	\param st_id  The st_id returned by a previous new_settrie() call.
+	\param set_id A valid set_id returned by a successful next_set_id() call.
+
+	\return		  An empty string on any error and the Python id of the set if both st_id and set_id are valid.
+*/
+char *set_name (int st_id, int set_id) {
+
+	SetTrieServer::iterator it = instance.find(st_id);
+
+	answer_buffer[0] = 0;
+
+	if (it != instance.end()) {
+		IdMap::iterator jt = it->second->id.find(set_id);
+
+		if (jt != it->second->id.end())
+			strcpy(answer_buffer, jt->second.c_str());
+	}
+
+	return answer_buffer;
 }
 
 

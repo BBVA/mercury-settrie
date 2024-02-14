@@ -18,12 +18,17 @@
 #     See the License for the specific language governing permissions and
 #     limitations under the License.
 
+import re
+
 from . import new_settrie
 from . import destroy_settrie
 from . import insert
 from . import find
 from . import supersets
 from . import subsets
+from . import elements
+from . import next_set_id
+from . import set_name
 from . import iterator_size
 from . import iterator_next
 from . import destroy_iterator
@@ -33,7 +38,6 @@ from . import binary_image_size
 from . import binary_image_next
 from . import destroy_binary_image
 
-
 from typing import Set
 
 
@@ -41,8 +45,13 @@ class Result:
     """ Container holding the results of several operations of SetTrie.
     It behaves, basically, like an iterator.
     """
-    def __init__(self, iter_id):
+    def __init__(self, iter_id, auto_serialize = False):
         self.iter_id = iter_id
+        self.as_is   = True
+        if auto_serialize:
+            self.as_is     = False
+            self.to_string = re.compile("^'(.+)'$")
+            self.to_float  = re.compile('^.*\\..*$')
 
     def __del__(self):
         destroy_iterator(self.iter_id)
@@ -52,9 +61,43 @@ class Result:
 
     def __next__(self):
         if iterator_size(self.iter_id) > 0:
-            return iterator_next(self.iter_id)
+            if self.as_is:
+                return iterator_next(self.iter_id)
+
+            s = iterator_next(self.iter_id)
+
+            if self.to_string.match(s):
+                return self.to_string.sub('\\1', s)
+
+            if self.to_float.match(s):
+                return float(s)
+
+            return int(s)
+
         else:
             raise StopIteration
+
+
+class TreeSet:
+    """ Class returned by the iterator of SetTrie to simplify iterating over the elements
+    while not computing a list of strings (calling c++ elements()) unless it is required.
+    """
+    def __init__(self, st_id, set_id):
+        self.st_id  = st_id
+        self.set_id = set_id
+
+    @property
+    def id(self):
+        return set_name(self.st_id, self.set_id)
+
+    @property
+    def elements(self):
+        iid = elements(self.st_id, self.set_id)
+
+        if iid == 0:
+            return None
+
+        return Result(iid, auto_serialize=True)
 
 
 class SetTrie:
@@ -64,17 +107,68 @@ class SetTrie:
 
     Example:
         ```python
-        >>> from mercury.dynamics.SetTrie import SetTrie
-        >>> s = SetTrie()
-        >>> s.insert({2,3}, 'id1')
-        >>> s.insert({2,3,4}, 'id2')
+        >>> from settrie import SetTrie
+        >>>
+        >>> # Create a SetTrie object
+        >>> stt = SetTrie()
+        >>>
+        >>> # Insert some sets
+        >>> stt.insert({2, 3}, 'id1')
+        >>> stt.insert({2, 3, 4.4}, 'id2')
+        >>> stt.insert({'Mon', 'Tue'}, 'days')
+        >>>
+        >>> # Find id by set
+        >>> print(stt.find({2, 3}))
+        >>>
+        >>> # Find ids of all supersets
+        >>> for id in stt.supersets({2, 3}):
+        >>>     print(id)
+        >>>
+        >>> # Find ids of all subsets
+        >>> for id in stt.subsets({2, 3}):
+        >>>     print(id)
+        >>>
+        >>> # Nested iteration over the sets and elements
+        >>> for st in stt:
+        >>>     print(st.id)
+        >>>     for e in st.elements:
+        >>>         print('  ', e)
+        >>>
+        >>> # Store as a pickle file file
+        >>> import pickle
+        >>> with open('my_settrie.pickle', 'wb') as f:
+        >>>     pickle.dump(stt, f)
+        >>>
+        >>> # Load from a pickle file
+        >>> with open('my_settrie.pickle', 'rb') as f:
+        >>>     tt = pickle.load(f)
+        >>>
+        >>> # Check that they are identical
+        >>> for t, st in zip(tt, stt):
+        >>>     assert t.id == st.id
+        >>>     for et, est in zip(t.elements, st.elements):
+        >>>         assert et == est
         ```
     """
     def __init__(self, binary_image=None):
-        self.st_id = new_settrie()
-
+        self.st_id  = new_settrie()
+        self.set_id = -1
         if binary_image is not None:
             self.load_from_binary_image(binary_image)
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.set_id < 0:
+            self.set_id = -1
+
+        self.set_id = next_set_id(self.st_id, self.set_id)
+
+        if self.set_id < 0:
+            raise StopIteration
+
+        return TreeSet(self.st_id, self.set_id)
 
     def __del__(self):
         destroy_settrie(self.st_id)
@@ -95,7 +189,7 @@ class SetTrie:
 
         Args:
             set: Set to add
-            id: String representind the ID for the test
+            id: String representing the ID for the test
         """
         insert(self.st_id, str(set), id)
 
@@ -173,6 +267,8 @@ class SetTrie:
 
         if not failed:
             failed = not push_binary_image_block(self.st_id, '')
+
+        self.set_id = -1
 
         if failed:
             destroy_settrie(self.st_id)
