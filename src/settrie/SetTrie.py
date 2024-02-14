@@ -114,10 +114,24 @@ class SetTrie:
         ```
     """
     def __init__(self, binary_image=None):
-        self.st_id = new_settrie()
-
+        self.st_id  = new_settrie()
+        self.set_id = -1
         if binary_image is not None:
             self.load_from_binary_image(binary_image)
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.set_id < 0:
+            self.set_id = -1
+
+        self.set_id = next_set_id(self.st_id, self.set_id)
+
+        if self.set_id < 0:
+            raise StopIteration
+
+        return TreeSet(self.st_id, self.set_id)
 
     def __del__(self):
         destroy_settrie(self.st_id)
@@ -216,6 +230,8 @@ class SetTrie:
 
         if not failed:
             failed = not push_binary_image_block(self.st_id, '')
+
+        self.set_id = -1
 
         if failed:
             destroy_settrie(self.st_id)
