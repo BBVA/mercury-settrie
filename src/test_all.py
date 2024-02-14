@@ -20,7 +20,7 @@
 
 import os, pickle
 
-from settrie import SetTrie, destroy_settrie
+from settrie import SetTrie, Result, destroy_settrie, next_set_id, elements, set_name
 
 
 def test_basic():
@@ -143,3 +143,115 @@ def test_force_errors():
 
     s = SetTrie()
     assert not s.load_from_binary_image(['Load this, please.'])
+
+
+def get_iterator_dataset():
+    stt = SetTrie()
+
+    names = ['integers', 'days', 'spanglish', 'días', 'more_integers', 'void', 'planets', 'pai']
+    sets  = [{1, 2, 3, 4}, {'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'},
+             {'lunes', 'martes', 'Wednesday', 'Thursday', 'viernes'},
+             {'lunes', 'martes', 'miércoles', 'jueves', 'viernes'}, {1, 2, 3, 4, 5}, {}, {'Earth', 'Mars', '...'}, {3.0, 3.1, 3.14}]
+
+    for s, n in zip(sets, names):
+       stt.insert(s, n)
+
+    return stt, names, sets
+
+
+def test_nested_iterator_calls():
+    stt, names, sets = get_iterator_dataset()
+
+    assert next_set_id(54321, -1) == -3
+
+    st_id  = stt.st_id
+    N      = 0
+    seen   = []
+    set_id = -1
+
+    assert next_set_id(st_id, 54321) == -3
+
+    st2 = SetTrie()
+
+    assert next_set_id(st2.st_id, set_id) == -2
+
+    assert elements(54321, 0) == 0
+    assert elements(st2.st_id, 0) == 0
+    assert elements(st_id, 54321) == 0
+
+    while set_id != -2:
+        set_id = next_set_id(st_id, set_id)
+
+        if set_id == -2:
+            break
+
+        assert set_id >= 0
+
+        name = set_name(st_id, set_id)
+        assert name in names
+        assert name not in seen
+        seen.append(name)
+
+        iix = elements(st_id, set_id)
+
+        if name == 'void':
+            assert iix == 0
+        else:
+            assert iix > 0
+
+            ee = Result(iix, True)
+            ix = names.index(name)
+            Ne = 0
+            Le = []
+
+            for e in ee:
+                assert e in sets[ix]
+                assert e not in Le
+                Le.append(e)
+                Ne += 1
+
+            assert Ne == len(sets[ix])
+
+        N += 1
+
+    assert N == len(names)
+
+
+def test_nested_iterators():
+    stt, names, sets = get_iterator_dataset()
+
+    N    = 0
+    seen = []
+
+    for st in stt:
+        assert st.id in names
+        assert st.id not in seen
+        seen.append(st.id)
+
+        if st.id == 'void':
+            assert st.elements is None
+        else:
+            ix = names.index(st.id)
+            Ne = 0
+            Le = []
+
+            for e in st.elements:
+                assert e in sets[ix]
+                assert e not in Le
+                Le.append(e)
+                Ne += 1
+
+            assert Ne == len(sets[ix])
+
+        N += 1
+
+    assert N == len(names)
+
+
+# test_basic()
+# test_one_page_save_load()
+# test_multi_page_save_load()
+# test_pickle_save_load()
+# test_force_errors()
+# test_nested_iterator_calls()
+# test_nested_iterators()
