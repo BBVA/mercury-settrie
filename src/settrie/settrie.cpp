@@ -935,6 +935,16 @@ char *set_name (int st_id, int set_id) {
 }
 
 
+//TODO: Document this
+extern int remove (int st_id, int set_id) {
+
+
+//TODO: Implement this
+
+	return -1;
+}
+
+
 /** Return the number of unread items in an iterator (returned by subsets() or supersets()).
 
 	\param iter_id  The iter_id returned by a previous subsets() or supersets() call.
