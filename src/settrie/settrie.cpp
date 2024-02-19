@@ -429,13 +429,6 @@ bool SetTrie::load (pBinaryImage &p_bi) {
 		ElementHash hh;
 		int			ll, count;
 
-		// ElementHash hh = it->first;
-		// image_put(p_bi, &hh, sizeof(hh));
-		// image_put(p_bi, &it->second.count, sizeof(int));
-		// int ll = it->second.name.length();
-		// image_put(p_bi, &ll, sizeof(ll));
-		// image_put(p_bi, (void *) it->second.name.c_str(), ll);
-
 		if (!image_get(p_bi, c_block, c_ofs, &hh, sizeof(hh)))
 			return false;
 
