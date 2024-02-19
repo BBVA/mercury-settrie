@@ -177,9 +177,8 @@ void SetTrie::insert (StringSet set, String str_id) {
 	int size = set.size();
 
 	if (size == 0) {
-		ElementHash hh = 0;
-
-		name[hh] = "";
+		String empty = {""};
+		assign_hh_nam(0, empty);
 
 		id[insert(b_set)] = str_id;
 
@@ -189,7 +188,7 @@ void SetTrie::insert (StringSet set, String str_id) {
 	for (int i = 0; i < size; i++) {
 		ElementHash hh = MurmurHash64A(set[i].c_str(), set[i].length());
 
-		name[hh] = set[i];
+		assign_hh_nam(hh, set[i]);
 
 		b_set.push_back(hh);
 	}
@@ -228,7 +227,7 @@ String SetTrie::find (StringSet set) {
 	for (int i = 0; i < size; i++) {
 		ElementHash hh = MurmurHash64A(set[i].c_str(), set[i].length());
 
-		if (name.find(hh) == name.end())
+		if (hh_nam.find(hh) == hh_nam.end())
 			return "";
 
 		b_set.push_back(hh);
@@ -239,7 +238,7 @@ String SetTrie::find (StringSet set) {
 
 	int idx = find(b_set);
 
-	if (idx == 0 || !tree[idx].is_flagged)
+	if (idx == 0 || tree[idx].state != STATE_HAS_SET_ID)
 		return "";
 
 	return id[idx];
@@ -277,7 +276,7 @@ StringSet SetTrie::supersets (StringSet set) {
 	for (int i = 0; i < size; i++) {
 		ElementHash hh = MurmurHash64A(set[i].c_str(), set[i].length());
 
-		if (name.find(hh) == name.end())
+		if (hh_nam.find(hh) == hh_nam.end())
 			return ret;
 
 		query.push_back(hh);
@@ -327,7 +326,7 @@ StringSet SetTrie::subsets (StringSet set) {
 	for (int i = 0; i < size; i++) {
 		ElementHash hh = MurmurHash64A(set[i].c_str(), set[i].length());
 
-		if (name.find(hh) != name.end())
+		if (hh_nam.find(hh) != hh_nam.end())
 			query.push_back(hh);
 	}
 	if (query.size() == 0)
@@ -372,10 +371,10 @@ StringSet SetTrie::elements	(int idx) {
 		while (idx > 0) {
 			ElementHash hh = tree[idx].value;
 
-			StringName::iterator it = name.find(hh);
+			StringName::iterator it = hh_nam.find(hh);
 
-			if (it != name.end())
-				ret.push_back(it->second);
+			if (it != hh_nam.end())
+				ret.push_back(it->second.name);
 
 			idx = tree[idx].idx_parent;
 		}
@@ -420,7 +419,7 @@ bool SetTrie::load (pBinaryImage &p_bi) {
 	if (!image_get(p_bi, c_block, c_ofs, &hs, sizeof(hs)))
 		return false;
 
-	if ((hs != MurmurHash64A(section.c_str(), section.length())) || (name.size() != 0))
+	if ((hs != MurmurHash64A(section.c_str(), section.length())) || (hh_nam.size() != 0))
 		return false;
 
 	if (!image_get(p_bi, c_block, c_ofs, &len, sizeof(len)))
@@ -428,9 +427,19 @@ bool SetTrie::load (pBinaryImage &p_bi) {
 
 	for (int i = 0; i < len; i++) {
 		ElementHash hh;
-		int			ll;
+		int			ll, count;
+
+		// ElementHash hh = it->first;
+		// image_put(p_bi, &hh, sizeof(hh));
+		// image_put(p_bi, &it->second.count, sizeof(int));
+		// int ll = it->second.name.length();
+		// image_put(p_bi, &ll, sizeof(ll));
+		// image_put(p_bi, (void *) it->second.name.c_str(), ll);
 
 		if (!image_get(p_bi, c_block, c_ofs, &hh, sizeof(hh)))
+			return false;
+
+		if (!image_get(p_bi, c_block, c_ofs, &count, sizeof(count)))
 			return false;
 
 		if (!image_get(p_bi, c_block, c_ofs, &ll, sizeof(ll)))
@@ -439,15 +448,17 @@ bool SetTrie::load (pBinaryImage &p_bi) {
 		if ((ll < 0) || (ll >= 8192))
 			return false;
 
-		if (ll == 0)
-			name[hh] = (char *) "";
-		else {
+		if (ll == 0) {
+			hh_nam[hh].count = count;
+			hh_nam[hh].name	 = (char *) "";
+		} else {
 			if (!image_get(p_bi, c_block, c_ofs, &buffer, ll))
 				return false;
 
 			buffer[ll] = 0;
 
-			name[hh] = buffer;
+			hh_nam[hh].count = count;
+			hh_nam[hh].name	 = buffer;
 		}
 	}
 
@@ -512,16 +523,17 @@ bool SetTrie::save (pBinaryImage &p_bi) {
 
 	image_put(p_bi, &hs, sizeof(hs));
 
-	len = name.size();
+	len = hh_nam.size();
 
 	image_put(p_bi, &len, sizeof(len));
 
-	for (StringName::iterator it = name.begin(); it != name.end(); ++it) {
+	for (StringName::iterator it = hh_nam.begin(); it != hh_nam.end(); ++it) {
 		ElementHash hh = it->first;
 		image_put(p_bi, &hh, sizeof(hh));
-		int ll = it->second.length();
+		image_put(p_bi, &it->second.count, sizeof(int));
+		int ll = it->second.name.length();
 		image_put(p_bi, &ll, sizeof(ll));
-		image_put(p_bi, (void *) it->second.c_str(), ll);
+		image_put(p_bi, (void *) it->second.name.c_str(), ll);
 	}
 
 	section = "id";

@@ -27,19 +27,26 @@
 #include <string>
 #include <vector>
 
+#define IMAGE_BUFF_SIZE				6136
+
 #define STATE_IN_USE				0
 #define STATE_HAS_SET_ID			1
 #define STATE_IS_GARBAGE			2
 
-typedef uint64_t 						ElementHash;
-typedef std::string						String;
+typedef uint64_t 					ElementHash;
+typedef std::string					String;
 
-typedef std::vector<ElementHash>		BinarySet;
-typedef std::vector<String>				StringSet;
-typedef std::vector<int>				IdList;
+typedef std::vector<ElementHash>	BinarySet;
+typedef std::vector<String>			StringSet;
+typedef std::vector<int>			IdList;
 
-typedef std::map<ElementHash, String>	StringName;
-typedef std::map<int, String>			IdMap;
+struct Name {
+	String name;
+	int count;
+};
+
+typedef std::map<ElementHash, Name>	StringName;
+typedef std::map<int, String>		IdMap;
 
 struct SetNode {
 	ElementHash value;
@@ -49,7 +56,7 @@ struct SetNode {
 	uint8_t state;
 };
 
-typedef std::vector<SetNode>			BinaryTree;
+typedef std::vector<SetNode>		BinaryTree;
 
 // This structure is 64encoded to 8K (3 input bytes == 24 bit -> 4 output chars == 24 bit). Therefore, its size is 6K.
 struct ImageBlock {
@@ -58,8 +65,8 @@ struct ImageBlock {
 	uint8_t buffer[IMAGE_BUFF_SIZE];		// makes sizeof(ImageBlock) == 6K
 };
 
-typedef std::vector<ImageBlock>			BinaryImage;
-typedef BinaryImage					   *pBinaryImage;
+typedef std::vector<ImageBlock>		BinaryImage;
+typedef BinaryImage				   *pBinaryImage;
 
 
 class SetTrie {
@@ -241,11 +248,21 @@ class SetTrie {
 		}
 	}
 
+	inline void assign_hh_nam(ElementHash hh, String &name) {
+		StringName::iterator it = hh_nam.find(hh);
+
+		if (it == hh_nam.end()) {
+			hh_nam[hh].count = 0;
+			hh_nam[hh].name  = name; }
+		else
+			hh_nam[hh].count++;
+	}
+
 	int last_query_idx;
 
 	BinarySet  query  = {};
 	IdList	   result = {};
 	BinaryTree tree	  = {};
-	StringName name	  = {};
+	StringName hh_nam = {};
 };
 #endif
