@@ -92,6 +92,9 @@ def set_name(st_id, set_id):
 def remove(st_id, set_id):
     return _py_settrie.remove(st_id, set_id)
 
+def purge(st_id, dry_run):
+    return _py_settrie.purge(st_id, dry_run)
+
 def iterator_size(iter_id):
     return _py_settrie.iterator_size(iter_id)
 
