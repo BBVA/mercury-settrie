@@ -252,7 +252,7 @@ class SetTrie {
 		StringName::iterator it = hh_nam.find(hh);
 
 		if (it == hh_nam.end()) {
-			hh_nam[hh].count = 0;
+			hh_nam[hh].count = 1;
 			hh_nam[hh].name  = name; }
 		else
 			hh_nam[hh].count++;
