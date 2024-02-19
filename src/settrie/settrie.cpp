@@ -367,7 +367,7 @@ StringSet SetTrie::elements	(int idx) {
 
 	StringSet ret = {};
 
-	if (idx > 0 && idx < tree.size() && tree[idx].is_flagged) {
+	if (idx > 0 && idx < tree.size() && tree[idx].state == STATE_HAS_SET_ID) {
 		String elem;
 		while (idx > 0) {
 			ElementHash hh = tree[idx].value;

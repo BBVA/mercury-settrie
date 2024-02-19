@@ -27,7 +27,9 @@
 #include <string>
 #include <vector>
 
-#define IMAGE_BUFF_SIZE					6136
+#define STATE_IN_USE				0
+#define STATE_HAS_SET_ID			1
+#define STATE_IS_GARBAGE			2
 
 typedef uint64_t 						ElementHash;
 typedef std::string						String;
@@ -44,7 +46,7 @@ struct SetNode {
 
 	int idx_next, idx_child, idx_parent;
 
-	bool is_flagged;
+	uint8_t state;
 };
 
 typedef std::vector<SetNode>			BinaryTree;
@@ -65,7 +67,7 @@ class SetTrie {
 	public:
 
 		SetTrie() {
-			SetNode root = {0, 0, 0, -1, false};
+			SetNode root = {0, 0, 0, -1, STATE_IN_USE};
 			tree.push_back(root);
 		}
 
@@ -90,7 +92,7 @@ class SetTrie {
 	inline int insert(int idx, ElementHash value) {
 
 		if (tree[idx].idx_child == 0) {
-			SetNode node = {value, 0, 0, idx, false};
+			SetNode node = {value, 0, 0, idx, STATE_IN_USE};
 
 			tree.push_back(node);
 
@@ -108,7 +110,7 @@ class SetTrie {
 				return idx;
 
 			if (tree[idx].idx_next == 0) {
-				SetNode node = {value, 0, 0, tree[idx].idx_parent, false};
+				SetNode node = {value, 0, 0, tree[idx].idx_parent, STATE_IN_USE};
 
 				tree.push_back(node);
 
@@ -129,7 +131,7 @@ class SetTrie {
 		int size = set.size();
 
 		if (size == 0) {
-			tree[0].is_flagged = true;
+			tree[0].state = STATE_HAS_SET_ID;
 
 			return 0;
 		}
@@ -137,7 +139,7 @@ class SetTrie {
 		for (int i = 0; i < size; i++)
 			idx	= insert(idx, set[i]);
 
-		tree[idx].is_flagged = true;
+		tree[idx].state = STATE_HAS_SET_ID;
 
 		return idx;
 	}
@@ -171,7 +173,7 @@ class SetTrie {
 	inline void all_supersets(int t_idx) {
 
 		while (t_idx != 0) {
-			if (tree[t_idx].is_flagged)
+			if (tree[t_idx].state == STATE_HAS_SET_ID)
 				result.push_back(t_idx);
 
 			if (int ci = tree[t_idx].idx_child)
@@ -191,7 +193,7 @@ class SetTrie {
 			if ((t_value = tree[t_idx].value) == (q_value = query[s_idx])) {
 				if (s_idx == last_query_idx) {
 
-					if (tree[t_idx].is_flagged)
+					if (tree[t_idx].state == STATE_HAS_SET_ID)
 						result.push_back(t_idx);
 
 					if (int ci = tree[t_idx].idx_child)
@@ -222,7 +224,7 @@ class SetTrie {
 					ns_idx++;
 
 				if (query[ns_idx] == t_value) {
-					if (tree[t_idx].is_flagged)
+					if (tree[t_idx].state == STATE_HAS_SET_ID)
 						result.push_back(t_idx);
 
 					int ni;
