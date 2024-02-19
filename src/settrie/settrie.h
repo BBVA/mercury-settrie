@@ -76,6 +76,7 @@ class SetTrie {
 		SetTrie() {
 			SetNode root = {0, 0, 0, -1, STATE_IN_USE};
 			tree.push_back(root);
+			num_dirty_nodes = 0;
 		}
 
 		void	  insert	(StringSet set, String id);
@@ -87,10 +88,13 @@ class SetTrie {
 		StringSet subsets	(StringSet set);
 		StringSet subsets	(String str, char split);
 		StringSet elements	(int idx);
+		int		  remove	(int idx);
+		int		  purge		();
 		bool	  load		(pBinaryImage &p_bi);
 		bool	  save		(pBinaryImage &p_bi);
 
-		IdMap	   id	  = {};
+		IdMap id			  = {};
+		int	  num_dirty_nodes;
 
 #ifndef TEST
 	private:
