@@ -928,13 +928,42 @@ char *set_name (int st_id, int set_id) {
 }
 
 
-//TODO: Document this
+/** Removes a set from the object by its unique integer id.
+
+	\param st_id  The st_id returned by a previous new_settrie() call.
+	\param set_id A valid set_id returned by a successful next_set_id() call.
+
+	\return		  0 on success or a negative error code.
+*/
 extern int remove (int st_id, int set_id) {
 
+	SetTrieServer::iterator it = instance.find(st_id);
 
-//TODO: Implement this
+	if (it == instance.end())
+		return -1;
 
-	return -1;
+	return it->second->remove(set_id);
+}
+
+
+/** Purges (reassigns node integer ids and frees RAM) after a series of remove() calls.
+
+	\param st_id   The st_id returned by a previous new_settrie() call.
+	\param dry_run If nonzero, does nothing and returns the number of dirty nodes.
+
+	\return		   A positive num_dirty_nodes on dry_run, zero on successful completion or a negative error code.
+*/
+extern int purge (int st_id, int dry_run) {
+
+	SetTrieServer::iterator it = instance.find(st_id);
+
+	if (it == instance.end())
+		return -1;
+
+	if (dry_run)
+		return it->second->num_dirty_nodes;
+
+	return it->second->purge();
 }
 
 
