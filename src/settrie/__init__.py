@@ -89,6 +89,9 @@ def next_set_id(st_id, set_id):
 def set_name(st_id, set_id):
     return _py_settrie.set_name(st_id, set_id)
 
+def remove(st_id, set_id):
+    return _py_settrie.remove(st_id, set_id)
+
 def iterator_size(iter_id):
     return _py_settrie.iterator_size(iter_id)
 

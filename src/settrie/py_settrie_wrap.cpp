@@ -2707,6 +2707,7 @@ static swig_module_info swig_module = {swig_types, 1, 0, 0, 0, 0};
 	extern int elements (int st_id, int set_id);
 	extern int next_set_id (int st_id, int set_id);
 	extern char *set_name (int st_id, int set_id);
+	extern int remove (int st_id, int set_id);
 	extern int iterator_size (int iter_id);
 	extern char *iterator_next (int iter_id);
 	extern void destroy_iterator (int iter_id);
@@ -3308,6 +3309,36 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_remove(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject *swig_obj[2] ;
+  int result;
+  
+  if (!SWIG_Python_UnpackTuple(args, "remove", 2, 2, swig_obj)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "remove" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = (int)(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "remove" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = (int)(val2);
+  result = (int)remove(arg1,arg2);
+  resultobj = SWIG_From_int((int)(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_iterator_size(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   int arg1 ;
@@ -3511,6 +3542,7 @@ static PyMethodDef SwigMethods[] = {
 	 { "elements", _wrap_elements, METH_VARARGS, NULL},
 	 { "next_set_id", _wrap_next_set_id, METH_VARARGS, NULL},
 	 { "set_name", _wrap_set_name, METH_VARARGS, NULL},
+	 { "remove", _wrap_remove, METH_VARARGS, NULL},
 	 { "iterator_size", _wrap_iterator_size, METH_O, NULL},
 	 { "iterator_next", _wrap_iterator_next, METH_O, NULL},
 	 { "destroy_iterator", _wrap_destroy_iterator, METH_O, NULL},
