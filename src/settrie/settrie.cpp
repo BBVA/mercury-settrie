@@ -382,6 +382,8 @@ StringSet SetTrie::elements	(int idx) {
 
 	return ret;
 }
+
+
 int SetTrie::purge () {
 
 	if (num_dirty_nodes <= 0)
@@ -1217,6 +1219,82 @@ char *binary_image_next (int image_id) {
 #include "catch.hpp"
 
 #endif
+
+void compare_iterating(pSetTrie p1, pSetTrie p2, bool compare_int_id) {
+
+	REQUIRE(p1->id.size() == p2->id.size());
+
+	IdMap::iterator it1 = p1->id.begin();
+	IdMap::iterator it2 = p2->id.begin();
+
+	while (it1 != p1->id.end()) {
+		REQUIRE(it2 != p2->id.end());
+		if (compare_int_id) {
+			REQUIRE(it1->first  == it2->first);
+			REQUIRE(it1->second == it2->second);
+
+			StringSet el1 = p1->elements(it1->first);
+			StringSet el2 = p2->elements(it2->first);
+
+			REQUIRE(el1.size() == el2.size());
+
+			for (int i = 0; i < el1.size(); i++) {
+				REQUIRE(el1[i] == el2[i]);
+			}
+		} else {
+			IdMap::iterator it3 = p2->id.begin();
+
+			while (it3 != p2->id.end() && it3->second != it1->second)
+				++it3;
+
+			REQUIRE(it1->second == it3->second);
+
+			StringSet el1 = p1->elements(it1->first);
+			StringSet el2 = p2->elements(it3->first);
+
+			REQUIRE(el1.size() == el2.size());
+
+			for (int i = 0; i < el1.size(); i++) {
+				REQUIRE(el1[i] == el2[i]);
+			}
+		}
+		++it1;
+		++it2;
+	}
+	REQUIRE(it2 == p2->id.end());
+}
+
+
+void recurse_tree(pSetTrie ps, int ii, int &n_nodes, int &n_sets, int level) {
+	REQUIRE(level > 0);
+	REQUIRE(ii >= 0);
+	REQUIRE(ii < ps->tree.size());
+
+	int state = ps->tree[ii].state;
+
+	REQUIRE(state >= 0);
+	REQUIRE(state < STATE_IS_GARBAGE);
+
+	if (state == STATE_HAS_SET_ID)
+		n_sets--;
+
+	n_nodes--;
+
+	if (ps->tree[ii].idx_child != 0)
+		recurse_tree(ps, ps->tree[ii].idx_child, n_nodes, n_sets, level - 1);
+
+	if (ps->tree[ii].idx_next != 0)
+		recurse_tree(ps, ps->tree[ii].idx_next, n_nodes, n_sets, level - 1);
+}
+
+
+void check_sets(pSetTrie ps) {
+	for (IdMap::iterator it = ps->id.begin(); it != ps->id.end(); ++it) {
+		REQUIRE(ps->tree[it->first].state == STATE_HAS_SET_ID);
+	}
+}
+
+
 void remove_by_id(pSetTrie ps, char *pID) {
 
 	IdMap::iterator it = ps->id.begin();
