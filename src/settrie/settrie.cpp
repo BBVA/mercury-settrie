@@ -1217,6 +1217,33 @@ char *binary_image_next (int image_id) {
 #include "catch.hpp"
 
 #endif
+void remove_by_id(pSetTrie ps, char *pID) {
+
+	IdMap::iterator it = ps->id.begin();
+
+	while (it != ps->id.end()) {
+		if (strcmp(pID, it->second.c_str()) == 0) {
+			REQUIRE(ps->remove(it->first) == 0);
+
+			int n_nodes = ps->tree.size() - ps->num_dirty_nodes;
+			int n_sets	= ps->id.size();
+
+			recurse_tree(ps, 0, n_nodes, n_sets, 8);
+
+			REQUIRE(n_nodes == 0);
+			REQUIRE(n_sets  == 0);
+
+			check_sets(ps);
+
+			return;
+		}
+
+		++it;
+	}
+	REQUIRE(false);
+}
+
+
 SCENARIO("Test remove() and purge().") {
 
 	int all = new_settrie();
@@ -1238,6 +1265,69 @@ SCENARIO("Test remove() and purge().") {
 	pSetTrie p_bak = instance[bak];
 
 	GIVEN("I load something to my objects.") {
+		insert(all, (char *) "a",		  (char *) "s_00");
+		insert(all, (char *) "a,b",		  (char *) "s_01");
+		insert(all, (char *) "a,b,c",	  (char *) "s_02");
+		insert(all, (char *) "a,b,c,d",	  (char *) "s_03");
+		insert(all, (char *) "a,b,c,d,e", (char *) "s_04");
+		insert(all, (char *) "a,c,d,e",	  (char *) "s_05");
+		insert(all, (char *) "a,b,d,e",	  (char *) "s_06");
+		insert(all, (char *) "a,b,c,e",	  (char *) "s_07");
+		insert(all, (char *) "b",		  (char *) "s_08");
+		insert(all, (char *) "b,c",		  (char *) "s_09");
+		insert(all, (char *) "b,c,d",	  (char *) "s_10");
+		insert(all, (char *) "b,c,d,e",	  (char *) "s_11");
+		insert(all, (char *) "b,d,e",	  (char *) "s_12");
+		insert(all, (char *) "b,c,e",	  (char *) "s_13");
+		insert(all, (char *) "c",		  (char *) "s_14");
+		insert(all, (char *) "c,d",		  (char *) "s_15");
+		insert(all, (char *) "c,d,e",	  (char *) "s_16");
+		insert(all, (char *) "c,e",		  (char *) "s_17");
+		insert(all, (char *) "d",		  (char *) "s_18");
+		insert(all, (char *) "d,e",		  (char *) "s_19");
+		insert(all, (char *) "e",		  (char *) "s_20");
+		insert(all, (char *) "a,e",		  (char *) "s_21");
+
+		insert(con, (char *) "b",		  (char *) "s_08");
+		insert(con, (char *) "b,c",		  (char *) "s_09");
+		insert(con, (char *) "b,c,d",	  (char *) "s_10");
+		insert(con, (char *) "c",		  (char *) "s_14");
+		insert(con, (char *) "c,d",		  (char *) "s_15");
+		insert(con, (char *) "d",		  (char *) "s_18");
+
+		insert(vow, (char *) "a",		  (char *) "s_00");
+		insert(vow, (char *) "e",		  (char *) "s_20");
+		insert(vow, (char *) "a,e",		  (char *) "s_21");
+
+		pBinaryImage p_bi = new BinaryImage;
+
+		REQUIRE(p_all->save(p_bi));
+		REQUIRE(p_bak->load(p_bi));
+
+		delete p_bi;
+
+		compare_iterating(p_all, p_bak, true);
+
+		REQUIRE(p_all->tree.size() == p_bak->tree.size());
+		REQUIRE(p_all->num_dirty_nodes == 0);
+
+		remove_by_id(p_all, (char *) "s_00");
+		remove_by_id(p_all, (char *) "s_01");
+		remove_by_id(p_all, (char *) "s_02");
+		remove_by_id(p_all, (char *) "s_03");
+		remove_by_id(p_all, (char *) "s_04");
+		remove_by_id(p_all, (char *) "s_05");
+		remove_by_id(p_all, (char *) "s_06");
+		remove_by_id(p_all, (char *) "s_07");
+		remove_by_id(p_all, (char *) "s_11");
+		remove_by_id(p_all, (char *) "s_12");
+		remove_by_id(p_all, (char *) "s_13");
+		remove_by_id(p_all, (char *) "s_16");
+		remove_by_id(p_all, (char *) "s_17");
+		remove_by_id(p_all, (char *) "s_19");
+		remove_by_id(p_all, (char *) "s_20");
+		remove_by_id(p_all, (char *) "s_21");
+
 	}
 	destroy_settrie(bak);
 	destroy_settrie(non);
