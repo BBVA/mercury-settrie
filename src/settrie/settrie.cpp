@@ -1328,6 +1328,184 @@ SCENARIO("Test remove() and purge().") {
 		remove_by_id(p_all, (char *) "s_20");
 		remove_by_id(p_all, (char *) "s_21");
 
+		REQUIRE(p_all->tree.size() == p_bak->tree.size());
+		REQUIRE(p_all->num_dirty_nodes == 19);
+
+		compare_iterating(p_all, p_con, false);
+
+		REQUIRE(p_all->tree.size() == p_bak->tree.size());
+		REQUIRE(p_all->tree.size() != p_con->tree.size());
+		REQUIRE(p_all->tree.size() - p_con->tree.size() == 19);
+
+		p_all->purge();
+
+		REQUIRE(p_all->num_dirty_nodes == 0);
+
+		int n_nodes = p_all->tree.size();
+		int n_sets	= p_all->id.size();
+
+		recurse_tree(p_all, 0, n_nodes, n_sets, 8);
+
+		REQUIRE(n_nodes == 0);
+		REQUIRE(n_sets  == 0);
+
+		check_sets(p_all);
+
+		compare_iterating(p_all, p_con, false);
+
+		REQUIRE(p_all->tree.size() == p_con->tree.size());
+
+		REQUIRE(p_bak->num_dirty_nodes == 0);
+
+		remove_by_id(p_bak, (char *) "s_01");
+		remove_by_id(p_bak, (char *) "s_02");
+		remove_by_id(p_bak, (char *) "s_03");
+		remove_by_id(p_bak, (char *) "s_04");
+		remove_by_id(p_bak, (char *) "s_05");
+		remove_by_id(p_bak, (char *) "s_06");
+		remove_by_id(p_bak, (char *) "s_07");
+		remove_by_id(p_bak, (char *) "s_08");
+		remove_by_id(p_bak, (char *) "s_09");
+		remove_by_id(p_bak, (char *) "s_10");
+		remove_by_id(p_bak, (char *) "s_11");
+		remove_by_id(p_bak, (char *) "s_12");
+		remove_by_id(p_bak, (char *) "s_13");
+		remove_by_id(p_bak, (char *) "s_14");
+		remove_by_id(p_bak, (char *) "s_15");
+		remove_by_id(p_bak, (char *) "s_16");
+		remove_by_id(p_bak, (char *) "s_17");
+		remove_by_id(p_bak, (char *) "s_18");
+		remove_by_id(p_bak, (char *) "s_19");
+
+		REQUIRE(p_bak->num_dirty_nodes == 22);
+
+		compare_iterating(p_bak, p_vow, false);
+
+		REQUIRE(p_bak->tree.size() - p_vow->tree.size() == 22);
+
+		p_bak->purge();
+
+		REQUIRE(p_bak->num_dirty_nodes == 0);
+
+		n_nodes = p_bak->tree.size();
+		n_sets	= p_bak->id.size();
+
+		recurse_tree(p_bak, 0, n_nodes, n_sets, 8);
+
+		REQUIRE(n_nodes == 0);
+		REQUIRE(n_sets  == 0);
+
+		check_sets(p_bak);
+
+		compare_iterating(p_bak, p_vow, true);
+
+		REQUIRE(p_bak->tree.size() == p_vow->tree.size());
+
+		remove_by_id(p_all, (char *) "s_08");
+		remove_by_id(p_all, (char *) "s_09");
+		remove_by_id(p_all, (char *) "s_10");
+		remove_by_id(p_all, (char *) "s_14");
+		remove_by_id(p_all, (char *) "s_15");
+		remove_by_id(p_all, (char *) "s_18");
+
+		REQUIRE(p_all->tree.size() == p_con->tree.size());
+		REQUIRE(p_all->num_dirty_nodes == 6);
+
+		compare_iterating(p_all, p_non, true);
+
+		REQUIRE(p_all->tree.size() == p_con->tree.size());
+		REQUIRE(p_all->tree.size() != p_non->tree.size());
+		REQUIRE(p_all->tree.size() - p_non->tree.size() == 6);
+
+		p_all->purge();
+
+		REQUIRE(p_all->num_dirty_nodes == 0);
+
+		n_nodes = p_all->tree.size();
+		n_sets	= p_all->id.size();
+
+		recurse_tree(p_all, 0, n_nodes, n_sets, 8);
+
+		REQUIRE(n_nodes == 0);
+		REQUIRE(n_sets  == 0);
+
+		check_sets(p_all);
+
+		compare_iterating(p_all, p_non, true);
+
+		REQUIRE(p_all->tree.size() == p_non->tree.size());
+		REQUIRE(p_all->tree.size() == 1);
+		REQUIRE(p_all->hh_nam.size() == 0);
+
+		remove_by_id(p_bak, (char *) "s_00");
+		remove_by_id(p_bak, (char *) "s_20");
+		remove_by_id(p_bak, (char *) "s_21");
+
+		REQUIRE(p_bak->tree.size() == p_vow->tree.size());
+		REQUIRE(p_bak->num_dirty_nodes == 3);
+
+		compare_iterating(p_bak, p_non, true);
+
+		REQUIRE(p_bak->tree.size() == p_vow->tree.size());
+		REQUIRE(p_bak->tree.size() != p_non->tree.size());
+		REQUIRE(p_bak->tree.size() - p_non->tree.size() == 3);
+
+		p_bak->purge();
+
+		REQUIRE(p_bak->num_dirty_nodes == 0);
+
+		n_nodes = p_bak->tree.size();
+		n_sets	= p_bak->id.size();
+
+		recurse_tree(p_bak, 0, n_nodes, n_sets, 8);
+
+		REQUIRE(n_nodes == 0);
+		REQUIRE(n_sets  == 0);
+
+		check_sets(p_bak);
+
+		compare_iterating(p_bak, p_non, true);
+
+		REQUIRE(p_bak->tree.size() == p_non->tree.size());
+		REQUIRE(p_bak->tree.size() == 1);
+		REQUIRE(p_bak->hh_nam.size() == 0);
+
+		insert(all, (char *) "a",	  (char *) "s_00");
+		insert(all, (char *) "a,b,c", (char *) "s_02");
+
+		REQUIRE(p_all->id.size() == 2);
+		REQUIRE(p_all->hh_nam.size() == 3);
+		REQUIRE(p_all->tree[0].state == STATE_IN_USE);
+
+		insert(all, (char *) "", (char *) "void");
+
+		REQUIRE(p_all->id.size() == 3);
+		REQUIRE(p_all->hh_nam.size() == 4);
+		REQUIRE(p_all->tree[0].state == STATE_HAS_SET_ID);
+
+		remove_by_id(p_all, (char *) "s_02");
+
+		REQUIRE(p_all->hh_nam.size() == 2);
+
+		REQUIRE(p_all->remove(-1) == -2);
+		REQUIRE(p_all->remove(50) == -2);
+		REQUIRE(p_all->remove(0) == 0);
+
+		REQUIRE(p_all->id.size() == 1);
+		REQUIRE(p_all->hh_nam.size() == 1);
+		REQUIRE(p_all->tree[0].state == STATE_IN_USE);
+
+		REQUIRE(p_all->remove(0) == -2);
+
+		REQUIRE(p_all->purge() == 0);
+		REQUIRE(p_all->purge() == -1);
+
+		insert(all, (char *) "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,r,s,t,u,v,w", (char *) "x");
+		REQUIRE(p_all->tree.size() == 24);
+		REQUIRE(p_all->tree[20].state == STATE_IN_USE);
+		REQUIRE(p_all->remove(20) == -2);
+		p_all->tree[20].state = STATE_HAS_SET_ID;
+		REQUIRE(p_all->remove(20) == -3);
 	}
 	destroy_settrie(bak);
 	destroy_settrie(non);
