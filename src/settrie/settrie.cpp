@@ -1180,6 +1180,35 @@ char *binary_image_next (int image_id) {
 #include "catch.hpp"
 
 #endif
+SCENARIO("Test remove() and purge().") {
+
+	int all = new_settrie();
+	int con = new_settrie();
+	int vow = new_settrie();
+	int non = new_settrie();
+	int bak = new_settrie();
+
+	REQUIRE(all > 0);
+	REQUIRE(con > 0);
+	REQUIRE(vow > 0);
+	REQUIRE(non > 0);
+	REQUIRE(bak > 0);
+
+	pSetTrie p_all = instance[all];
+	pSetTrie p_con = instance[con];
+	pSetTrie p_vow = instance[vow];
+	pSetTrie p_non = instance[non];
+	pSetTrie p_bak = instance[bak];
+
+	GIVEN("I load something to my objects.") {
+	}
+	destroy_settrie(bak);
+	destroy_settrie(non);
+	destroy_settrie(vow);
+	destroy_settrie(con);
+	destroy_settrie(all);
+}
+
 
 SCENARIO("Test image_block_as_string() / string_as_image_block()") {
 
