@@ -382,6 +382,43 @@ StringSet SetTrie::elements	(int idx) {
 
 	return ret;
 }
+int SetTrie::purge () {
+
+	if (num_dirty_nodes <= 0)
+		return -1;
+
+	int ni = 0, size = tree.size();
+	std::map<int, int> is = {}, was = {};
+
+	for (int i = 0; i < size; i++) {
+		if (tree[i].state != STATE_IS_GARBAGE) {
+			was[ni] = i;
+			is [i]  = ni;
+			ni++;
+		}
+	}
+
+	size = was.size();
+	for (int i = 0; i < size; i++) {
+		ni = was[i];
+		if (i != ni)
+			tree[i] = tree[ni];
+		tree[i].idx_child  = is[tree[i].idx_child];
+		tree[i].idx_next   = is[tree[i].idx_next];
+		tree[i].idx_parent = is[tree[i].idx_parent];
+	}
+
+	IdMap id2 = id;
+	id = {};
+	for (IdMap::iterator it = id2.begin(); it != id2.end(); ++it)
+		id[is[it->first]] = it->second;
+
+	tree.resize(size);
+
+	num_dirty_nodes = 0;
+
+	return 0;
+}
 
 
 bool SetTrie::load (pBinaryImage &p_bi) {
