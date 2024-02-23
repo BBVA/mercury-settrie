@@ -95,6 +95,15 @@ for t, st in zip(tt, stt):
     assert t.id == st.id
     for et, est in zip(t.elements, st.elements):
         assert et == est
+
+# Remove sets by id
+stt.remove('id2')
+stt.remove('days')
+
+# After many .remove() calls, the tree has nodes marked as dirty,
+# calling .purge() removes them completely and frees RAM.
+stt.purge()
+
 ```
 
 ## Clone and set up a development environment to work with it
