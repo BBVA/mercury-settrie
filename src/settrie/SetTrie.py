@@ -244,6 +244,8 @@ class SetTrie:
         Returns:
             Zero if the set was removed, a negative integer code on error.
         """
+        self.set_id	= -1
+
         if type(id) is int:
             self.int_ids = None
             return remove(self.st_id, id)
@@ -270,10 +272,14 @@ class SetTrie:
         Returns:
             The number of tree nodes freed.
         """
+        self.set_id	= -1
+
         size = purge(self.st_id, 1) # dry run
 
         if size == 0:
             return 0
+
+        self.int_ids = None
 
         purge(self.st_id, 0)
 
