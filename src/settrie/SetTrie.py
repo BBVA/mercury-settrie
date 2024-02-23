@@ -150,6 +150,14 @@ class SetTrie:
         >>>     assert t.id == st.id
         >>>     for et, est in zip(t.elements, st.elements):
         >>>         assert et == est
+        >>>
+        >>> # Remove sets by id
+        >>> stt.remove('id2')
+        >>> stt.remove('days')
+        >>>
+        >>> # After many .remove() calls, the tree has nodes marked as dirty,
+        >>> # calling .purge() removes them completely and frees RAM.
+        >>> stt.purge()
         ```
     """
     def __init__(self, binary_image=None):
