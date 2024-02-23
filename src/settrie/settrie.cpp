@@ -384,6 +384,70 @@ StringSet SetTrie::elements	(int idx) {
 }
 
 
+int SetTrie::remove	(int idx) {
+
+	if (idx < 0 || idx >= tree.size() || tree[idx].state != STATE_HAS_SET_ID)
+		return -2;
+
+	IdMap::iterator it = id.find(idx);
+
+	if (it == id.end())
+		return -3;
+
+	id.erase(it);
+
+	if (idx == 0) {
+		tree[idx].state = STATE_IN_USE;
+		StringName::iterator it = hh_nam.begin();
+		if (it != hh_nam.end() && it->first == tree[0].value)
+			hh_nam.erase(it);
+
+		return 0;
+	}
+
+	int i = idx;
+	while (i > 0) {
+		ElementHash hh = tree[i].value;
+
+		StringName::iterator it = hh_nam.find(hh);
+
+		if (it != hh_nam.end())
+			if (--it->second.count == 0)
+				hh_nam.erase(it);
+
+		i = tree[i].idx_parent;
+	}
+
+	if (tree[idx].idx_child != 0)
+		tree[idx].state = STATE_IN_USE;
+	else {
+		int stop = false;
+
+		while (!stop) {
+			int lx = tree[idx].idx_parent, j;
+
+			if ((j = tree[lx].idx_child) == idx) {
+				j = tree[idx].idx_next;
+				tree[lx].idx_child = j;
+				stop = (j != 0) || (tree[lx].state == STATE_HAS_SET_ID) || (lx == 0);
+			} else {
+				lx = j;
+				while ((j = tree[lx].idx_next) != idx) lx = j;
+				tree[lx].idx_next = tree[idx].idx_next;
+				stop = true;
+			}
+
+			tree[idx] = {0xbaadF00DbaadF00D, -1, -1, -1, STATE_IS_GARBAGE};
+			num_dirty_nodes++;
+
+			idx = lx;
+		}
+	}
+
+	return 0;
+}
+
+
 int SetTrie::purge () {
 
 	if (num_dirty_nodes <= 0)
