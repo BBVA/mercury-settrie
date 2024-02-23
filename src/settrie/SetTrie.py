@@ -209,7 +209,7 @@ class SetTrie:
         """ Finds the ID of the set matching the one provided.
 
         Args:
-            set: Set for searching
+            set (set): Set for searching
         Returns:
             id of the set with the exact match. An empty string if no match was found.
         """
@@ -219,7 +219,7 @@ class SetTrie:
         """ Find all the supersets of a given set.
 
         Args:
-            set: set for which we want to find all the supersets
+            set (set): set for which we want to find all the supersets
 
         Returns:
             Iterator object with the IDs of the matching supersets.
@@ -230,7 +230,7 @@ class SetTrie:
         """ Find all the subsets for a given set.
 
         Args:
-            set: set for which we want to find all the supersets
+            set (set): set for which we want to find all the supersets
 
         Returns:
             Iterator object with the IDs of the matching subsets.
@@ -245,12 +245,12 @@ class SetTrie:
         dictionary will be rebuilt each time, which requires iterating over the whole object.
 
         Args:
-            id: Either the same string used as the id when the set was inserted via `insert()` or the unique integer id, if known.
+            id (str): Either the same string used as the id when the set was inserted via `insert()` or the unique integer id, if known.
                 The latter is faster. The unique integer id is the id used by the iterator when you iterate over the whole object
                 to identify the specific set.
 
         Returns:
-            Zero if the set was removed, a negative integer code on error.
+            (int): Zero if the set was removed, a negative integer code on error.
         """
         self.set_id	= -1
 
@@ -278,7 +278,7 @@ class SetTrie:
         Call purge() just once after you have finished removing.
 
         Returns:
-            The number of tree nodes freed.
+            (int): The number of tree nodes freed.
         """
         self.set_id	= -1
 
@@ -298,10 +298,10 @@ class SetTrie:
             list of strings referred to a binary_image.
 
         Returns:
-            The binary_image containing the state of the SetTrie. There is
-            not much you can do with it except serializing it as a Python
-            (e.g., pickle) object and loading it into another SetTrie object.
-            Pass it to the constructor to create an initialized object,
+            (list): The binary_image containing the state of the SetTrie. There is
+                not much you can do with it except serializing it as a Python
+                (e.g., pickle) object and loading it into another SetTrie object.
+                Pass it to the constructor to create an initialized object,
         """
         bi_idx = save_as_binary_image(self.st_id)
         if bi_idx == 0:
@@ -321,10 +321,10 @@ class SetTrie:
             returned by a previous save_as_binary_image() call.
 
         Args:
-            binary_image: A list of strings returned by save_as_binary_image()
+            binary_image (list): A list of strings returned by save_as_binary_image()
 
         Returns:
-            True on success, destroys, initializes and returns false on failure.
+            (bool): True on success, destroys, initializes and returns false on failure.
         """
         self.int_ids = None
 
