@@ -29,6 +29,8 @@ from . import subsets
 from . import elements
 from . import next_set_id
 from . import set_name
+from . import remove
+from . import purge
 from . import iterator_size
 from . import iterator_next
 from . import destroy_iterator
@@ -148,11 +150,20 @@ class SetTrie:
         >>>     assert t.id == st.id
         >>>     for et, est in zip(t.elements, st.elements):
         >>>         assert et == est
+        >>>
+        >>> # Remove sets by id
+        >>> stt.remove('id2')
+        >>> stt.remove('days')
+        >>>
+        >>> # After many .remove() calls, the tree has nodes marked as dirty,
+        >>> # calling .purge() removes them completely and frees RAM.
+        >>> stt.purge()
         ```
     """
     def __init__(self, binary_image=None):
-        self.st_id  = new_settrie()
-        self.set_id = -1
+        self.st_id	 = new_settrie()
+        self.set_id	 = -1
+        self.int_ids = None
         if binary_image is not None:
             self.load_from_binary_image(binary_image)
 
@@ -191,6 +202,7 @@ class SetTrie:
             set: Set to add
             id: String representing the ID for the test
         """
+        self.int_ids = None
         insert(self.st_id, str(set), id)
 
     def find(self, set) -> str:
@@ -225,6 +237,62 @@ class SetTrie:
         """
         return Result(subsets(self.st_id, str(set)))
 
+    def remove(self, id):
+        """ Removes a set from the object either by string identifier or by its unique integer id.
+
+        If you need to remove multiple elements, it is more efficient to avoid inserting or purging between remove() calls. The
+        object needs to build a dictionary with all the unique integer ids. Since ids change by insert() and purge() calls, the
+        dictionary will be rebuilt each time, which requires iterating over the whole object.
+
+        Args:
+            id: Either the same string used as the id when the set was inserted via `insert()` or the unique integer id, if known.
+                The latter is faster. The unique integer id is the id used by the iterator when you iterate over the whole object
+                to identify the specific set.
+
+        Returns:
+            Zero if the set was removed, a negative integer code on error.
+        """
+        self.set_id	= -1
+
+        if type(id) is int:
+            self.int_ids = None
+            return remove(self.st_id, id)
+
+        if self.int_ids is None:
+            self.int_ids = dict()
+            int_id = next_set_id(self.st_id, -1)
+            while int_id >= 0:
+                self.int_ids[set_name(self.st_id, int_id)] = int_id
+                int_id = next_set_id(self.st_id, int_id)
+
+        int_id = self.int_ids.pop(id, None)
+        if int_id is None:
+            return -1
+
+        return remove(self.st_id, int_id)
+
+    def purge(self):
+        """ Purges (reassigns node integer ids and frees RAM) after a series of remove() calls.
+
+        If you need to remove multiple elements, it is more efficient to avoid inserting or purging between remove() calls.
+        Call purge() just once after you have finished removing.
+
+        Returns:
+            The number of tree nodes freed.
+        """
+        self.set_id	= -1
+
+        size = purge(self.st_id, 1) # dry run
+
+        if size == 0:
+            return 0
+
+        self.int_ids = None
+
+        purge(self.st_id, 0)
+
+        return size
+
     def save_as_binary_image(self):
         """ Saves the state of the c++ SetTrie object as a Python
             list of strings referred to a binary_image.
@@ -258,6 +326,8 @@ class SetTrie:
         Returns:
             True on success, destroys, initializes and returns false on failure.
         """
+        self.int_ids = None
+
         failed = False
 
         for binary_image_block in binary_image:

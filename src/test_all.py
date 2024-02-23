@@ -248,6 +248,100 @@ def test_nested_iterators():
     assert N == len(names)
 
 
+def test_remove_purge():
+    stt, names, _ = get_iterator_dataset()
+
+    assert stt.purge() == 0
+
+    N = 0
+    for st in stt:
+        assert st.id in names
+        N += 1
+    assert N == len(names)
+
+    name = names.pop(4)
+    assert stt.remove(name) == 0
+    assert stt.remove(name) < 0
+
+    N = 0
+    for st in stt:
+        assert st.id in names
+        N += 1
+    assert N == len(names)
+
+    name = names.pop(2)
+    assert stt.remove(name) == 0
+
+    N = 0
+    for st in stt:
+        assert st.id in names
+        N += 1
+    assert N == len(names)
+
+    name = names.pop(0)
+    assert stt.remove(name) == 0
+
+    N = 0
+    for st in stt:
+        assert st.id in names
+        N += 1
+    assert N == len(names)
+
+    name = names.pop(0)
+    assert stt.remove(name) == 0
+
+    N = 0
+    for st in stt:
+        assert st.id in names
+        N += 1
+    assert N == len(names)
+
+    removed = stt.purge()
+    assert removed > 0
+    assert stt.purge() == 0
+
+    st = next(stt)
+
+    name = st.id
+    names.pop(names.index(name))
+    assert stt.remove(st.set_id) == 0
+    assert stt.remove(st.set_id) < 0
+    stt.set_id = -1
+
+    N = 0
+    for st in stt:
+        assert st.id in names
+        N += 1
+    assert N == len(names)
+
+    st = next(stt)
+
+    name = st.id
+    names.pop(names.index(name))
+    assert stt.remove(st.set_id) == 0
+    assert stt.remove(st.set_id) < 0
+    stt.set_id = -1
+
+    N = 0
+    for st in stt:
+        assert st.id in names
+        N += 1
+    assert N == len(names)
+
+    ll = list(stt)
+    assert len(ll) == 2
+
+    assert stt.remove('pai') == 0
+    assert stt.remove('planets') == 0
+
+    ll = list(stt)
+    assert len(ll) == 0
+
+    removed = stt.purge()
+    assert removed > 0
+    assert stt.purge() == 0
+
+
 # test_basic()
 # test_one_page_save_load()
 # test_multi_page_save_load()
@@ -255,3 +349,4 @@ def test_nested_iterators():
 # test_force_errors()
 # test_nested_iterator_calls()
 # test_nested_iterators()
+# test_remove_purge()

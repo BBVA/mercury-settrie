@@ -27,27 +27,36 @@
 #include <string>
 #include <vector>
 
-#define IMAGE_BUFF_SIZE					6136
+#define IMAGE_BUFF_SIZE				6136
 
-typedef uint64_t 						ElementHash;
-typedef std::string						String;
+#define STATE_IN_USE				0
+#define STATE_HAS_SET_ID			1
+#define STATE_IS_GARBAGE			2
 
-typedef std::vector<ElementHash>		BinarySet;
-typedef std::vector<String>				StringSet;
-typedef std::vector<int>				IdList;
+typedef uint64_t 					ElementHash;
+typedef std::string					String;
 
-typedef std::map<ElementHash, String>	StringName;
-typedef std::map<int, String>			IdMap;
+typedef std::vector<ElementHash>	BinarySet;
+typedef std::vector<String>			StringSet;
+typedef std::vector<int>			IdList;
+
+struct Name {
+	String name;
+	int count;
+};
+
+typedef std::map<ElementHash, Name>	StringName;
+typedef std::map<int, String>		IdMap;
 
 struct SetNode {
 	ElementHash value;
 
 	int idx_next, idx_child, idx_parent;
 
-	bool is_flagged;
+	uint8_t state;
 };
 
-typedef std::vector<SetNode>			BinaryTree;
+typedef std::vector<SetNode>		BinaryTree;
 
 // This structure is 64encoded to 8K (3 input bytes == 24 bit -> 4 output chars == 24 bit). Therefore, its size is 6K.
 struct ImageBlock {
@@ -56,8 +65,8 @@ struct ImageBlock {
 	uint8_t buffer[IMAGE_BUFF_SIZE];		// makes sizeof(ImageBlock) == 6K
 };
 
-typedef std::vector<ImageBlock>			BinaryImage;
-typedef BinaryImage					   *pBinaryImage;
+typedef std::vector<ImageBlock>		BinaryImage;
+typedef BinaryImage				   *pBinaryImage;
 
 
 class SetTrie {
@@ -65,8 +74,9 @@ class SetTrie {
 	public:
 
 		SetTrie() {
-			SetNode root = {0, 0, 0, -1, false};
+			SetNode root = {0, 0, 0, -1, STATE_IN_USE};
 			tree.push_back(root);
+			num_dirty_nodes = 0;
 		}
 
 		void	  insert	(StringSet set, String id);
@@ -78,10 +88,13 @@ class SetTrie {
 		StringSet subsets	(StringSet set);
 		StringSet subsets	(String str, char split);
 		StringSet elements	(int idx);
+		int		  remove	(int idx);
+		int		  purge		();
 		bool	  load		(pBinaryImage &p_bi);
 		bool	  save		(pBinaryImage &p_bi);
 
-		IdMap	   id	  = {};
+		IdMap id			  = {};
+		int	  num_dirty_nodes;
 
 #ifndef TEST
 	private:
@@ -90,7 +103,7 @@ class SetTrie {
 	inline int insert(int idx, ElementHash value) {
 
 		if (tree[idx].idx_child == 0) {
-			SetNode node = {value, 0, 0, idx, false};
+			SetNode node = {value, 0, 0, idx, STATE_IN_USE};
 
 			tree.push_back(node);
 
@@ -108,7 +121,7 @@ class SetTrie {
 				return idx;
 
 			if (tree[idx].idx_next == 0) {
-				SetNode node = {value, 0, 0, tree[idx].idx_parent, false};
+				SetNode node = {value, 0, 0, tree[idx].idx_parent, STATE_IN_USE};
 
 				tree.push_back(node);
 
@@ -129,7 +142,7 @@ class SetTrie {
 		int size = set.size();
 
 		if (size == 0) {
-			tree[0].is_flagged = true;
+			tree[0].state = STATE_HAS_SET_ID;
 
 			return 0;
 		}
@@ -137,7 +150,7 @@ class SetTrie {
 		for (int i = 0; i < size; i++)
 			idx	= insert(idx, set[i]);
 
-		tree[idx].is_flagged = true;
+		tree[idx].state = STATE_HAS_SET_ID;
 
 		return idx;
 	}
@@ -171,7 +184,7 @@ class SetTrie {
 	inline void all_supersets(int t_idx) {
 
 		while (t_idx != 0) {
-			if (tree[t_idx].is_flagged)
+			if (tree[t_idx].state == STATE_HAS_SET_ID)
 				result.push_back(t_idx);
 
 			if (int ci = tree[t_idx].idx_child)
@@ -191,7 +204,7 @@ class SetTrie {
 			if ((t_value = tree[t_idx].value) == (q_value = query[s_idx])) {
 				if (s_idx == last_query_idx) {
 
-					if (tree[t_idx].is_flagged)
+					if (tree[t_idx].state == STATE_HAS_SET_ID)
 						result.push_back(t_idx);
 
 					if (int ci = tree[t_idx].idx_child)
@@ -222,7 +235,7 @@ class SetTrie {
 					ns_idx++;
 
 				if (query[ns_idx] == t_value) {
-					if (tree[t_idx].is_flagged)
+					if (tree[t_idx].state == STATE_HAS_SET_ID)
 						result.push_back(t_idx);
 
 					int ni;
@@ -239,11 +252,21 @@ class SetTrie {
 		}
 	}
 
+	inline void assign_hh_nam(ElementHash hh, String &name) {
+		StringName::iterator it = hh_nam.find(hh);
+
+		if (it == hh_nam.end()) {
+			hh_nam[hh].count = 1;
+			hh_nam[hh].name  = name; }
+		else
+			hh_nam[hh].count++;
+	}
+
 	int last_query_idx;
 
 	BinarySet  query  = {};
 	IdList	   result = {};
 	BinaryTree tree	  = {};
-	StringName name	  = {};
+	StringName hh_nam = {};
 };
 #endif

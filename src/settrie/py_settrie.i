@@ -10,6 +10,8 @@
 	extern int elements (int st_id, int set_id);
 	extern int next_set_id (int st_id, int set_id);
 	extern char *set_name (int st_id, int set_id);
+	extern int remove (int st_id, int set_id);
+	extern int purge (int st_id, int dry_run);
 	extern int iterator_size (int iter_id);
 	extern char *iterator_next (int iter_id);
 	extern void destroy_iterator (int iter_id);
@@ -29,6 +31,8 @@ extern int subsets (int st_id, char *set);
 extern int elements (int st_id, int set_id);
 extern int next_set_id (int st_id, int set_id);
 extern char *set_name (int st_id, int set_id);
+extern int remove (int st_id, int set_id);
+extern int purge (int st_id, int dry_run);
 extern int iterator_size (int iter_id);
 extern char *iterator_next (int iter_id);
 extern void destroy_iterator (int iter_id);

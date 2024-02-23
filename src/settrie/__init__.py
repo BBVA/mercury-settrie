@@ -89,6 +89,12 @@ def next_set_id(st_id, set_id):
 def set_name(st_id, set_id):
     return _py_settrie.set_name(st_id, set_id)
 
+def remove(st_id, set_id):
+    return _py_settrie.remove(st_id, set_id)
+
+def purge(st_id, dry_run):
+    return _py_settrie.purge(st_id, dry_run)
+
 def iterator_size(iter_id):
     return _py_settrie.iterator_size(iter_id)
 
@@ -115,7 +121,7 @@ def destroy_binary_image(image_id):
 
 
 # The source version file is <proj>/src/version.py, anything else is auto generated.
-__version__ = '1.4.4'
+__version__ = '1.4.5'
 
 from settrie.SetTrie import SetTrie
 from settrie.SetTrie import Result
