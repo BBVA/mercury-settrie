@@ -27,6 +27,7 @@ from . import find
 from . import supersets
 from . import subsets
 from . import elements
+from . import num_sets
 from . import next_set_id
 from . import set_name
 from . import remove
@@ -60,6 +61,9 @@ class Result:
 
     def __iter__(self):
         return self
+
+    def __len__(self):
+        return iterator_size(self.iter_id)
 
     def __next__(self):
         if iterator_size(self.iter_id) > 0:
@@ -169,6 +173,9 @@ class SetTrie:
 
     def __iter__(self):
         return self
+
+    def __len__(self):
+        return num_sets(self.st_id)
 
     def __next__(self):
         if self.set_id < 0:

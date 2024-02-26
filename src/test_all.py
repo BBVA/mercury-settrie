@@ -26,16 +26,28 @@ from settrie import SetTrie, Result, destroy_settrie, next_set_id, elements, set
 def test_basic():
     s = SetTrie()
 
+    assert len(s) == 0
+
     s.insert({2, 3, 4}, 'id2')
     s.insert({2, 3, 4, 5}, 'id4')
 
+    assert len(s) == 2
+
     assert s.find({4, 3, 2}) == 'id2'
 
-    ll = list(s.subsets({3, 4, 2}))
+    sub = s.subsets({3, 4, 2})
+
+    assert len(sub) == 1
+
+    ll = list(sub)
 
     assert len(ll) == 1 and ll[0] == 'id2'
 
-    ll = list(s.supersets({2, 3, 4}))
+    sup = s.supersets({2, 3, 4})
+
+    assert len(sup) == 2
+
+    ll = list(sup)
 
     assert len(ll) == 2
 
