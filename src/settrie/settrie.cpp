@@ -1007,6 +1007,23 @@ int next_set_id (int st_id, int set_id) {
 }
 
 
+/** Return the number of sets in a SetTrie object.
+
+	\param st_id  The st_id returned by a previous new_settrie() call.
+
+	\return		  The number or -1 on invalid st_id.
+*/
+int num_sets (int st_id) {
+
+	SetTrieServer::iterator it = instance.find(st_id);
+
+	if (it == instance.end())
+		return -1;
+
+	return it->second->id.size();
+}
+
+
 /** Return the name (Python id) of a set stored in a SetTrie identified by its binary (int) set_id.
 
 	\param st_id  The st_id returned by a previous new_settrie() call.
