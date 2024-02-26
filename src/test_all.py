@@ -18,7 +18,7 @@
 #     See the License for the specific language governing permissions and
 #     limitations under the License.
 
-import os, pickle
+import os, pickle, copy
 
 from settrie import SetTrie, Result, destroy_settrie, next_set_id, elements, set_name
 
@@ -38,6 +38,17 @@ def test_basic():
     ll = list(s.supersets({2, 3, 4}))
 
     assert len(ll) == 2
+
+
+def test_deepcopy():
+    s = SetTrie()
+    s.insert({2, 3, 4}, 'id2')
+    s.insert({2, 3, 4, 5}, 'id4')
+    s2 = copy.deepcopy(s)
+    assert s2.find({4, 3, 2}) == 'id2'
+    s.remove('id2')
+    s.purge()
+    assert s2.find({4, 3, 2}) == 'id2'
 
 
 def test_one_page_save_load():

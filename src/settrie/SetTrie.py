@@ -346,3 +346,6 @@ class SetTrie:
             return False
 
         return True
+
+    def __deepcopy__(self, memo):
+        return SetTrie(binary_image=self.save_as_binary_image())
