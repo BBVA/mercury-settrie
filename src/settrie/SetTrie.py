@@ -98,12 +98,7 @@ class TreeSet:
 
     @property
     def elements(self):
-        iid = elements(self.st_id, self.set_id)
-
-        if iid == 0:
-            return None
-
-        return Result(iid, auto_serialize=True)
+        return Result(elements(self.st_id, self.set_id), auto_serialize=True)
 
 
 class SetTrie:

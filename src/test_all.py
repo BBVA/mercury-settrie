@@ -240,20 +240,17 @@ def test_nested_iterators():
         assert st.id not in seen
         seen.append(st.id)
 
-        if st.id == 'void':
-            assert st.elements is None
-        else:
-            ix = names.index(st.id)
-            Ne = 0
-            Le = []
+        ix = names.index(st.id)
+        Ne = 0
+        Le = []
 
-            for e in st.elements:
-                assert e in sets[ix]
-                assert e not in Le
-                Le.append(e)
-                Ne += 1
+        for e in st.elements:
+            assert e in sets[ix]
+            assert e not in Le
+            Le.append(e)
+            Ne += 1
 
-            assert Ne == len(sets[ix])
+        assert Ne == len(sets[ix])
 
         N += 1
 
@@ -354,11 +351,11 @@ def test_remove_purge():
     assert stt.purge() == 0
 
 
-# test_basic()
-# test_one_page_save_load()
-# test_multi_page_save_load()
-# test_pickle_save_load()
-# test_force_errors()
-# test_nested_iterator_calls()
-# test_nested_iterators()
-# test_remove_purge()
+test_basic()
+test_one_page_save_load()
+test_multi_page_save_load()
+test_pickle_save_load()
+test_force_errors()
+test_nested_iterator_calls()
+test_nested_iterators()
+test_remove_purge()
