@@ -351,11 +351,11 @@ def test_remove_purge():
     assert stt.purge() == 0
 
 
-test_basic()
-test_one_page_save_load()
-test_multi_page_save_load()
-test_pickle_save_load()
-test_force_errors()
-test_nested_iterator_calls()
-test_nested_iterators()
-test_remove_purge()
+# test_basic()
+# test_one_page_save_load()
+# test_multi_page_save_load()
+# test_pickle_save_load()
+# test_force_errors()
+# test_nested_iterator_calls()
+# test_nested_iterators()
+# test_remove_purge()
