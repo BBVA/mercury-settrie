@@ -86,6 +86,9 @@ def elements(st_id, set_id):
 def next_set_id(st_id, set_id):
     return _py_settrie.next_set_id(st_id, set_id)
 
+def num_sets(st_id):
+    return _py_settrie.num_sets(st_id)
+
 def set_name(st_id, set_id):
     return _py_settrie.set_name(st_id, set_id)
 
