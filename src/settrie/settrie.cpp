@@ -709,6 +709,7 @@ char *image_block_as_string(ImageBlock &blk) {
 	return image_block_as_string(p_in);
 }
 
+
 bool string_as_image_block(ImageBlock &blk, char *p_in) {
 
 	if (b64inverse[0] != 0xc0) {
@@ -755,6 +756,20 @@ String python_set_as_string(char *p_char) {
 
 	if (size == 5 && strcmp(p_char, "set()") == 0)
 		return "";
+
+	if (size > 4 && *((int*) p_char) == 0x7a6f7266) {
+		// frozenset({ . . . })
+		// ^[0]     ^[9]      ^[size - 1]
+
+		if (p_char[9] != '(' || p_char[size - 1] != ')')
+			return "";
+
+		p_char += 10;
+		size   -= 11;
+
+		if (size < 3)
+			return "";
+	}
 
 	if (p_char[0] != '{' || p_char[size - 1] != '}')
 		return String(p_char);
@@ -2136,7 +2151,8 @@ SCENARIO("Test python_set_as_string()") {
 
 	// Special case: This is how python serializes the empty set.
 
-	s = python_set_as_string((char *) "set()");		 REQUIRE(s == "");
+	s = python_set_as_string((char *) "set()");		  REQUIRE(s == "");
+	s = python_set_as_string((char *) "frozenset()"); REQUIRE(s == "");
 
 	// Fall back to doing nothing when not a set.
 
