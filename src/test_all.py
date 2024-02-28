@@ -199,7 +199,7 @@ def get_iterator_dataset():
     names = ['integers', 'days', 'spanglish', 'días', 'more_integers', 'void', 'planets', 'pai']
     sets  = [{1, 2, 3, 4}, {'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'},
              {'lunes', 'martes', 'Wednesday', 'Thursday', 'viernes'},
-             {'lunes', 'martes', 'miércoles', 'jueves', 'viernes'}, {1, 2, 3, 4, 5}, {}, {'Earth', 'Mars', '...'}, {3.0, 3.1, 3.14}]
+             {'lunes', 'martes', 'miércoles', 'jueves', 'viernes'}, {1, 2, 3, 4, 5}, {}, {'Earth', 'Mars', '1,2,3'}, {3.0, 3.1, 3.14}]
 
     for s, n in zip(sets, names):
        stt.insert(s, n)
