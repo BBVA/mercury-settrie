@@ -73,7 +73,7 @@ class Result:
             s = iterator_next(self.iter_id)
 
             if self.to_string.match(s):
-                return self.to_string.sub('\\1', s)
+                return self.to_string.sub('\\1', s).replace('\udc82', ',')
 
             if self.to_float.match(s):
                 return float(s)
