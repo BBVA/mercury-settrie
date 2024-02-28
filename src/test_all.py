@@ -47,6 +47,10 @@ def test_basic():
 
     assert len(sup) == 2
 
+    sup = s.supersets({})
+
+    assert len(sup) == 2
+
     ll = list(sup)
 
     assert len(ll) == 2

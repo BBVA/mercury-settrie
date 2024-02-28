@@ -264,8 +264,8 @@ StringSet SetTrie::supersets (StringSet set) {
 	int size = set.size();
 
 	if (size == 0) {
-		IdMap::iterator it;
-		if ((it = id.find(0)) != id.end())
+		// FIX (2024/02/28): All sets are the supersets of the empty set.
+		for (IdMap::iterator it = id.begin(); it != id.end(); ++it)
 			ret.push_back(it->second);
 
 		return ret;
@@ -2443,7 +2443,7 @@ SCENARIO("Small Insert/supersets test") {
 
 	ST.insert(val1, key1, ' ');
 
-	REQUIRE(ST.supersets("", ' ').size()	== 0);
+	REQUIRE(ST.supersets("", ' ').size()	== 1);
 
 	REQUIRE(ST.supersets("c e", ' ').size() == 0);
 	REQUIRE(ST.supersets("a", ' ').size()	== 1);
@@ -2462,8 +2462,9 @@ SCENARIO("Small Insert/supersets test") {
 
 	StringSet ss = ST.supersets("", ' ');
 
-	REQUIRE(ss.size() == 1);
+	REQUIRE(ss.size() == 2);
 	REQUIRE(ss[0] == "empty");
+	REQUIRE(ss[1] == "no_1");
 
 	key1 = {"no_2"};
 	val1 = {"a c d"};
@@ -2622,9 +2623,9 @@ SCENARIO("Small Insert/supersets test") {
 	REQUIRE(ST.supersets("d e", ' ').size()	== 7);
 	REQUIRE(ST.supersets("c", ' ').size()	== 12);
 
-	REQUIRE(ST.supersets("", ' ').size()		== 1);
-	REQUIRE(ST.supersets("xy", ' ').size()		== 0);
-	REQUIRE(ST.supersets("a b xy", ' ').size()	== 0);
+	REQUIRE(ST.supersets("", ' ').size()	   == 17);
+	REQUIRE(ST.supersets("xy", ' ').size()	   == 0);
+	REQUIRE(ST.supersets("a b xy", ' ').size() == 0);
 
 	ST.query = {3, 5, 7};
 	ST.last_query_idx = ST.query.size() - 1;
