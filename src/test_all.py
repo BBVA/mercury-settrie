@@ -55,6 +55,27 @@ def test_basic():
 
     assert len(ll) == 2
 
+    s.insert(frozenset({22, 33, 44}), 'fr2')
+    s.insert(frozenset({2, 333, 44, 5}), 'fr4')
+
+    assert s.find(frozenset({4, 3, 2})) == 'id2'
+    assert s.find({44, 33, 22}) == 'fr2'
+
+    ll = list(s.subsets({2, 3, 4, 22, 33, 44}))
+    lf = list(s.subsets(frozenset({2, 3, 4, 22, 33, 44})))
+
+    assert ll == lf and len(ll) == 2
+
+    ll = list(s.supersets({5}))
+    lf = list(s.supersets(frozenset({5})))
+
+    assert ll == lf and len(ll) == 2
+
+    ll = list(s.supersets({}))
+    lf = list(s.supersets(frozenset({})))
+
+    assert ll == lf and len(ll) == 4
+
 
 def test_deepcopy():
     s = SetTrie()

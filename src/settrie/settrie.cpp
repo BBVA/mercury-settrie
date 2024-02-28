@@ -2155,15 +2155,30 @@ SCENARIO("Test python_set_as_string()") {
 	s = python_set_as_string((char *) "{1,  2, 345}");	 REQUIRE(s == "1,2,345");
 	s = python_set_as_string((char *) "{1,  2, '345'}"); REQUIRE(s == "1,2,'345'");
 
+	s = python_set_as_string((char *) "frozenset({})");				REQUIRE(s == "");
+	s = python_set_as_string((char *) "frozenset({a})");			REQUIRE(s == "a");
+	s = python_set_as_string((char *) "frozenset({a })");			REQUIRE(s == "a ");
+	s = python_set_as_string((char *) "frozenset({a, b})");			REQUIRE(s == "a,b");
+	s = python_set_as_string((char *) "frozenset({1,2,345})");		REQUIRE(s == "1,2,345");
+	s = python_set_as_string((char *) "frozenset({1, 2, 345})");	REQUIRE(s == "1,2,345");
+	s = python_set_as_string((char *) "frozenset({1,  2, 345})");	REQUIRE(s == "1,2,345");
+	s = python_set_as_string((char *) "frozenset({1,  2, '345'})");	REQUIRE(s == "1,2,'345'");
+
 	// Replace commas inside quotes by \x82.
 
 	s = python_set_as_string((char *) "{1, 'two', 'three'}");		 REQUIRE(s == "1,'two','three'");
 	s = python_set_as_string((char *) "{1, 'two,three', 'four'}");	 REQUIRE(s == "1,'two\x82three','four'");
 	s = python_set_as_string((char *) "{1, \"two,three\", 'four'}"); REQUIRE(s == "1,\"two\x82three\",'four'");
 
+	s = python_set_as_string((char *) "frozenset({1, 'two', 'three'})");		REQUIRE(s == "1,'two','three'");
+	s = python_set_as_string((char *) "frozenset({1, 'two,three', 'four'})");	REQUIRE(s == "1,'two\x82three','four'");
+	s = python_set_as_string((char *) "frozenset({1, \"two,three\", 'four'})");	REQUIRE(s == "1,\"two\x82three\",'four'");
+
 	s = python_set_as_string((char *) "{1, '8', 'six, seven', 10, 555, 44, \"El'even, O'Toole\", 'three', 9999, '\"Dirty\" Harry, 2'}");
 
 	REQUIRE(s == "1,'8','six\x82 seven',10,555,44,\"El'even\x82 O'Toole\",'three',9999,'\"Dirty\" Harry\x82 2'");
+
+	s = python_set_as_string((char *) "frozenset({'2, 3', 1, 'its', 'this', \"it's\"})"); REQUIRE(s == "'2\x82 3',1,'its','this',\"it's\"");
 }
 
 
