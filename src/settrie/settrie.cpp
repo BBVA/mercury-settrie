@@ -757,7 +757,7 @@ String python_set_as_string(char *p_char) {
 	if (size == 5 && strcmp(p_char, "set()") == 0)
 		return "";
 
-	if (size > 4 && *((int*) p_char) == 0x7a6f7266) {
+	if (size > 10 && *((int*) p_char) == 0x7a6f7266) {
 		// frozenset({ . . . })
 		// ^[0]     ^[9]      ^[size - 1]
 
