@@ -25,6 +25,10 @@ make
 
 Make without arguments gives help. Try all the options. Everything should work assuming the tools are installed.
 
+> [!IMPORTANT]
+> You have to build the package with `make package` in order to run the tests or try new features without installing the library.
+> In that case, `from settrie import SetTrie` works because `settrie` is a folder in your current folder.
+
 We recommend (and the json shared assumes) to work inside the `mercury-settrie/src` folder, not the project's root folder.
 
 #### Configuring both Python and c++ debuggers to work on any file
