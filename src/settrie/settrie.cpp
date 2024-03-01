@@ -264,8 +264,8 @@ StringSet SetTrie::supersets (StringSet set) {
 	int size = set.size();
 
 	if (size == 0) {
-		IdMap::iterator it;
-		if ((it = id.find(0)) != id.end())
+		// FIX (2024/02/28): All sets are the supersets of the empty set.
+		for (IdMap::iterator it = id.begin(); it != id.end(); ++it)
 			ret.push_back(it->second);
 
 		return ret;
@@ -709,6 +709,7 @@ char *image_block_as_string(ImageBlock &blk) {
 	return image_block_as_string(p_in);
 }
 
+
 bool string_as_image_block(ImageBlock &blk, char *p_in) {
 
 	if (b64inverse[0] != 0xc0) {
@@ -755,6 +756,20 @@ String python_set_as_string(char *p_char) {
 
 	if (size == 5 && strcmp(p_char, "set()") == 0)
 		return "";
+
+	if (size > 10 && *((int*) p_char) == 0x7a6f7266) {
+		// frozenset({ . . . })
+		// ^[0]     ^[9]      ^[size - 1]
+
+		if (p_char[9] != '(' || p_char[size - 1] != ')')
+			return "";
+
+		p_char += 10;
+		size   -= 11;
+
+		if (size < 3)
+			return "";
+	}
 
 	if (p_char[0] != '{' || p_char[size - 1] != '}')
 		return String(p_char);
@@ -1004,6 +1019,23 @@ int next_set_id (int st_id, int set_id) {
 		return -2;
 
 	return jt->first;
+}
+
+
+/** Return the number of sets in a SetTrie object.
+
+	\param st_id  The st_id returned by a previous new_settrie() call.
+
+	\return		  The number or -1 on invalid st_id.
+*/
+int num_sets (int st_id) {
+
+	SetTrieServer::iterator it = instance.find(st_id);
+
+	if (it == instance.end())
+		return -1;
+
+	return it->second->id.size();
 }
 
 
@@ -2119,7 +2151,8 @@ SCENARIO("Test python_set_as_string()") {
 
 	// Special case: This is how python serializes the empty set.
 
-	s = python_set_as_string((char *) "set()");		 REQUIRE(s == "");
+	s = python_set_as_string((char *) "set()");		  REQUIRE(s == "");
+	s = python_set_as_string((char *) "frozenset()"); REQUIRE(s == "");
 
 	// Fall back to doing nothing when not a set.
 
@@ -2138,15 +2171,30 @@ SCENARIO("Test python_set_as_string()") {
 	s = python_set_as_string((char *) "{1,  2, 345}");	 REQUIRE(s == "1,2,345");
 	s = python_set_as_string((char *) "{1,  2, '345'}"); REQUIRE(s == "1,2,'345'");
 
+	s = python_set_as_string((char *) "frozenset({})");				REQUIRE(s == "");
+	s = python_set_as_string((char *) "frozenset({a})");			REQUIRE(s == "a");
+	s = python_set_as_string((char *) "frozenset({a })");			REQUIRE(s == "a ");
+	s = python_set_as_string((char *) "frozenset({a, b})");			REQUIRE(s == "a,b");
+	s = python_set_as_string((char *) "frozenset({1,2,345})");		REQUIRE(s == "1,2,345");
+	s = python_set_as_string((char *) "frozenset({1, 2, 345})");	REQUIRE(s == "1,2,345");
+	s = python_set_as_string((char *) "frozenset({1,  2, 345})");	REQUIRE(s == "1,2,345");
+	s = python_set_as_string((char *) "frozenset({1,  2, '345'})");	REQUIRE(s == "1,2,'345'");
+
 	// Replace commas inside quotes by \x82.
 
 	s = python_set_as_string((char *) "{1, 'two', 'three'}");		 REQUIRE(s == "1,'two','three'");
 	s = python_set_as_string((char *) "{1, 'two,three', 'four'}");	 REQUIRE(s == "1,'two\x82three','four'");
 	s = python_set_as_string((char *) "{1, \"two,three\", 'four'}"); REQUIRE(s == "1,\"two\x82three\",'four'");
 
+	s = python_set_as_string((char *) "frozenset({1, 'two', 'three'})");		REQUIRE(s == "1,'two','three'");
+	s = python_set_as_string((char *) "frozenset({1, 'two,three', 'four'})");	REQUIRE(s == "1,'two\x82three','four'");
+	s = python_set_as_string((char *) "frozenset({1, \"two,three\", 'four'})");	REQUIRE(s == "1,\"two\x82three\",'four'");
+
 	s = python_set_as_string((char *) "{1, '8', 'six, seven', 10, 555, 44, \"El'even, O'Toole\", 'three', 9999, '\"Dirty\" Harry, 2'}");
 
 	REQUIRE(s == "1,'8','six\x82 seven',10,555,44,\"El'even\x82 O'Toole\",'three',9999,'\"Dirty\" Harry\x82 2'");
+
+	s = python_set_as_string((char *) "frozenset({'2, 3', 1, 'its', 'this', \"it's\"})"); REQUIRE(s == "'2\x82 3',1,'its','this',\"it's\"");
 }
 
 
@@ -2426,7 +2474,7 @@ SCENARIO("Small Insert/supersets test") {
 
 	ST.insert(val1, key1, ' ');
 
-	REQUIRE(ST.supersets("", ' ').size()	== 0);
+	REQUIRE(ST.supersets("", ' ').size()	== 1);
 
 	REQUIRE(ST.supersets("c e", ' ').size() == 0);
 	REQUIRE(ST.supersets("a", ' ').size()	== 1);
@@ -2445,8 +2493,9 @@ SCENARIO("Small Insert/supersets test") {
 
 	StringSet ss = ST.supersets("", ' ');
 
-	REQUIRE(ss.size() == 1);
+	REQUIRE(ss.size() == 2);
 	REQUIRE(ss[0] == "empty");
+	REQUIRE(ss[1] == "no_1");
 
 	key1 = {"no_2"};
 	val1 = {"a c d"};
@@ -2605,9 +2654,9 @@ SCENARIO("Small Insert/supersets test") {
 	REQUIRE(ST.supersets("d e", ' ').size()	== 7);
 	REQUIRE(ST.supersets("c", ' ').size()	== 12);
 
-	REQUIRE(ST.supersets("", ' ').size()		== 1);
-	REQUIRE(ST.supersets("xy", ' ').size()		== 0);
-	REQUIRE(ST.supersets("a b xy", ' ').size()	== 0);
+	REQUIRE(ST.supersets("", ' ').size()	   == 17);
+	REQUIRE(ST.supersets("xy", ' ').size()	   == 0);
+	REQUIRE(ST.supersets("a b xy", ' ').size() == 0);
 
 	ST.query = {3, 5, 7};
 	ST.last_query_idx = ST.query.size() - 1;

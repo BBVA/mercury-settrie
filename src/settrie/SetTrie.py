@@ -27,6 +27,7 @@ from . import find
 from . import supersets
 from . import subsets
 from . import elements
+from . import num_sets
 from . import next_set_id
 from . import set_name
 from . import remove
@@ -61,6 +62,9 @@ class Result:
     def __iter__(self):
         return self
 
+    def __len__(self):
+        return iterator_size(self.iter_id)
+
     def __next__(self):
         if iterator_size(self.iter_id) > 0:
             if self.as_is:
@@ -69,7 +73,7 @@ class Result:
             s = iterator_next(self.iter_id)
 
             if self.to_string.match(s):
-                return self.to_string.sub('\\1', s)
+                return self.to_string.sub('\\1', s).replace('\udc82', ',')
 
             if self.to_float.match(s):
                 return float(s)
@@ -94,12 +98,7 @@ class TreeSet:
 
     @property
     def elements(self):
-        iid = elements(self.st_id, self.set_id)
-
-        if iid == 0:
-            return None
-
-        return Result(iid, auto_serialize=True)
+        return Result(elements(self.st_id, self.set_id), auto_serialize=True)
 
 
 class SetTrie:
@@ -169,6 +168,9 @@ class SetTrie:
 
     def __iter__(self):
         return self
+
+    def __len__(self):
+        return num_sets(self.st_id)
 
     def __next__(self):
         if self.set_id < 0:
@@ -346,3 +348,6 @@ class SetTrie:
             return False
 
         return True
+
+    def __deepcopy__(self, memo):
+        return SetTrie(binary_image=self.save_as_binary_image())

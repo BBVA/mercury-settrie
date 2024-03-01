@@ -18,7 +18,7 @@
 #     See the License for the specific language governing permissions and
 #     limitations under the License.
 
-import os, pickle
+import os, pickle, copy
 
 from settrie import SetTrie, Result, destroy_settrie, next_set_id, elements, set_name
 
@@ -26,18 +26,66 @@ from settrie import SetTrie, Result, destroy_settrie, next_set_id, elements, set
 def test_basic():
     s = SetTrie()
 
+    assert len(s) == 0
+
     s.insert({2, 3, 4}, 'id2')
     s.insert({2, 3, 4, 5}, 'id4')
 
+    assert len(s) == 2
+
     assert s.find({4, 3, 2}) == 'id2'
 
-    ll = list(s.subsets({3, 4, 2}))
+    sub = s.subsets({3, 4, 2})
+
+    assert len(sub) == 1
+
+    ll = list(sub)
 
     assert len(ll) == 1 and ll[0] == 'id2'
 
-    ll = list(s.supersets({2, 3, 4}))
+    sup = s.supersets({2, 3, 4})
+
+    assert len(sup) == 2
+
+    sup = s.supersets({})
+
+    assert len(sup) == 2
+
+    ll = list(sup)
 
     assert len(ll) == 2
+
+    s.insert(frozenset({22, 33, 44}), 'fr2')
+    s.insert(frozenset({2, 333, 44, 5}), 'fr4')
+
+    assert s.find(frozenset({4, 3, 2})) == 'id2'
+    assert s.find({44, 33, 22}) == 'fr2'
+
+    ll = list(s.subsets({2, 3, 4, 22, 33, 44}))
+    lf = list(s.subsets(frozenset({2, 3, 4, 22, 33, 44})))
+
+    assert ll == lf and len(ll) == 2
+
+    ll = list(s.supersets({5}))
+    lf = list(s.supersets(frozenset({5})))
+
+    assert ll == lf and len(ll) == 2
+
+    ll = list(s.supersets({}))
+    lf = list(s.supersets(frozenset({})))
+
+    assert ll == lf and len(ll) == 4
+
+
+def test_deepcopy():
+    s = SetTrie()
+    s.insert({2, 3, 4}, 'id2')
+    s.insert({2, 3, 4, 5}, 'id4')
+    s2 = copy.deepcopy(s)
+    assert s2.find({4, 3, 2}) == 'id2'
+    s.remove('id2')
+    s.purge()
+    assert s2.find({4, 3, 2}) == 'id2'
 
 
 def test_one_page_save_load():
@@ -151,7 +199,7 @@ def get_iterator_dataset():
     names = ['integers', 'days', 'spanglish', 'días', 'more_integers', 'void', 'planets', 'pai']
     sets  = [{1, 2, 3, 4}, {'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'},
              {'lunes', 'martes', 'Wednesday', 'Thursday', 'viernes'},
-             {'lunes', 'martes', 'miércoles', 'jueves', 'viernes'}, {1, 2, 3, 4, 5}, {}, {'Earth', 'Mars', '...'}, {3.0, 3.1, 3.14}]
+             {'lunes', 'martes', 'miércoles', 'jueves', 'viernes'}, {1, 2, 3, 4, 5}, {}, {'Earth', 'Mars', '1,2,3'}, {3.0, 3.1, 3.14}]
 
     for s, n in zip(sets, names):
        stt.insert(s, n)
@@ -228,20 +276,17 @@ def test_nested_iterators():
         assert st.id not in seen
         seen.append(st.id)
 
-        if st.id == 'void':
-            assert st.elements is None
-        else:
-            ix = names.index(st.id)
-            Ne = 0
-            Le = []
+        ix = names.index(st.id)
+        Ne = 0
+        Le = []
 
-            for e in st.elements:
-                assert e in sets[ix]
-                assert e not in Le
-                Le.append(e)
-                Ne += 1
+        for e in st.elements:
+            assert e in sets[ix]
+            assert e not in Le
+            Le.append(e)
+            Ne += 1
 
-            assert Ne == len(sets[ix])
+        assert Ne == len(sets[ix])
 
         N += 1
 

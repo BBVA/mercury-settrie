@@ -2706,6 +2706,7 @@ static swig_module_info swig_module = {swig_types, 1, 0, 0, 0, 0};
 	extern int subsets (int st_id, char *set);
 	extern int elements (int st_id, int set_id);
 	extern int next_set_id (int st_id, int set_id);
+	extern int num_sets (int st_id);
 	extern char *set_name (int st_id, int set_id);
 	extern int remove (int st_id, int set_id);
 	extern int purge (int st_id, int dry_run);
@@ -3280,6 +3281,29 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_num_sets(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "num_sets" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = (int)(val1);
+  result = (int)num_sets(arg1);
+  resultobj = SWIG_From_int((int)(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_set_name(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   int arg1 ;
@@ -3572,6 +3596,7 @@ static PyMethodDef SwigMethods[] = {
 	 { "subsets", _wrap_subsets, METH_VARARGS, NULL},
 	 { "elements", _wrap_elements, METH_VARARGS, NULL},
 	 { "next_set_id", _wrap_next_set_id, METH_VARARGS, NULL},
+	 { "num_sets", _wrap_num_sets, METH_O, NULL},
 	 { "set_name", _wrap_set_name, METH_VARARGS, NULL},
 	 { "remove", _wrap_remove, METH_VARARGS, NULL},
 	 { "purge", _wrap_purge, METH_VARARGS, NULL},
