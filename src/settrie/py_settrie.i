@@ -9,6 +9,7 @@
 	extern int subsets (int st_id, char *set);
 	extern int elements (int st_id, int set_id);
 	extern int next_set_id (int st_id, int set_id);
+	extern int num_sets (int st_id);
 	extern char *set_name (int st_id, int set_id);
 	extern int remove (int st_id, int set_id);
 	extern int purge (int st_id, int dry_run);
@@ -30,6 +31,7 @@ extern int supersets (int st_id, char *set);
 extern int subsets (int st_id, char *set);
 extern int elements (int st_id, int set_id);
 extern int next_set_id (int st_id, int set_id);
+extern int num_sets (int st_id);
 extern char *set_name (int st_id, int set_id);
 extern int remove (int st_id, int set_id);
 extern int purge (int st_id, int dry_run);

@@ -86,6 +86,9 @@ def elements(st_id, set_id):
 def next_set_id(st_id, set_id):
     return _py_settrie.next_set_id(st_id, set_id)
 
+def num_sets(st_id):
+    return _py_settrie.num_sets(st_id)
+
 def set_name(st_id, set_id):
     return _py_settrie.set_name(st_id, set_id)
 
@@ -121,7 +124,7 @@ def destroy_binary_image(image_id):
 
 
 # The source version file is <proj>/src/version.py, anything else is auto generated.
-__version__ = '1.4.5'
+__version__ = '1.4.6'
 
 from settrie.SetTrie import SetTrie
 from settrie.SetTrie import Result

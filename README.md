@@ -106,24 +106,13 @@ stt.purge()
 
 ```
 
-## Clone and set up a development environment to work with it
+## How to setup a development environment and contribute to settrie
 
-To work with Settrie command line or develop Settrie, you can set up an environment with git, gcc, make and the following tools:
+See [DEVELOPMENT](src/DEVELOPMENT.md)
 
-  * catch2 (Already included in source code)
-  * doxygen 1.9.5 or better (to render C++ documentation)
-  * mkdocs 1.4.2 or better (to render Python documentation)
-  * swig 4.0.2
-  * python 3.x with appropriate paths to python.h (see Makefile)
+### Thank you to our contributor(s)
 
-```bash
-git clone https://github.com/BBVA/mercury-settrie.git
-cd mercury-settrie/src
-
-make
-```
-
-Make without arguments gives help. Try all the options. Everything should work assuming the tools are installed.
+  * [ldeluigi](https://github.com/ldeluigi)
 
 ## Documentation
 
