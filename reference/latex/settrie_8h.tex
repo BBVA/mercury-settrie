@@ -1,0 +1,158 @@
+\hypertarget{settrie_8h}{}\doxysection{settrie/settrie.h File Reference}
+\label{settrie_8h}\index{settrie/settrie.h@{settrie/settrie.h}}
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$functional$>$}\newline
+{\ttfamily \#include $<$map$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+Include dependency graph for settrie.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{settrie_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=306pt]{settrie_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structName}{Name}}
+\item 
+struct \mbox{\hyperlink{structSetNode}{Set\+Node}}
+\item 
+struct \mbox{\hyperlink{structImageBlock}{Image\+Block}}
+\item 
+class \mbox{\hyperlink{classSetTrie}{Set\+Trie}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{settrie_8h_a75cc8eb3d48ceda2913f0c5c9a39edc3}{IMAGE\+\_\+\+BUFF\+\_\+\+SIZE}}~6136
+\item 
+\#define \mbox{\hyperlink{settrie_8h_a0b83795e97ecf990661056d3afb6a8c9}{STATE\+\_\+\+IN\+\_\+\+USE}}~0
+\item 
+\#define \mbox{\hyperlink{settrie_8h_aece036d754241c812166a72096bd1d4f}{STATE\+\_\+\+HAS\+\_\+\+SET\+\_\+\+ID}}~1
+\item 
+\#define \mbox{\hyperlink{settrie_8h_a22bca05419fc0bbbef331bdfe381ef10}{STATE\+\_\+\+IS\+\_\+\+GARBAGE}}~2
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef uint64\+\_\+t \mbox{\hyperlink{settrie_8h_a28f4aaa17e343d8ab9244277194386d6}{Element\+Hash}}
+\item 
+typedef std\+::string \mbox{\hyperlink{settrie_8h_afbeda3fd1bdc8c37d01bdf9f5c8274ff}{String}}
+\item 
+typedef std\+::vector$<$ \mbox{\hyperlink{settrie_8h_a28f4aaa17e343d8ab9244277194386d6}{Element\+Hash}} $>$ \mbox{\hyperlink{settrie_8h_af424136aa4c1b72b8afe41d7483f225d}{Binary\+Set}}
+\item 
+typedef std\+::vector$<$ \mbox{\hyperlink{settrie_8h_afbeda3fd1bdc8c37d01bdf9f5c8274ff}{String}} $>$ \mbox{\hyperlink{settrie_8h_a635a5f230a424bcf4fa3f14cc8412286}{String\+Set}}
+\item 
+typedef std\+::vector$<$ int $>$ \mbox{\hyperlink{settrie_8h_af4aa3b75d10f37f456ecdf6dbfa37373}{Id\+List}}
+\item 
+typedef std\+::map$<$ \mbox{\hyperlink{settrie_8h_a28f4aaa17e343d8ab9244277194386d6}{Element\+Hash}}, \mbox{\hyperlink{structName}{Name}} $>$ \mbox{\hyperlink{settrie_8h_a68c8861627fef1a9bc2191893891e3fa}{String\+Name}}
+\item 
+typedef std\+::map$<$ int, \mbox{\hyperlink{settrie_8h_afbeda3fd1bdc8c37d01bdf9f5c8274ff}{String}} $>$ \mbox{\hyperlink{settrie_8h_a3a4755cedadd9190dfbf561607e09379}{Id\+Map}}
+\item 
+typedef std\+::vector$<$ \mbox{\hyperlink{structSetNode}{Set\+Node}} $>$ \mbox{\hyperlink{settrie_8h_a53b014d3f3977bdf8135eadb64057248}{Binary\+Tree}}
+\item 
+typedef std\+::vector$<$ \mbox{\hyperlink{structImageBlock}{Image\+Block}} $>$ \mbox{\hyperlink{settrie_8h_a8b6bff08235702631ef0b98976b46dbb}{Binary\+Image}}
+\item 
+typedef \mbox{\hyperlink{settrie_8h_a8b6bff08235702631ef0b98976b46dbb}{Binary\+Image}} $\ast$ \mbox{\hyperlink{settrie_8h_a31d667349d31ceb318e7264d03030e14}{p\+Binary\+Image}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{settrie_8h_a75cc8eb3d48ceda2913f0c5c9a39edc3}\label{settrie_8h_a75cc8eb3d48ceda2913f0c5c9a39edc3}} 
+\index{settrie.h@{settrie.h}!IMAGE\_BUFF\_SIZE@{IMAGE\_BUFF\_SIZE}}
+\index{IMAGE\_BUFF\_SIZE@{IMAGE\_BUFF\_SIZE}!settrie.h@{settrie.h}}
+\doxysubsubsection{\texorpdfstring{IMAGE\_BUFF\_SIZE}{IMAGE\_BUFF\_SIZE}}
+{\footnotesize\ttfamily \#define IMAGE\+\_\+\+BUFF\+\_\+\+SIZE~6136}
+
+\mbox{\Hypertarget{settrie_8h_aece036d754241c812166a72096bd1d4f}\label{settrie_8h_aece036d754241c812166a72096bd1d4f}} 
+\index{settrie.h@{settrie.h}!STATE\_HAS\_SET\_ID@{STATE\_HAS\_SET\_ID}}
+\index{STATE\_HAS\_SET\_ID@{STATE\_HAS\_SET\_ID}!settrie.h@{settrie.h}}
+\doxysubsubsection{\texorpdfstring{STATE\_HAS\_SET\_ID}{STATE\_HAS\_SET\_ID}}
+{\footnotesize\ttfamily \#define STATE\+\_\+\+HAS\+\_\+\+SET\+\_\+\+ID~1}
+
+\mbox{\Hypertarget{settrie_8h_a0b83795e97ecf990661056d3afb6a8c9}\label{settrie_8h_a0b83795e97ecf990661056d3afb6a8c9}} 
+\index{settrie.h@{settrie.h}!STATE\_IN\_USE@{STATE\_IN\_USE}}
+\index{STATE\_IN\_USE@{STATE\_IN\_USE}!settrie.h@{settrie.h}}
+\doxysubsubsection{\texorpdfstring{STATE\_IN\_USE}{STATE\_IN\_USE}}
+{\footnotesize\ttfamily \#define STATE\+\_\+\+IN\+\_\+\+USE~0}
+
+\mbox{\Hypertarget{settrie_8h_a22bca05419fc0bbbef331bdfe381ef10}\label{settrie_8h_a22bca05419fc0bbbef331bdfe381ef10}} 
+\index{settrie.h@{settrie.h}!STATE\_IS\_GARBAGE@{STATE\_IS\_GARBAGE}}
+\index{STATE\_IS\_GARBAGE@{STATE\_IS\_GARBAGE}!settrie.h@{settrie.h}}
+\doxysubsubsection{\texorpdfstring{STATE\_IS\_GARBAGE}{STATE\_IS\_GARBAGE}}
+{\footnotesize\ttfamily \#define STATE\+\_\+\+IS\+\_\+\+GARBAGE~2}
+
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{settrie_8h_a8b6bff08235702631ef0b98976b46dbb}\label{settrie_8h_a8b6bff08235702631ef0b98976b46dbb}} 
+\index{settrie.h@{settrie.h}!BinaryImage@{BinaryImage}}
+\index{BinaryImage@{BinaryImage}!settrie.h@{settrie.h}}
+\doxysubsubsection{\texorpdfstring{BinaryImage}{BinaryImage}}
+{\footnotesize\ttfamily typedef std\+::vector$<$\mbox{\hyperlink{structImageBlock}{Image\+Block}}$>$ \mbox{\hyperlink{settrie_8h_a8b6bff08235702631ef0b98976b46dbb}{Binary\+Image}}}
+
+\mbox{\Hypertarget{settrie_8h_af424136aa4c1b72b8afe41d7483f225d}\label{settrie_8h_af424136aa4c1b72b8afe41d7483f225d}} 
+\index{settrie.h@{settrie.h}!BinarySet@{BinarySet}}
+\index{BinarySet@{BinarySet}!settrie.h@{settrie.h}}
+\doxysubsubsection{\texorpdfstring{BinarySet}{BinarySet}}
+{\footnotesize\ttfamily typedef std\+::vector$<$\mbox{\hyperlink{settrie_8h_a28f4aaa17e343d8ab9244277194386d6}{Element\+Hash}}$>$ \mbox{\hyperlink{settrie_8h_af424136aa4c1b72b8afe41d7483f225d}{Binary\+Set}}}
+
+\mbox{\Hypertarget{settrie_8h_a53b014d3f3977bdf8135eadb64057248}\label{settrie_8h_a53b014d3f3977bdf8135eadb64057248}} 
+\index{settrie.h@{settrie.h}!BinaryTree@{BinaryTree}}
+\index{BinaryTree@{BinaryTree}!settrie.h@{settrie.h}}
+\doxysubsubsection{\texorpdfstring{BinaryTree}{BinaryTree}}
+{\footnotesize\ttfamily typedef std\+::vector$<$\mbox{\hyperlink{structSetNode}{Set\+Node}}$>$ \mbox{\hyperlink{settrie_8h_a53b014d3f3977bdf8135eadb64057248}{Binary\+Tree}}}
+
+\mbox{\Hypertarget{settrie_8h_a28f4aaa17e343d8ab9244277194386d6}\label{settrie_8h_a28f4aaa17e343d8ab9244277194386d6}} 
+\index{settrie.h@{settrie.h}!ElementHash@{ElementHash}}
+\index{ElementHash@{ElementHash}!settrie.h@{settrie.h}}
+\doxysubsubsection{\texorpdfstring{ElementHash}{ElementHash}}
+{\footnotesize\ttfamily typedef uint64\+\_\+t \mbox{\hyperlink{settrie_8h_a28f4aaa17e343d8ab9244277194386d6}{Element\+Hash}}}
+
+\mbox{\Hypertarget{settrie_8h_af4aa3b75d10f37f456ecdf6dbfa37373}\label{settrie_8h_af4aa3b75d10f37f456ecdf6dbfa37373}} 
+\index{settrie.h@{settrie.h}!IdList@{IdList}}
+\index{IdList@{IdList}!settrie.h@{settrie.h}}
+\doxysubsubsection{\texorpdfstring{IdList}{IdList}}
+{\footnotesize\ttfamily typedef std\+::vector$<$int$>$ \mbox{\hyperlink{settrie_8h_af4aa3b75d10f37f456ecdf6dbfa37373}{Id\+List}}}
+
+\mbox{\Hypertarget{settrie_8h_a3a4755cedadd9190dfbf561607e09379}\label{settrie_8h_a3a4755cedadd9190dfbf561607e09379}} 
+\index{settrie.h@{settrie.h}!IdMap@{IdMap}}
+\index{IdMap@{IdMap}!settrie.h@{settrie.h}}
+\doxysubsubsection{\texorpdfstring{IdMap}{IdMap}}
+{\footnotesize\ttfamily typedef std\+::map$<$int, \mbox{\hyperlink{settrie_8h_afbeda3fd1bdc8c37d01bdf9f5c8274ff}{String}}$>$ \mbox{\hyperlink{settrie_8h_a3a4755cedadd9190dfbf561607e09379}{Id\+Map}}}
+
+\mbox{\Hypertarget{settrie_8h_a31d667349d31ceb318e7264d03030e14}\label{settrie_8h_a31d667349d31ceb318e7264d03030e14}} 
+\index{settrie.h@{settrie.h}!pBinaryImage@{pBinaryImage}}
+\index{pBinaryImage@{pBinaryImage}!settrie.h@{settrie.h}}
+\doxysubsubsection{\texorpdfstring{pBinaryImage}{pBinaryImage}}
+{\footnotesize\ttfamily typedef \mbox{\hyperlink{settrie_8h_a8b6bff08235702631ef0b98976b46dbb}{Binary\+Image}}$\ast$ \mbox{\hyperlink{settrie_8h_a31d667349d31ceb318e7264d03030e14}{p\+Binary\+Image}}}
+
+\mbox{\Hypertarget{settrie_8h_afbeda3fd1bdc8c37d01bdf9f5c8274ff}\label{settrie_8h_afbeda3fd1bdc8c37d01bdf9f5c8274ff}} 
+\index{settrie.h@{settrie.h}!String@{String}}
+\index{String@{String}!settrie.h@{settrie.h}}
+\doxysubsubsection{\texorpdfstring{String}{String}}
+{\footnotesize\ttfamily typedef std\+::string \mbox{\hyperlink{settrie_8h_afbeda3fd1bdc8c37d01bdf9f5c8274ff}{String}}}
+
+\mbox{\Hypertarget{settrie_8h_a68c8861627fef1a9bc2191893891e3fa}\label{settrie_8h_a68c8861627fef1a9bc2191893891e3fa}} 
+\index{settrie.h@{settrie.h}!StringName@{StringName}}
+\index{StringName@{StringName}!settrie.h@{settrie.h}}
+\doxysubsubsection{\texorpdfstring{StringName}{StringName}}
+{\footnotesize\ttfamily typedef std\+::map$<$\mbox{\hyperlink{settrie_8h_a28f4aaa17e343d8ab9244277194386d6}{Element\+Hash}}, \mbox{\hyperlink{structName}{Name}}$>$ \mbox{\hyperlink{settrie_8h_a68c8861627fef1a9bc2191893891e3fa}{String\+Name}}}
+
+\mbox{\Hypertarget{settrie_8h_a635a5f230a424bcf4fa3f14cc8412286}\label{settrie_8h_a635a5f230a424bcf4fa3f14cc8412286}} 
+\index{settrie.h@{settrie.h}!StringSet@{StringSet}}
+\index{StringSet@{StringSet}!settrie.h@{settrie.h}}
+\doxysubsubsection{\texorpdfstring{StringSet}{StringSet}}
+{\footnotesize\ttfamily typedef std\+::vector$<$\mbox{\hyperlink{settrie_8h_afbeda3fd1bdc8c37d01bdf9f5c8274ff}{String}}$>$ \mbox{\hyperlink{settrie_8h_a635a5f230a424bcf4fa3f14cc8412286}{String\+Set}}}
+

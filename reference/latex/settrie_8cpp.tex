@@ -1,0 +1,604 @@
+\hypertarget{settrie_8cpp}{}\doxysection{settrie/settrie.cpp File Reference}
+\label{settrie_8cpp}\index{settrie/settrie.cpp@{settrie/settrie.cpp}}
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}settrie.\+h\char`\"{}}\newline
+Include dependency graph for settrie.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{settrie_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{settrie_8cpp_acf830c3140deca25e44187534c55e5a8}{MURMUR\+\_\+\+SEED}}~76493
+\begin{DoxyCompactList}\small\item\em Just a 5 digit prime. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef \mbox{\hyperlink{classSetTrie}{Set\+Trie}} $\ast$ \mbox{\hyperlink{settrie_8cpp_a63c3fa7da97ab4c6b21932e237a726cc}{p\+Set\+Trie}}
+\item 
+typedef \mbox{\hyperlink{settrie_8h_a635a5f230a424bcf4fa3f14cc8412286}{String\+Set}} $\ast$ \mbox{\hyperlink{settrie_8cpp_acdca7eb275e20dc6dc0d1a9f57c97483}{p\+String\+Set}}
+\item 
+typedef std\+::map$<$ int, \mbox{\hyperlink{settrie_8cpp_a63c3fa7da97ab4c6b21932e237a726cc}{p\+Set\+Trie}} $>$ \mbox{\hyperlink{settrie_8cpp_acedc3866d3a29b656ee52b9b5de54fed}{Set\+Trie\+Server}}
+\item 
+typedef std\+::map$<$ int, \mbox{\hyperlink{settrie_8cpp_acdca7eb275e20dc6dc0d1a9f57c97483}{p\+String\+Set}} $>$ \mbox{\hyperlink{settrie_8cpp_aeb902765eaed9ee8c1e50b938126baab}{Iter\+Server}}
+\item 
+typedef std\+::map$<$ int, \mbox{\hyperlink{settrie_8h_a31d667349d31ceb318e7264d03030e14}{p\+Binary\+Image}} $>$ \mbox{\hyperlink{settrie_8cpp_afe560789669a8dbab1aefb1a0e5ccd6c}{Binary\+Image\+Server}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{settrie_8cpp_af00a6a16d02e30654cace0aa01e68f3a}{Murmur\+Hash64A}} (const void $\ast$key, int len)
+\begin{DoxyCompactList}\small\item\em Murmur\+Hash2, 64-\/bit versions, by Austin Appleby. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{settrie_8cpp_abea00aaa5a7ad198b65780a63fdc668f}{image\+\_\+put}} (\mbox{\hyperlink{settrie_8h_a31d667349d31ceb318e7264d03030e14}{p\+Binary\+Image}} p\+\_\+bi, void $\ast$p\+\_\+data, int size)
+\item 
+bool \mbox{\hyperlink{settrie_8cpp_aacd8ca20dfe6f3716384d033b74354fc}{image\+\_\+get}} (\mbox{\hyperlink{settrie_8h_a31d667349d31ceb318e7264d03030e14}{p\+Binary\+Image}} p\+\_\+bi, int \&c\+\_\+block, int \&c\+\_\+ofs, void $\ast$p\+\_\+data, int size)
+\item 
+char $\ast$ \mbox{\hyperlink{settrie_8cpp_a0b00567c9a0b17ae2c390c9512144d20}{image\+\_\+block\+\_\+as\+\_\+string}} (uint8\+\_\+t $\ast$p\+\_\+in)
+\item 
+char $\ast$ \mbox{\hyperlink{settrie_8cpp_ad453096538f0f4eb0578b41765d5da79}{image\+\_\+block\+\_\+as\+\_\+string}} (\mbox{\hyperlink{structImageBlock}{Image\+Block}} \&blk)
+\item 
+bool \mbox{\hyperlink{settrie_8cpp_a824686b1b9a5de641bbeaad372e299a0}{string\+\_\+as\+\_\+image\+\_\+block}} (\mbox{\hyperlink{structImageBlock}{Image\+Block}} \&blk, char $\ast$p\+\_\+in)
+\item 
+\mbox{\hyperlink{settrie_8h_afbeda3fd1bdc8c37d01bdf9f5c8274ff}{String}} \mbox{\hyperlink{settrie_8cpp_a978b99946914087b89781781d2ec49cb}{python\+\_\+set\+\_\+as\+\_\+string}} (char $\ast$p\+\_\+char)
+\item 
+int \mbox{\hyperlink{settrie_8cpp_a2e215d94498eeebdffc89585e6e06065}{new\+\_\+settrie}} ()
+\item 
+void \mbox{\hyperlink{settrie_8cpp_ad5b3d49f3cdac771f72d3f6b7cfb8f88}{destroy\+\_\+settrie}} (int st\+\_\+id)
+\item 
+void \mbox{\hyperlink{settrie_8cpp_a9b24962e5bba11b1e2d97aa95fbbd142}{insert}} (int st\+\_\+id, char $\ast$set, char $\ast$str\+\_\+id)
+\item 
+char $\ast$ \mbox{\hyperlink{settrie_8cpp_a34bc67f029a478471c30855035d69f56}{find}} (int st\+\_\+id, char $\ast$set)
+\item 
+int \mbox{\hyperlink{settrie_8cpp_ac7d7038c48d5079c6147c2964b4208f5}{supersets}} (int st\+\_\+id, char $\ast$set)
+\item 
+int \mbox{\hyperlink{settrie_8cpp_a01803376236c40d20a124608637632de}{subsets}} (int st\+\_\+id, char $\ast$set)
+\item 
+int \mbox{\hyperlink{settrie_8cpp_aa794bfd7f400ba5419d6d456a8775339}{elements}} (int st\+\_\+id, int set\+\_\+id)
+\item 
+int \mbox{\hyperlink{settrie_8cpp_a68241c91262da8c0dcb681eb827ec1ac}{next\+\_\+set\+\_\+id}} (int st\+\_\+id, int set\+\_\+id)
+\item 
+int \mbox{\hyperlink{settrie_8cpp_af4966b5346cf0883c150b5ea2a893700}{num\+\_\+sets}} (int st\+\_\+id)
+\item 
+char $\ast$ \mbox{\hyperlink{settrie_8cpp_aaab9be65216fd6ac61c05647b52ea7a1}{set\+\_\+name}} (int st\+\_\+id, int set\+\_\+id)
+\item 
+int \mbox{\hyperlink{settrie_8cpp_aa207abef104d6243af4170b28dd662ec}{remove}} (int st\+\_\+id, int set\+\_\+id)
+\item 
+int \mbox{\hyperlink{settrie_8cpp_a0cb5f5d83a9b089cb74ff48ff4ffe575}{purge}} (int st\+\_\+id, int dry\+\_\+run)
+\item 
+int \mbox{\hyperlink{settrie_8cpp_a56fb3654e410546ba594b722e2dc2918}{iterator\+\_\+size}} (int iter\+\_\+id)
+\item 
+char $\ast$ \mbox{\hyperlink{settrie_8cpp_acdc467f95203917237d73748d091dc68}{iterator\+\_\+next}} (int iter\+\_\+id)
+\item 
+void \mbox{\hyperlink{settrie_8cpp_a58c2cbde0d2c4c1c6a521d4a28849764}{destroy\+\_\+iterator}} (int iter\+\_\+id)
+\item 
+void \mbox{\hyperlink{settrie_8cpp_ab1ff5515808234d01e24e52cedf6f35f}{destroy\+\_\+binary\+\_\+image}} (int image\+\_\+id)
+\item 
+int \mbox{\hyperlink{settrie_8cpp_a64d77fe0f38f9fca7a098356f725ddcf}{save\+\_\+as\+\_\+binary\+\_\+image}} (int st\+\_\+id)
+\item 
+bool \mbox{\hyperlink{settrie_8cpp_a77b967a5cb92850951a315b13c08c8c5}{push\+\_\+binary\+\_\+image\+\_\+block}} (int st\+\_\+id, char $\ast$p\+\_\+block)
+\item 
+int \mbox{\hyperlink{settrie_8cpp_ad09d202d845463d9ad0450a7d9d175b9}{binary\+\_\+image\+\_\+size}} (int image\+\_\+id)
+\item 
+char $\ast$ \mbox{\hyperlink{settrie_8cpp_a1447ea0f5f4735a0503baba5e9bcdc9b}{binary\+\_\+image\+\_\+next}} (int image\+\_\+id)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{settrie_8cpp_a904fce38a7b978b3756a515bcc539a11}{instance\+\_\+num}} = 0
+\item 
+int \mbox{\hyperlink{settrie_8cpp_abb22027e7c6e9f03f4e765018c75501c}{instance\+\_\+iter}} = 0
+\item 
+\mbox{\hyperlink{settrie_8cpp_acedc3866d3a29b656ee52b9b5de54fed}{Set\+Trie\+Server}} \mbox{\hyperlink{settrie_8cpp_a998eb5dc4620e65d20743750e76062f2}{instance}} = \{\}
+\item 
+\mbox{\hyperlink{settrie_8cpp_aeb902765eaed9ee8c1e50b938126baab}{Iter\+Server}} \mbox{\hyperlink{settrie_8cpp_a1ff388504293a3a62d6f0d9f76a27ef0}{iterator}} = \{\}
+\item 
+\mbox{\hyperlink{settrie_8cpp_afe560789669a8dbab1aefb1a0e5ccd6c}{Binary\+Image\+Server}} \mbox{\hyperlink{settrie_8cpp_aa15ca750c1f18e56d3a75eee54c1ca5b}{image}} = \{\}
+\item 
+char \mbox{\hyperlink{settrie_8cpp_a3ce3af741592ed7c6bbc6bca94a81ca7}{answer\+\_\+buffer}} \mbox{[}8192\mbox{]}
+\item 
+char \mbox{\hyperlink{settrie_8cpp_a87c6228e206d40acd8bb922514f65270}{answer\+\_\+block}} \mbox{[}8208\mbox{]}
+\item 
+const char \mbox{\hyperlink{settrie_8cpp_a63970901e1960b660aeaf8737ca44f4c}{b64chars}} \mbox{[}$\,$\mbox{]} = \char`\"{}ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/\char`\"{}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{settrie_8cpp_a7bf7e1476e68f28be16d2d7642ced87d}{b64inverse}} \mbox{[}256\mbox{]} = \{0\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{settrie_8cpp_acf830c3140deca25e44187534c55e5a8}\label{settrie_8cpp_acf830c3140deca25e44187534c55e5a8}} 
+\index{settrie.cpp@{settrie.cpp}!MURMUR\_SEED@{MURMUR\_SEED}}
+\index{MURMUR\_SEED@{MURMUR\_SEED}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{MURMUR\_SEED}{MURMUR\_SEED}}
+{\footnotesize\ttfamily \#define MURMUR\+\_\+\+SEED~76493}
+
+
+
+Just a 5 digit prime. 
+
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{settrie_8cpp_afe560789669a8dbab1aefb1a0e5ccd6c}\label{settrie_8cpp_afe560789669a8dbab1aefb1a0e5ccd6c}} 
+\index{settrie.cpp@{settrie.cpp}!BinaryImageServer@{BinaryImageServer}}
+\index{BinaryImageServer@{BinaryImageServer}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{BinaryImageServer}{BinaryImageServer}}
+{\footnotesize\ttfamily typedef std\+::map$<$int, \mbox{\hyperlink{settrie_8h_a31d667349d31ceb318e7264d03030e14}{p\+Binary\+Image}}$>$ \mbox{\hyperlink{settrie_8cpp_afe560789669a8dbab1aefb1a0e5ccd6c}{Binary\+Image\+Server}}}
+
+\mbox{\Hypertarget{settrie_8cpp_aeb902765eaed9ee8c1e50b938126baab}\label{settrie_8cpp_aeb902765eaed9ee8c1e50b938126baab}} 
+\index{settrie.cpp@{settrie.cpp}!IterServer@{IterServer}}
+\index{IterServer@{IterServer}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{IterServer}{IterServer}}
+{\footnotesize\ttfamily typedef std\+::map$<$int, \mbox{\hyperlink{settrie_8cpp_acdca7eb275e20dc6dc0d1a9f57c97483}{p\+String\+Set}}$>$ \mbox{\hyperlink{settrie_8cpp_aeb902765eaed9ee8c1e50b938126baab}{Iter\+Server}}}
+
+\mbox{\Hypertarget{settrie_8cpp_a63c3fa7da97ab4c6b21932e237a726cc}\label{settrie_8cpp_a63c3fa7da97ab4c6b21932e237a726cc}} 
+\index{settrie.cpp@{settrie.cpp}!pSetTrie@{pSetTrie}}
+\index{pSetTrie@{pSetTrie}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{pSetTrie}{pSetTrie}}
+{\footnotesize\ttfamily typedef \mbox{\hyperlink{classSetTrie}{Set\+Trie}}$\ast$ \mbox{\hyperlink{settrie_8cpp_a63c3fa7da97ab4c6b21932e237a726cc}{p\+Set\+Trie}}}
+
+\mbox{\Hypertarget{settrie_8cpp_acdca7eb275e20dc6dc0d1a9f57c97483}\label{settrie_8cpp_acdca7eb275e20dc6dc0d1a9f57c97483}} 
+\index{settrie.cpp@{settrie.cpp}!pStringSet@{pStringSet}}
+\index{pStringSet@{pStringSet}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{pStringSet}{pStringSet}}
+{\footnotesize\ttfamily typedef \mbox{\hyperlink{settrie_8h_a635a5f230a424bcf4fa3f14cc8412286}{String\+Set}}$\ast$ \mbox{\hyperlink{settrie_8cpp_acdca7eb275e20dc6dc0d1a9f57c97483}{p\+String\+Set}}}
+
+\mbox{\Hypertarget{settrie_8cpp_acedc3866d3a29b656ee52b9b5de54fed}\label{settrie_8cpp_acedc3866d3a29b656ee52b9b5de54fed}} 
+\index{settrie.cpp@{settrie.cpp}!SetTrieServer@{SetTrieServer}}
+\index{SetTrieServer@{SetTrieServer}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{SetTrieServer}{SetTrieServer}}
+{\footnotesize\ttfamily typedef std\+::map$<$int, \mbox{\hyperlink{settrie_8cpp_a63c3fa7da97ab4c6b21932e237a726cc}{p\+Set\+Trie}}$>$ \mbox{\hyperlink{settrie_8cpp_acedc3866d3a29b656ee52b9b5de54fed}{Set\+Trie\+Server}}}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{settrie_8cpp_a1447ea0f5f4735a0503baba5e9bcdc9b}\label{settrie_8cpp_a1447ea0f5f4735a0503baba5e9bcdc9b}} 
+\index{settrie.cpp@{settrie.cpp}!binary\_image\_next@{binary\_image\_next}}
+\index{binary\_image\_next@{binary\_image\_next}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{binary\_image\_next()}{binary\_image\_next()}}
+{\footnotesize\ttfamily char $\ast$ binary\+\_\+image\+\_\+next (\begin{DoxyParamCaption}\item[{int}]{image\+\_\+id }\end{DoxyParamCaption})}
+
+Return the first unread binary images block in an iterator returned by a \mbox{\hyperlink{settrie_8cpp_a64d77fe0f38f9fca7a098356f725ddcf}{save\+\_\+as\+\_\+binary\+\_\+image()}} call.
+
+
+\begin{DoxyParams}{Parameters}
+{\em image\+\_\+id} & The image\+\_\+id returned by a previous \mbox{\hyperlink{settrie_8cpp_a64d77fe0f38f9fca7a098356f725ddcf}{save\+\_\+as\+\_\+binary\+\_\+image()}} call.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The the binary image block serialized as base64 or an empty string on failure. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{settrie_8cpp_ad09d202d845463d9ad0450a7d9d175b9}\label{settrie_8cpp_ad09d202d845463d9ad0450a7d9d175b9}} 
+\index{settrie.cpp@{settrie.cpp}!binary\_image\_size@{binary\_image\_size}}
+\index{binary\_image\_size@{binary\_image\_size}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{binary\_image\_size()}{binary\_image\_size()}}
+{\footnotesize\ttfamily int binary\+\_\+image\+\_\+size (\begin{DoxyParamCaption}\item[{int}]{image\+\_\+id }\end{DoxyParamCaption})}
+
+Return the number of unread binary images blocks in an iterator returned by a \mbox{\hyperlink{settrie_8cpp_a64d77fe0f38f9fca7a098356f725ddcf}{save\+\_\+as\+\_\+binary\+\_\+image()}} call.
+
+
+\begin{DoxyParams}{Parameters}
+{\em image\+\_\+id} & The image\+\_\+id returned by a previous \mbox{\hyperlink{settrie_8cpp_a64d77fe0f38f9fca7a098356f725ddcf}{save\+\_\+as\+\_\+binary\+\_\+image()}} call.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of unread blocks in the iterator. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{settrie_8cpp_ab1ff5515808234d01e24e52cedf6f35f}\label{settrie_8cpp_ab1ff5515808234d01e24e52cedf6f35f}} 
+\index{settrie.cpp@{settrie.cpp}!destroy\_binary\_image@{destroy\_binary\_image}}
+\index{destroy\_binary\_image@{destroy\_binary\_image}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{destroy\_binary\_image()}{destroy\_binary\_image()}}
+{\footnotesize\ttfamily void destroy\+\_\+binary\+\_\+image (\begin{DoxyParamCaption}\item[{int}]{image\+\_\+id }\end{DoxyParamCaption})}
+
+Destroy an iterator for a binary \mbox{\hyperlink{settrie_8cpp_aa15ca750c1f18e56d3a75eee54c1ca5b}{image(returned by save\+\_\+as\+\_\+binary\+\_\+image())}}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em image\+\_\+id} & The image\+\_\+id returned by a previous \mbox{\hyperlink{settrie_8cpp_a64d77fe0f38f9fca7a098356f725ddcf}{save\+\_\+as\+\_\+binary\+\_\+image()}} call. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{settrie_8cpp_a58c2cbde0d2c4c1c6a521d4a28849764}\label{settrie_8cpp_a58c2cbde0d2c4c1c6a521d4a28849764}} 
+\index{settrie.cpp@{settrie.cpp}!destroy\_iterator@{destroy\_iterator}}
+\index{destroy\_iterator@{destroy\_iterator}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{destroy\_iterator()}{destroy\_iterator()}}
+{\footnotesize\ttfamily void destroy\+\_\+iterator (\begin{DoxyParamCaption}\item[{int}]{iter\+\_\+id }\end{DoxyParamCaption})}
+
+Destroy an iterator (returned by \mbox{\hyperlink{settrie_8cpp_a01803376236c40d20a124608637632de}{subsets()}} or \mbox{\hyperlink{settrie_8cpp_ac7d7038c48d5079c6147c2964b4208f5}{supersets()}}).
+
+
+\begin{DoxyParams}{Parameters}
+{\em iter\+\_\+id} & The iter\+\_\+id returned by a previous \mbox{\hyperlink{settrie_8cpp_a01803376236c40d20a124608637632de}{subsets()}} or \mbox{\hyperlink{settrie_8cpp_ac7d7038c48d5079c6147c2964b4208f5}{supersets()}} call. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{settrie_8cpp_ad5b3d49f3cdac771f72d3f6b7cfb8f88}\label{settrie_8cpp_ad5b3d49f3cdac771f72d3f6b7cfb8f88}} 
+\index{settrie.cpp@{settrie.cpp}!destroy\_settrie@{destroy\_settrie}}
+\index{destroy\_settrie@{destroy\_settrie}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{destroy\_settrie()}{destroy\_settrie()}}
+{\footnotesize\ttfamily void destroy\+\_\+settrie (\begin{DoxyParamCaption}\item[{int}]{st\+\_\+id }\end{DoxyParamCaption})}
+
+Destroy a \mbox{\hyperlink{classSetTrie}{Set\+Trie}} object that was used via the Python interface.
+
+
+\begin{DoxyParams}{Parameters}
+{\em st\+\_\+id} & The st\+\_\+id returned by a previous \mbox{\hyperlink{settrie_8cpp_a2e215d94498eeebdffc89585e6e06065}{new\+\_\+settrie()}} call. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{settrie_8cpp_aa794bfd7f400ba5419d6d456a8775339}\label{settrie_8cpp_aa794bfd7f400ba5419d6d456a8775339}} 
+\index{settrie.cpp@{settrie.cpp}!elements@{elements}}
+\index{elements@{elements}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{elements()}{elements()}}
+{\footnotesize\ttfamily int elements (\begin{DoxyParamCaption}\item[{int}]{st\+\_\+id,  }\item[{int}]{set\+\_\+id }\end{DoxyParamCaption})}
+
+Return all the elements in a set from a \mbox{\hyperlink{classSetTrie}{Set\+Trie}} identified by set\+\_\+id as an iterator of strings.
+
+
+\begin{DoxyParams}{Parameters}
+{\em st\+\_\+id} & The st\+\_\+id returned by a previous \mbox{\hyperlink{settrie_8cpp_a2e215d94498eeebdffc89585e6e06065}{new\+\_\+settrie()}} call. \\
+\hline
+{\em set\+\_\+id} & A valid set\+\_\+id returned by a successful \mbox{\hyperlink{settrie_8cpp_a68241c91262da8c0dcb681eb827ec1ac}{next\+\_\+set\+\_\+id()}} call.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on error or the empty set, or an iter\+\_\+id \texorpdfstring{$>$}{>} 0 that can be used to retrieve the result using \mbox{\hyperlink{settrie_8cpp_acdc467f95203917237d73748d091dc68}{iterator\+\_\+next()}}/iterator\+\_\+size() and must be explicitly destroyed via \mbox{\hyperlink{settrie_8cpp_a58c2cbde0d2c4c1c6a521d4a28849764}{destroy\+\_\+iterator()}} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{settrie_8cpp_a34bc67f029a478471c30855035d69f56}\label{settrie_8cpp_a34bc67f029a478471c30855035d69f56}} 
+\index{settrie.cpp@{settrie.cpp}!find@{find}}
+\index{find@{find}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{find()}{find()}}
+{\footnotesize\ttfamily char $\ast$ find (\begin{DoxyParamCaption}\item[{int}]{st\+\_\+id,  }\item[{char $\ast$}]{set }\end{DoxyParamCaption})}
+
+Find a Python set (serialized by a str() call) for a complete match inside a \mbox{\hyperlink{classSetTrie}{Set\+Trie}} object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em st\+\_\+id} & The st\+\_\+id returned by a previous \mbox{\hyperlink{settrie_8cpp_a2e215d94498eeebdffc89585e6e06065}{new\+\_\+settrie()}} call. \\
+\hline
+{\em set} & A Python set serialized by a str() call.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The str\+\_\+id string that was given to the set when it was inserted. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{settrie_8cpp_ad453096538f0f4eb0578b41765d5da79}\label{settrie_8cpp_ad453096538f0f4eb0578b41765d5da79}} 
+\index{settrie.cpp@{settrie.cpp}!image\_block\_as\_string@{image\_block\_as\_string}}
+\index{image\_block\_as\_string@{image\_block\_as\_string}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{image\_block\_as\_string()}{image\_block\_as\_string()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily char $\ast$ image\+\_\+block\+\_\+as\+\_\+string (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structImageBlock}{Image\+Block}} \&}]{blk }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{settrie_8cpp_a0b00567c9a0b17ae2c390c9512144d20}\label{settrie_8cpp_a0b00567c9a0b17ae2c390c9512144d20}} 
+\index{settrie.cpp@{settrie.cpp}!image\_block\_as\_string@{image\_block\_as\_string}}
+\index{image\_block\_as\_string@{image\_block\_as\_string}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{image\_block\_as\_string()}{image\_block\_as\_string()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily char $\ast$ image\+\_\+block\+\_\+as\+\_\+string (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{p\+\_\+in }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{settrie_8cpp_aacd8ca20dfe6f3716384d033b74354fc}\label{settrie_8cpp_aacd8ca20dfe6f3716384d033b74354fc}} 
+\index{settrie.cpp@{settrie.cpp}!image\_get@{image\_get}}
+\index{image\_get@{image\_get}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{image\_get()}{image\_get()}}
+{\footnotesize\ttfamily bool image\+\_\+get (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{settrie_8h_a31d667349d31ceb318e7264d03030e14}{p\+Binary\+Image}}}]{p\+\_\+bi,  }\item[{int \&}]{c\+\_\+block,  }\item[{int \&}]{c\+\_\+ofs,  }\item[{void $\ast$}]{p\+\_\+data,  }\item[{int}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{settrie_8cpp_abea00aaa5a7ad198b65780a63fdc668f}\label{settrie_8cpp_abea00aaa5a7ad198b65780a63fdc668f}} 
+\index{settrie.cpp@{settrie.cpp}!image\_put@{image\_put}}
+\index{image\_put@{image\_put}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{image\_put()}{image\_put()}}
+{\footnotesize\ttfamily bool image\+\_\+put (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{settrie_8h_a31d667349d31ceb318e7264d03030e14}{p\+Binary\+Image}}}]{p\+\_\+bi,  }\item[{void $\ast$}]{p\+\_\+data,  }\item[{int}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{settrie_8cpp_a9b24962e5bba11b1e2d97aa95fbbd142}\label{settrie_8cpp_a9b24962e5bba11b1e2d97aa95fbbd142}} 
+\index{settrie.cpp@{settrie.cpp}!insert@{insert}}
+\index{insert@{insert}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{insert()}{insert()}}
+{\footnotesize\ttfamily void insert (\begin{DoxyParamCaption}\item[{int}]{st\+\_\+id,  }\item[{char $\ast$}]{set,  }\item[{char $\ast$}]{str\+\_\+id }\end{DoxyParamCaption})}
+
+Insert a Python set (serialized by a str() call) into a \mbox{\hyperlink{classSetTrie}{Set\+Trie}} object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em st\+\_\+id} & The st\+\_\+id returned by a previous \mbox{\hyperlink{settrie_8cpp_a2e215d94498eeebdffc89585e6e06065}{new\+\_\+settrie()}} call. \\
+\hline
+{\em set} & A Python set serialized by a str() call. \\
+\hline
+{\em str\+\_\+id} & An id representing this set that will be returned in searches. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{settrie_8cpp_acdc467f95203917237d73748d091dc68}\label{settrie_8cpp_acdc467f95203917237d73748d091dc68}} 
+\index{settrie.cpp@{settrie.cpp}!iterator\_next@{iterator\_next}}
+\index{iterator\_next@{iterator\_next}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{iterator\_next()}{iterator\_next()}}
+{\footnotesize\ttfamily char $\ast$ iterator\+\_\+next (\begin{DoxyParamCaption}\item[{int}]{iter\+\_\+id }\end{DoxyParamCaption})}
+
+Return the first unread item in an iterator (returned by \mbox{\hyperlink{settrie_8cpp_a01803376236c40d20a124608637632de}{subsets()}} or \mbox{\hyperlink{settrie_8cpp_ac7d7038c48d5079c6147c2964b4208f5}{supersets()}}).
+
+
+\begin{DoxyParams}{Parameters}
+{\em iter\+\_\+id} & The iter\+\_\+id returned by a previous \mbox{\hyperlink{settrie_8cpp_a01803376236c40d20a124608637632de}{subsets()}} or \mbox{\hyperlink{settrie_8cpp_ac7d7038c48d5079c6147c2964b4208f5}{supersets()}} call.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The str\+\_\+id of an \mbox{\hyperlink{settrie_8cpp_a9b24962e5bba11b1e2d97aa95fbbd142}{insert()}}-\/ed set that matches the query. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{settrie_8cpp_a56fb3654e410546ba594b722e2dc2918}\label{settrie_8cpp_a56fb3654e410546ba594b722e2dc2918}} 
+\index{settrie.cpp@{settrie.cpp}!iterator\_size@{iterator\_size}}
+\index{iterator\_size@{iterator\_size}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{iterator\_size()}{iterator\_size()}}
+{\footnotesize\ttfamily int iterator\+\_\+size (\begin{DoxyParamCaption}\item[{int}]{iter\+\_\+id }\end{DoxyParamCaption})}
+
+Return the number of unread items in an iterator (returned by \mbox{\hyperlink{settrie_8cpp_a01803376236c40d20a124608637632de}{subsets()}} or \mbox{\hyperlink{settrie_8cpp_ac7d7038c48d5079c6147c2964b4208f5}{supersets()}}).
+
+
+\begin{DoxyParams}{Parameters}
+{\em iter\+\_\+id} & The iter\+\_\+id returned by a previous \mbox{\hyperlink{settrie_8cpp_a01803376236c40d20a124608637632de}{subsets()}} or \mbox{\hyperlink{settrie_8cpp_ac7d7038c48d5079c6147c2964b4208f5}{supersets()}} call.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of unread items in the iterator. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{settrie_8cpp_af00a6a16d02e30654cace0aa01e68f3a}\label{settrie_8cpp_af00a6a16d02e30654cace0aa01e68f3a}} 
+\index{settrie.cpp@{settrie.cpp}!MurmurHash64A@{MurmurHash64A}}
+\index{MurmurHash64A@{MurmurHash64A}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{MurmurHash64A()}{MurmurHash64A()}}
+{\footnotesize\ttfamily uint64\+\_\+t Murmur\+Hash64A (\begin{DoxyParamCaption}\item[{const void $\ast$}]{key,  }\item[{int}]{len }\end{DoxyParamCaption})}
+
+
+
+Murmur\+Hash2, 64-\/bit versions, by Austin Appleby. 
+
+(from \href{https://sites.google.com/site/murmurhash/}{\texttt{ https\+://sites.\+google.\+com/site/murmurhash/}}) a 64-\/bit hash for 64-\/bit platforms
+
+All code is released to the public domain. For business purposes, Murmurhash is under the MIT license.
+
+The same caveats as 32-\/bit Murmur\+Hash2 apply here -\/ beware of alignment and endian-\/ness issues if used across multiple platforms.
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & address of the memory block to hash. \\
+\hline
+{\em len} & Number of bytes to hash. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+64-\/bit hash of the memory block. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{settrie_8cpp_a2e215d94498eeebdffc89585e6e06065}\label{settrie_8cpp_a2e215d94498eeebdffc89585e6e06065}} 
+\index{settrie.cpp@{settrie.cpp}!new\_settrie@{new\_settrie}}
+\index{new\_settrie@{new\_settrie}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{new\_settrie()}{new\_settrie()}}
+{\footnotesize\ttfamily int new\+\_\+settrie (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Create a new \mbox{\hyperlink{classSetTrie}{Set\+Trie}} object that can be used via the Python interface.
+
+\begin{DoxyReturn}{Returns}
+A unique ID that can be passed as the st\+\_\+id parameter for any method in the Python interface.
+\end{DoxyReturn}
+To free the resources allocated by this ID, the (python) caller must call \mbox{\hyperlink{settrie_8cpp_ad5b3d49f3cdac771f72d3f6b7cfb8f88}{destroy\+\_\+settrie()}} with the st\+\_\+id and never use the same st\+\_\+id after that. \mbox{\Hypertarget{settrie_8cpp_a68241c91262da8c0dcb681eb827ec1ac}\label{settrie_8cpp_a68241c91262da8c0dcb681eb827ec1ac}} 
+\index{settrie.cpp@{settrie.cpp}!next\_set\_id@{next\_set\_id}}
+\index{next\_set\_id@{next\_set\_id}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{next\_set\_id()}{next\_set\_id()}}
+{\footnotesize\ttfamily int next\+\_\+set\+\_\+id (\begin{DoxyParamCaption}\item[{int}]{st\+\_\+id,  }\item[{int}]{set\+\_\+id }\end{DoxyParamCaption})}
+
+Return the integer set\+\_\+id of the next set stored in a \mbox{\hyperlink{classSetTrie}{Set\+Trie}} after a given set\+\_\+id to iterate over all the sets in the object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em st\+\_\+id} & The st\+\_\+id returned by a previous \mbox{\hyperlink{settrie_8cpp_a2e215d94498eeebdffc89585e6e06065}{new\+\_\+settrie()}} call. \\
+\hline
+{\em set\+\_\+id} & A valid set\+\_\+id returned by previous call or the constant -\/1 to return the first set. Note that 0 may be the set\+\_\+id of the empty set in case the empty set is in the \mbox{\hyperlink{classSetTrie}{Set\+Trie}}.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A unique integer set\+\_\+id that can be used for iterating, calling \mbox{\hyperlink{settrie_8cpp_aaab9be65216fd6ac61c05647b52ea7a1}{set\+\_\+name()}} or \mbox{\hyperlink{settrie_8cpp_aa794bfd7f400ba5419d6d456a8775339}{elements()}}. On error, it will return -\/3 if the st\+\_\+id or the set\+\_\+id is invalid and -\/2 if the set\+\_\+id given is the last set in the object or the object is empty. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{settrie_8cpp_af4966b5346cf0883c150b5ea2a893700}\label{settrie_8cpp_af4966b5346cf0883c150b5ea2a893700}} 
+\index{settrie.cpp@{settrie.cpp}!num\_sets@{num\_sets}}
+\index{num\_sets@{num\_sets}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{num\_sets()}{num\_sets()}}
+{\footnotesize\ttfamily int num\+\_\+sets (\begin{DoxyParamCaption}\item[{int}]{st\+\_\+id }\end{DoxyParamCaption})}
+
+Return the number of sets in a \mbox{\hyperlink{classSetTrie}{Set\+Trie}} object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em st\+\_\+id} & The st\+\_\+id returned by a previous \mbox{\hyperlink{settrie_8cpp_a2e215d94498eeebdffc89585e6e06065}{new\+\_\+settrie()}} call.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number or -\/1 on invalid st\+\_\+id. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{settrie_8cpp_a0cb5f5d83a9b089cb74ff48ff4ffe575}\label{settrie_8cpp_a0cb5f5d83a9b089cb74ff48ff4ffe575}} 
+\index{settrie.cpp@{settrie.cpp}!purge@{purge}}
+\index{purge@{purge}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{purge()}{purge()}}
+{\footnotesize\ttfamily int purge (\begin{DoxyParamCaption}\item[{int}]{st\+\_\+id,  }\item[{int}]{dry\+\_\+run }\end{DoxyParamCaption})}
+
+Purges (reassigns node integer ids and frees RAM) after a series of \mbox{\hyperlink{settrie_8cpp_aa207abef104d6243af4170b28dd662ec}{remove()}} calls.
+
+
+\begin{DoxyParams}{Parameters}
+{\em st\+\_\+id} & The st\+\_\+id returned by a previous \mbox{\hyperlink{settrie_8cpp_a2e215d94498eeebdffc89585e6e06065}{new\+\_\+settrie()}} call. \\
+\hline
+{\em dry\+\_\+run} & If nonzero, does nothing and returns the number of dirty nodes.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A positive num\+\_\+dirty\+\_\+nodes on dry\+\_\+run, zero on successful completion or a negative error code. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{settrie_8cpp_a77b967a5cb92850951a315b13c08c8c5}\label{settrie_8cpp_a77b967a5cb92850951a315b13c08c8c5}} 
+\index{settrie.cpp@{settrie.cpp}!push\_binary\_image\_block@{push\_binary\_image\_block}}
+\index{push\_binary\_image\_block@{push\_binary\_image\_block}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{push\_binary\_image\_block()}{push\_binary\_image\_block()}}
+{\footnotesize\ttfamily bool push\+\_\+binary\+\_\+image\+\_\+block (\begin{DoxyParamCaption}\item[{int}]{st\+\_\+id,  }\item[{char $\ast$}]{p\+\_\+block }\end{DoxyParamCaption})}
+
+Pushes raw image blocks into an initially empty \mbox{\hyperlink{classSetTrie}{Set\+Trie}} object and finally creates it already populated with the binary image.
+
+
+\begin{DoxyParams}{Parameters}
+{\em st\+\_\+id} & The st\+\_\+id returned by a previous \mbox{\hyperlink{settrie_8cpp_a2e215d94498eeebdffc89585e6e06065}{new\+\_\+settrie()}} call. The object must be empty (never inserted). \\
+\hline
+{\em p\+\_\+block} & If non-\/empty, a block in the right order making a binary image obtained for a previous \mbox{\hyperlink{settrie_8cpp_a64d77fe0f38f9fca7a098356f725ddcf}{save\+\_\+as\+\_\+binary\+\_\+image()}} call. If empty, an order to .load() the \mbox{\hyperlink{classSetTrie}{Set\+Trie}} object and destroyed the previously stored blocks.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True on success. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{settrie_8cpp_a978b99946914087b89781781d2ec49cb}\label{settrie_8cpp_a978b99946914087b89781781d2ec49cb}} 
+\index{settrie.cpp@{settrie.cpp}!python\_set\_as\_string@{python\_set\_as\_string}}
+\index{python\_set\_as\_string@{python\_set\_as\_string}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{python\_set\_as\_string()}{python\_set\_as\_string()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{settrie_8h_afbeda3fd1bdc8c37d01bdf9f5c8274ff}{String}} python\+\_\+set\+\_\+as\+\_\+string (\begin{DoxyParamCaption}\item[{char $\ast$}]{p\+\_\+char }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{settrie_8cpp_aa207abef104d6243af4170b28dd662ec}\label{settrie_8cpp_aa207abef104d6243af4170b28dd662ec}} 
+\index{settrie.cpp@{settrie.cpp}!remove@{remove}}
+\index{remove@{remove}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{remove()}{remove()}}
+{\footnotesize\ttfamily int remove (\begin{DoxyParamCaption}\item[{int}]{st\+\_\+id,  }\item[{int}]{set\+\_\+id }\end{DoxyParamCaption})}
+
+Removes a set from the object by its unique integer id.
+
+
+\begin{DoxyParams}{Parameters}
+{\em st\+\_\+id} & The st\+\_\+id returned by a previous \mbox{\hyperlink{settrie_8cpp_a2e215d94498eeebdffc89585e6e06065}{new\+\_\+settrie()}} call. \\
+\hline
+{\em set\+\_\+id} & A valid set\+\_\+id returned by a successful \mbox{\hyperlink{settrie_8cpp_a68241c91262da8c0dcb681eb827ec1ac}{next\+\_\+set\+\_\+id()}} call.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success or a negative error code. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{settrie_8cpp_a64d77fe0f38f9fca7a098356f725ddcf}\label{settrie_8cpp_a64d77fe0f38f9fca7a098356f725ddcf}} 
+\index{settrie.cpp@{settrie.cpp}!save\_as\_binary\_image@{save\_as\_binary\_image}}
+\index{save\_as\_binary\_image@{save\_as\_binary\_image}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{save\_as\_binary\_image()}{save\_as\_binary\_image()}}
+{\footnotesize\ttfamily int save\+\_\+as\+\_\+binary\+\_\+image (\begin{DoxyParamCaption}\item[{int}]{st\+\_\+id }\end{DoxyParamCaption})}
+
+Saves a \mbox{\hyperlink{classSetTrie}{Set\+Trie}} object as a Binary\+Image.
+
+
+\begin{DoxyParams}{Parameters}
+{\em st\+\_\+id} & The st\+\_\+id returned by a previous \mbox{\hyperlink{settrie_8cpp_a2e215d94498eeebdffc89585e6e06065}{new\+\_\+settrie()}} call.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on error, or a binary\+\_\+image\+\_\+id \texorpdfstring{$>$}{>} 0 which is the same as st\+\_\+id and must be destroyed using \mbox{\hyperlink{settrie_8cpp_ab1ff5515808234d01e24e52cedf6f35f}{destroy\+\_\+binary\+\_\+image()}} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{settrie_8cpp_aaab9be65216fd6ac61c05647b52ea7a1}\label{settrie_8cpp_aaab9be65216fd6ac61c05647b52ea7a1}} 
+\index{settrie.cpp@{settrie.cpp}!set\_name@{set\_name}}
+\index{set\_name@{set\_name}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{set\_name()}{set\_name()}}
+{\footnotesize\ttfamily char $\ast$ set\+\_\+name (\begin{DoxyParamCaption}\item[{int}]{st\+\_\+id,  }\item[{int}]{set\+\_\+id }\end{DoxyParamCaption})}
+
+Return the name (Python id) of a set stored in a \mbox{\hyperlink{classSetTrie}{Set\+Trie}} identified by its binary (int) set\+\_\+id.
+
+
+\begin{DoxyParams}{Parameters}
+{\em st\+\_\+id} & The st\+\_\+id returned by a previous \mbox{\hyperlink{settrie_8cpp_a2e215d94498eeebdffc89585e6e06065}{new\+\_\+settrie()}} call. \\
+\hline
+{\em set\+\_\+id} & A valid set\+\_\+id returned by a successful \mbox{\hyperlink{settrie_8cpp_a68241c91262da8c0dcb681eb827ec1ac}{next\+\_\+set\+\_\+id()}} call.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An empty string on any error and the Python id of the set if both st\+\_\+id and set\+\_\+id are valid. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{settrie_8cpp_a824686b1b9a5de641bbeaad372e299a0}\label{settrie_8cpp_a824686b1b9a5de641bbeaad372e299a0}} 
+\index{settrie.cpp@{settrie.cpp}!string\_as\_image\_block@{string\_as\_image\_block}}
+\index{string\_as\_image\_block@{string\_as\_image\_block}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{string\_as\_image\_block()}{string\_as\_image\_block()}}
+{\footnotesize\ttfamily bool string\+\_\+as\+\_\+image\+\_\+block (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structImageBlock}{Image\+Block}} \&}]{blk,  }\item[{char $\ast$}]{p\+\_\+in }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{settrie_8cpp_a01803376236c40d20a124608637632de}\label{settrie_8cpp_a01803376236c40d20a124608637632de}} 
+\index{settrie.cpp@{settrie.cpp}!subsets@{subsets}}
+\index{subsets@{subsets}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{subsets()}{subsets()}}
+{\footnotesize\ttfamily int subsets (\begin{DoxyParamCaption}\item[{int}]{st\+\_\+id,  }\item[{char $\ast$}]{set }\end{DoxyParamCaption})}
+
+Find all the subsets of a given Python set (serialized by a str() call) stored inside a \mbox{\hyperlink{classSetTrie}{Set\+Trie}} object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em st\+\_\+id} & The st\+\_\+id returned by a previous \mbox{\hyperlink{settrie_8cpp_a2e215d94498eeebdffc89585e6e06065}{new\+\_\+settrie()}} call. \\
+\hline
+{\em set} & A Python set serialized by a str() call.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if no sets were found, or an iter\+\_\+id \texorpdfstring{$>$}{>} 0 that can be used to retrieve the result using \mbox{\hyperlink{settrie_8cpp_acdc467f95203917237d73748d091dc68}{iterator\+\_\+next()}}/iterator\+\_\+size() and must be explicitly destroyed via \mbox{\hyperlink{settrie_8cpp_a58c2cbde0d2c4c1c6a521d4a28849764}{destroy\+\_\+iterator()}} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{settrie_8cpp_ac7d7038c48d5079c6147c2964b4208f5}\label{settrie_8cpp_ac7d7038c48d5079c6147c2964b4208f5}} 
+\index{settrie.cpp@{settrie.cpp}!supersets@{supersets}}
+\index{supersets@{supersets}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{supersets()}{supersets()}}
+{\footnotesize\ttfamily int supersets (\begin{DoxyParamCaption}\item[{int}]{st\+\_\+id,  }\item[{char $\ast$}]{set }\end{DoxyParamCaption})}
+
+Find all the supersets of a given Python set (serialized by a str() call) stored inside a \mbox{\hyperlink{classSetTrie}{Set\+Trie}} object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em st\+\_\+id} & The st\+\_\+id returned by a previous \mbox{\hyperlink{settrie_8cpp_a2e215d94498eeebdffc89585e6e06065}{new\+\_\+settrie()}} call. \\
+\hline
+{\em set} & A Python set serialized by a str() call.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if no sets were found, or an iter\+\_\+id \texorpdfstring{$>$}{>} 0 that can be used to retrieve the result using \mbox{\hyperlink{settrie_8cpp_acdc467f95203917237d73748d091dc68}{iterator\+\_\+next()}}/iterator\+\_\+size() and must be explicitly destroyed via \mbox{\hyperlink{settrie_8cpp_a58c2cbde0d2c4c1c6a521d4a28849764}{destroy\+\_\+iterator()}} 
+\end{DoxyReturn}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{settrie_8cpp_a87c6228e206d40acd8bb922514f65270}\label{settrie_8cpp_a87c6228e206d40acd8bb922514f65270}} 
+\index{settrie.cpp@{settrie.cpp}!answer\_block@{answer\_block}}
+\index{answer\_block@{answer\_block}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{answer\_block}{answer\_block}}
+{\footnotesize\ttfamily char answer\+\_\+block\mbox{[}8208\mbox{]}}
+
+\mbox{\Hypertarget{settrie_8cpp_a3ce3af741592ed7c6bbc6bca94a81ca7}\label{settrie_8cpp_a3ce3af741592ed7c6bbc6bca94a81ca7}} 
+\index{settrie.cpp@{settrie.cpp}!answer\_buffer@{answer\_buffer}}
+\index{answer\_buffer@{answer\_buffer}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{answer\_buffer}{answer\_buffer}}
+{\footnotesize\ttfamily char answer\+\_\+buffer\mbox{[}8192\mbox{]}}
+
+\mbox{\Hypertarget{settrie_8cpp_a63970901e1960b660aeaf8737ca44f4c}\label{settrie_8cpp_a63970901e1960b660aeaf8737ca44f4c}} 
+\index{settrie.cpp@{settrie.cpp}!b64chars@{b64chars}}
+\index{b64chars@{b64chars}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{b64chars}{b64chars}}
+{\footnotesize\ttfamily const char b64chars\mbox{[}$\,$\mbox{]} = \char`\"{}ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/\char`\"{}}
+
+\mbox{\Hypertarget{settrie_8cpp_a7bf7e1476e68f28be16d2d7642ced87d}\label{settrie_8cpp_a7bf7e1476e68f28be16d2d7642ced87d}} 
+\index{settrie.cpp@{settrie.cpp}!b64inverse@{b64inverse}}
+\index{b64inverse@{b64inverse}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{b64inverse}{b64inverse}}
+{\footnotesize\ttfamily uint8\+\_\+t b64inverse\mbox{[}256\mbox{]} = \{0\}}
+
+\mbox{\Hypertarget{settrie_8cpp_aa15ca750c1f18e56d3a75eee54c1ca5b}\label{settrie_8cpp_aa15ca750c1f18e56d3a75eee54c1ca5b}} 
+\index{settrie.cpp@{settrie.cpp}!image@{image}}
+\index{image@{image}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{image}{image}}
+{\footnotesize\ttfamily \mbox{\hyperlink{settrie_8cpp_afe560789669a8dbab1aefb1a0e5ccd6c}{Binary\+Image\+Server}} image = \{\}}
+
+\mbox{\Hypertarget{settrie_8cpp_a998eb5dc4620e65d20743750e76062f2}\label{settrie_8cpp_a998eb5dc4620e65d20743750e76062f2}} 
+\index{settrie.cpp@{settrie.cpp}!instance@{instance}}
+\index{instance@{instance}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{instance}{instance}}
+{\footnotesize\ttfamily \mbox{\hyperlink{settrie_8cpp_acedc3866d3a29b656ee52b9b5de54fed}{Set\+Trie\+Server}} instance = \{\}}
+
+\mbox{\Hypertarget{settrie_8cpp_abb22027e7c6e9f03f4e765018c75501c}\label{settrie_8cpp_abb22027e7c6e9f03f4e765018c75501c}} 
+\index{settrie.cpp@{settrie.cpp}!instance\_iter@{instance\_iter}}
+\index{instance\_iter@{instance\_iter}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{instance\_iter}{instance\_iter}}
+{\footnotesize\ttfamily int instance\+\_\+iter = 0}
+
+\mbox{\Hypertarget{settrie_8cpp_a904fce38a7b978b3756a515bcc539a11}\label{settrie_8cpp_a904fce38a7b978b3756a515bcc539a11}} 
+\index{settrie.cpp@{settrie.cpp}!instance\_num@{instance\_num}}
+\index{instance\_num@{instance\_num}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{instance\_num}{instance\_num}}
+{\footnotesize\ttfamily int instance\+\_\+num = 0}
+
+\mbox{\Hypertarget{settrie_8cpp_a1ff388504293a3a62d6f0d9f76a27ef0}\label{settrie_8cpp_a1ff388504293a3a62d6f0d9f76a27ef0}} 
+\index{settrie.cpp@{settrie.cpp}!iterator@{iterator}}
+\index{iterator@{iterator}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{iterator}{iterator}}
+{\footnotesize\ttfamily \mbox{\hyperlink{settrie_8cpp_aeb902765eaed9ee8c1e50b938126baab}{Iter\+Server}} iterator = \{\}}
+

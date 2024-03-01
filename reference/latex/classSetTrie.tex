@@ -1,59 +1,155 @@
 \hypertarget{classSetTrie}{}\doxysection{Set\+Trie Class Reference}
 \label{classSetTrie}\index{SetTrie@{SetTrie}}
+
+
+{\ttfamily \#include $<$settrie.\+h$>$}
+
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classSetTrie_a9f5ef6dce39f8a0b32eed46acaa6b89a}\label{classSetTrie_a9f5ef6dce39f8a0b32eed46acaa6b89a}} 
-void {\bfseries insert} (String\+Set set, String id)
+\mbox{\hyperlink{classSetTrie_ab9d60e396588d0ee8e702901e9cd65c4}{Set\+Trie}} ()
 \item 
-\mbox{\Hypertarget{classSetTrie_a30928e37d39d7c74128267f571b7d11c}\label{classSetTrie_a30928e37d39d7c74128267f571b7d11c}} 
-void {\bfseries insert} (String str, String str\+\_\+id, char split)
+void \mbox{\hyperlink{classSetTrie_a9f5ef6dce39f8a0b32eed46acaa6b89a}{insert}} (\mbox{\hyperlink{settrie_8h_a635a5f230a424bcf4fa3f14cc8412286}{String\+Set}} set, \mbox{\hyperlink{settrie_8h_afbeda3fd1bdc8c37d01bdf9f5c8274ff}{String}} \mbox{\hyperlink{classSetTrie_ab533cc6f20d8251eee27dc2983279688}{id}})
 \item 
-\mbox{\Hypertarget{classSetTrie_a17d79b5f61422b1bf4334e2bb4d95ebd}\label{classSetTrie_a17d79b5f61422b1bf4334e2bb4d95ebd}} 
-String {\bfseries find} (String\+Set set)
+void \mbox{\hyperlink{classSetTrie_a30928e37d39d7c74128267f571b7d11c}{insert}} (\mbox{\hyperlink{settrie_8h_afbeda3fd1bdc8c37d01bdf9f5c8274ff}{String}} str, \mbox{\hyperlink{settrie_8h_afbeda3fd1bdc8c37d01bdf9f5c8274ff}{String}} str\+\_\+id, char split)
 \item 
-\mbox{\Hypertarget{classSetTrie_a4e9829259f848d6a296d55b144ab63a5}\label{classSetTrie_a4e9829259f848d6a296d55b144ab63a5}} 
-String {\bfseries find} (String str, char split)
+\mbox{\hyperlink{settrie_8h_afbeda3fd1bdc8c37d01bdf9f5c8274ff}{String}} \mbox{\hyperlink{classSetTrie_a17d79b5f61422b1bf4334e2bb4d95ebd}{find}} (\mbox{\hyperlink{settrie_8h_a635a5f230a424bcf4fa3f14cc8412286}{String\+Set}} set)
 \item 
-\mbox{\Hypertarget{classSetTrie_aea196ee6f4412c829e0a2ddda9fdeee1}\label{classSetTrie_aea196ee6f4412c829e0a2ddda9fdeee1}} 
-String\+Set {\bfseries supersets} (String\+Set set)
+\mbox{\hyperlink{settrie_8h_afbeda3fd1bdc8c37d01bdf9f5c8274ff}{String}} \mbox{\hyperlink{classSetTrie_a4e9829259f848d6a296d55b144ab63a5}{find}} (\mbox{\hyperlink{settrie_8h_afbeda3fd1bdc8c37d01bdf9f5c8274ff}{String}} str, char split)
 \item 
-\mbox{\Hypertarget{classSetTrie_a3761c0e99ce653a404c40c2a4931ceb9}\label{classSetTrie_a3761c0e99ce653a404c40c2a4931ceb9}} 
-String\+Set {\bfseries supersets} (String str, char split)
+\mbox{\hyperlink{settrie_8h_a635a5f230a424bcf4fa3f14cc8412286}{String\+Set}} \mbox{\hyperlink{classSetTrie_aea196ee6f4412c829e0a2ddda9fdeee1}{supersets}} (\mbox{\hyperlink{settrie_8h_a635a5f230a424bcf4fa3f14cc8412286}{String\+Set}} set)
 \item 
-\mbox{\Hypertarget{classSetTrie_a3f8fa6665e075164b3b6b2fc5c81210a}\label{classSetTrie_a3f8fa6665e075164b3b6b2fc5c81210a}} 
-String\+Set {\bfseries subsets} (String\+Set set)
+\mbox{\hyperlink{settrie_8h_a635a5f230a424bcf4fa3f14cc8412286}{String\+Set}} \mbox{\hyperlink{classSetTrie_a3761c0e99ce653a404c40c2a4931ceb9}{supersets}} (\mbox{\hyperlink{settrie_8h_afbeda3fd1bdc8c37d01bdf9f5c8274ff}{String}} str, char split)
 \item 
-\mbox{\Hypertarget{classSetTrie_a6d054a930df91c7b9c515991b6db3cfa}\label{classSetTrie_a6d054a930df91c7b9c515991b6db3cfa}} 
-String\+Set {\bfseries subsets} (String str, char split)
+\mbox{\hyperlink{settrie_8h_a635a5f230a424bcf4fa3f14cc8412286}{String\+Set}} \mbox{\hyperlink{classSetTrie_a3f8fa6665e075164b3b6b2fc5c81210a}{subsets}} (\mbox{\hyperlink{settrie_8h_a635a5f230a424bcf4fa3f14cc8412286}{String\+Set}} set)
 \item 
-\mbox{\Hypertarget{classSetTrie_ae45d8b4ff7900f5f3fbc0a47bcc8c5e0}\label{classSetTrie_ae45d8b4ff7900f5f3fbc0a47bcc8c5e0}} 
-String\+Set {\bfseries elements} (int idx)
+\mbox{\hyperlink{settrie_8h_a635a5f230a424bcf4fa3f14cc8412286}{String\+Set}} \mbox{\hyperlink{classSetTrie_a6d054a930df91c7b9c515991b6db3cfa}{subsets}} (\mbox{\hyperlink{settrie_8h_afbeda3fd1bdc8c37d01bdf9f5c8274ff}{String}} str, char split)
 \item 
-\mbox{\Hypertarget{classSetTrie_a32f403cfdbdae4005c89eb7fbb2f8050}\label{classSetTrie_a32f403cfdbdae4005c89eb7fbb2f8050}} 
-int {\bfseries remove} (int idx)
+\mbox{\hyperlink{settrie_8h_a635a5f230a424bcf4fa3f14cc8412286}{String\+Set}} \mbox{\hyperlink{classSetTrie_ae45d8b4ff7900f5f3fbc0a47bcc8c5e0}{elements}} (int idx)
 \item 
-\mbox{\Hypertarget{classSetTrie_ae83ad0dd6ecdbba2afcca8d66cd624df}\label{classSetTrie_ae83ad0dd6ecdbba2afcca8d66cd624df}} 
-int {\bfseries purge} ()
+int \mbox{\hyperlink{classSetTrie_a32f403cfdbdae4005c89eb7fbb2f8050}{remove}} (int idx)
 \item 
-\mbox{\Hypertarget{classSetTrie_afbbe55ce4562af6eb035b7167275b3bc}\label{classSetTrie_afbbe55ce4562af6eb035b7167275b3bc}} 
-bool {\bfseries load} (p\+Binary\+Image \&p\+\_\+bi)
+int \mbox{\hyperlink{classSetTrie_ae83ad0dd6ecdbba2afcca8d66cd624df}{purge}} ()
 \item 
-\mbox{\Hypertarget{classSetTrie_a456f35f560383b7701b8bfb9d37e3660}\label{classSetTrie_a456f35f560383b7701b8bfb9d37e3660}} 
-bool {\bfseries save} (p\+Binary\+Image \&p\+\_\+bi)
+bool \mbox{\hyperlink{classSetTrie_afbbe55ce4562af6eb035b7167275b3bc}{load}} (\mbox{\hyperlink{settrie_8h_a31d667349d31ceb318e7264d03030e14}{p\+Binary\+Image}} \&p\+\_\+bi)
+\item 
+bool \mbox{\hyperlink{classSetTrie_a456f35f560383b7701b8bfb9d37e3660}{save}} (\mbox{\hyperlink{settrie_8h_a31d667349d31ceb318e7264d03030e14}{p\+Binary\+Image}} \&p\+\_\+bi)
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classSetTrie_ab533cc6f20d8251eee27dc2983279688}\label{classSetTrie_ab533cc6f20d8251eee27dc2983279688}} 
-Id\+Map {\bfseries id} = \{\}
+\mbox{\hyperlink{settrie_8h_a3a4755cedadd9190dfbf561607e09379}{Id\+Map}} \mbox{\hyperlink{classSetTrie_ab533cc6f20d8251eee27dc2983279688}{id}} = \{\}
 \item 
-\mbox{\Hypertarget{classSetTrie_a49ddef07ea7ad4f6b9d396f06150123d}\label{classSetTrie_a49ddef07ea7ad4f6b9d396f06150123d}} 
-int {\bfseries num\+\_\+dirty\+\_\+nodes}
+int \mbox{\hyperlink{classSetTrie_a49ddef07ea7ad4f6b9d396f06150123d}{num\+\_\+dirty\+\_\+nodes}}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classSetTrie_ab9d60e396588d0ee8e702901e9cd65c4}\label{classSetTrie_ab9d60e396588d0ee8e702901e9cd65c4}} 
+\index{SetTrie@{SetTrie}!SetTrie@{SetTrie}}
+\index{SetTrie@{SetTrie}!SetTrie@{SetTrie}}
+\doxysubsubsection{\texorpdfstring{SetTrie()}{SetTrie()}}
+{\footnotesize\ttfamily Set\+Trie\+::\+Set\+Trie (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classSetTrie_ae45d8b4ff7900f5f3fbc0a47bcc8c5e0}\label{classSetTrie_ae45d8b4ff7900f5f3fbc0a47bcc8c5e0}} 
+\index{SetTrie@{SetTrie}!elements@{elements}}
+\index{elements@{elements}!SetTrie@{SetTrie}}
+\doxysubsubsection{\texorpdfstring{elements()}{elements()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{settrie_8h_a635a5f230a424bcf4fa3f14cc8412286}{String\+Set}} Set\+Trie\+::elements (\begin{DoxyParamCaption}\item[{int}]{idx }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classSetTrie_a4e9829259f848d6a296d55b144ab63a5}\label{classSetTrie_a4e9829259f848d6a296d55b144ab63a5}} 
+\index{SetTrie@{SetTrie}!find@{find}}
+\index{find@{find}!SetTrie@{SetTrie}}
+\doxysubsubsection{\texorpdfstring{find()}{find()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{settrie_8h_afbeda3fd1bdc8c37d01bdf9f5c8274ff}{String}} Set\+Trie\+::find (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{settrie_8h_afbeda3fd1bdc8c37d01bdf9f5c8274ff}{String}}}]{str,  }\item[{char}]{split }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classSetTrie_a17d79b5f61422b1bf4334e2bb4d95ebd}\label{classSetTrie_a17d79b5f61422b1bf4334e2bb4d95ebd}} 
+\index{SetTrie@{SetTrie}!find@{find}}
+\index{find@{find}!SetTrie@{SetTrie}}
+\doxysubsubsection{\texorpdfstring{find()}{find()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{settrie_8h_afbeda3fd1bdc8c37d01bdf9f5c8274ff}{String}} Set\+Trie\+::find (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{settrie_8h_a635a5f230a424bcf4fa3f14cc8412286}{String\+Set}}}]{set }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classSetTrie_a30928e37d39d7c74128267f571b7d11c}\label{classSetTrie_a30928e37d39d7c74128267f571b7d11c}} 
+\index{SetTrie@{SetTrie}!insert@{insert}}
+\index{insert@{insert}!SetTrie@{SetTrie}}
+\doxysubsubsection{\texorpdfstring{insert()}{insert()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Set\+Trie\+::insert (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{settrie_8h_afbeda3fd1bdc8c37d01bdf9f5c8274ff}{String}}}]{str,  }\item[{\mbox{\hyperlink{settrie_8h_afbeda3fd1bdc8c37d01bdf9f5c8274ff}{String}}}]{str\+\_\+id,  }\item[{char}]{split }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classSetTrie_a9f5ef6dce39f8a0b32eed46acaa6b89a}\label{classSetTrie_a9f5ef6dce39f8a0b32eed46acaa6b89a}} 
+\index{SetTrie@{SetTrie}!insert@{insert}}
+\index{insert@{insert}!SetTrie@{SetTrie}}
+\doxysubsubsection{\texorpdfstring{insert()}{insert()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Set\+Trie\+::insert (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{settrie_8h_a635a5f230a424bcf4fa3f14cc8412286}{String\+Set}}}]{set,  }\item[{\mbox{\hyperlink{settrie_8h_afbeda3fd1bdc8c37d01bdf9f5c8274ff}{String}}}]{id }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classSetTrie_afbbe55ce4562af6eb035b7167275b3bc}\label{classSetTrie_afbbe55ce4562af6eb035b7167275b3bc}} 
+\index{SetTrie@{SetTrie}!load@{load}}
+\index{load@{load}!SetTrie@{SetTrie}}
+\doxysubsubsection{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily bool Set\+Trie\+::load (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{settrie_8h_a31d667349d31ceb318e7264d03030e14}{p\+Binary\+Image}} \&}]{p\+\_\+bi }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classSetTrie_ae83ad0dd6ecdbba2afcca8d66cd624df}\label{classSetTrie_ae83ad0dd6ecdbba2afcca8d66cd624df}} 
+\index{SetTrie@{SetTrie}!purge@{purge}}
+\index{purge@{purge}!SetTrie@{SetTrie}}
+\doxysubsubsection{\texorpdfstring{purge()}{purge()}}
+{\footnotesize\ttfamily int Set\+Trie\+::purge (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classSetTrie_a32f403cfdbdae4005c89eb7fbb2f8050}\label{classSetTrie_a32f403cfdbdae4005c89eb7fbb2f8050}} 
+\index{SetTrie@{SetTrie}!remove@{remove}}
+\index{remove@{remove}!SetTrie@{SetTrie}}
+\doxysubsubsection{\texorpdfstring{remove()}{remove()}}
+{\footnotesize\ttfamily int Set\+Trie\+::remove (\begin{DoxyParamCaption}\item[{int}]{idx }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classSetTrie_a456f35f560383b7701b8bfb9d37e3660}\label{classSetTrie_a456f35f560383b7701b8bfb9d37e3660}} 
+\index{SetTrie@{SetTrie}!save@{save}}
+\index{save@{save}!SetTrie@{SetTrie}}
+\doxysubsubsection{\texorpdfstring{save()}{save()}}
+{\footnotesize\ttfamily bool Set\+Trie\+::save (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{settrie_8h_a31d667349d31ceb318e7264d03030e14}{p\+Binary\+Image}} \&}]{p\+\_\+bi }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classSetTrie_a6d054a930df91c7b9c515991b6db3cfa}\label{classSetTrie_a6d054a930df91c7b9c515991b6db3cfa}} 
+\index{SetTrie@{SetTrie}!subsets@{subsets}}
+\index{subsets@{subsets}!SetTrie@{SetTrie}}
+\doxysubsubsection{\texorpdfstring{subsets()}{subsets()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{settrie_8h_a635a5f230a424bcf4fa3f14cc8412286}{String\+Set}} Set\+Trie\+::subsets (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{settrie_8h_afbeda3fd1bdc8c37d01bdf9f5c8274ff}{String}}}]{str,  }\item[{char}]{split }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classSetTrie_a3f8fa6665e075164b3b6b2fc5c81210a}\label{classSetTrie_a3f8fa6665e075164b3b6b2fc5c81210a}} 
+\index{SetTrie@{SetTrie}!subsets@{subsets}}
+\index{subsets@{subsets}!SetTrie@{SetTrie}}
+\doxysubsubsection{\texorpdfstring{subsets()}{subsets()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{settrie_8h_a635a5f230a424bcf4fa3f14cc8412286}{String\+Set}} Set\+Trie\+::subsets (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{settrie_8h_a635a5f230a424bcf4fa3f14cc8412286}{String\+Set}}}]{set }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classSetTrie_a3761c0e99ce653a404c40c2a4931ceb9}\label{classSetTrie_a3761c0e99ce653a404c40c2a4931ceb9}} 
+\index{SetTrie@{SetTrie}!supersets@{supersets}}
+\index{supersets@{supersets}!SetTrie@{SetTrie}}
+\doxysubsubsection{\texorpdfstring{supersets()}{supersets()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{settrie_8h_a635a5f230a424bcf4fa3f14cc8412286}{String\+Set}} Set\+Trie\+::supersets (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{settrie_8h_afbeda3fd1bdc8c37d01bdf9f5c8274ff}{String}}}]{str,  }\item[{char}]{split }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classSetTrie_aea196ee6f4412c829e0a2ddda9fdeee1}\label{classSetTrie_aea196ee6f4412c829e0a2ddda9fdeee1}} 
+\index{SetTrie@{SetTrie}!supersets@{supersets}}
+\index{supersets@{supersets}!SetTrie@{SetTrie}}
+\doxysubsubsection{\texorpdfstring{supersets()}{supersets()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{settrie_8h_a635a5f230a424bcf4fa3f14cc8412286}{String\+Set}} Set\+Trie\+::supersets (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{settrie_8h_a635a5f230a424bcf4fa3f14cc8412286}{String\+Set}}}]{set }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classSetTrie_ab533cc6f20d8251eee27dc2983279688}\label{classSetTrie_ab533cc6f20d8251eee27dc2983279688}} 
+\index{SetTrie@{SetTrie}!id@{id}}
+\index{id@{id}!SetTrie@{SetTrie}}
+\doxysubsubsection{\texorpdfstring{id}{id}}
+{\footnotesize\ttfamily \mbox{\hyperlink{settrie_8h_a3a4755cedadd9190dfbf561607e09379}{Id\+Map}} Set\+Trie\+::id = \{\}}
+
+\mbox{\Hypertarget{classSetTrie_a49ddef07ea7ad4f6b9d396f06150123d}\label{classSetTrie_a49ddef07ea7ad4f6b9d396f06150123d}} 
+\index{SetTrie@{SetTrie}!num\_dirty\_nodes@{num\_dirty\_nodes}}
+\index{num\_dirty\_nodes@{num\_dirty\_nodes}!SetTrie@{SetTrie}}
+\doxysubsubsection{\texorpdfstring{num\_dirty\_nodes}{num\_dirty\_nodes}}
+{\footnotesize\ttfamily int Set\+Trie\+::num\+\_\+dirty\+\_\+nodes}
+
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-settrie/settrie.\+h\item 
-settrie/settrie.\+cpp\end{DoxyCompactItemize}
+settrie/\mbox{\hyperlink{settrie_8h}{settrie.\+h}}\item 
+settrie/\mbox{\hyperlink{settrie_8cpp}{settrie.\+cpp}}\end{DoxyCompactItemize}
