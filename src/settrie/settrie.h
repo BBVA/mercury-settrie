@@ -26,6 +26,7 @@
 #include <map>
 #include <string>
 #include <vector>
+#include <cstdint>
 
 #define IMAGE_BUFF_SIZE				6136
 
