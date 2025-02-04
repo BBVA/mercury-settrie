@@ -128,3 +128,4 @@ __version__ = '1.4.7'
 
 from settrie.SetTrie import SetTrie
 from settrie.SetTrie import Result
+from settrie.create_tutorials import create_tutorials
