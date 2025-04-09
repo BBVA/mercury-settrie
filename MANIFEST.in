@@ -1,3 +1,5 @@
 include src/settrie/_py_settrie.so
 
 graft src/settrie/
+
+recursive-include notebooks *
