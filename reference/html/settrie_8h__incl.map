@@ -1,9 +1,15 @@
 <map id="settrie/settrie.h" name="settrie/settrie.h">
-<area shape="rect" id="node1" title=" " alt="" coords="229,5,352,31"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,79,91,104"/>
-<area shape="rect" id="node3" title=" " alt="" coords="115,79,202,104"/>
-<area shape="rect" id="node4" title=" " alt="" coords="227,79,277,104"/>
-<area shape="rect" id="node5" title=" " alt="" coords="301,79,360,104"/>
-<area shape="rect" id="node6" title=" " alt="" coords="385,79,447,104"/>
-<area shape="rect" id="node7" title=" " alt="" coords="472,79,539,104"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="229,5,352,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,91,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="252,33,101,77,99,72,251,28"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="115,79,202,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="271,33,193,74,191,70,268,28"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="227,79,277,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="287,32,267,68,262,65,282,30"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="301,79,360,104"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="300,30,320,65,315,68,295,32"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="385,79,447,104"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="312,28,385,69,382,74,309,33"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="472,79,539,104"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="326,28,460,72,458,77,324,33"/>
 </map>

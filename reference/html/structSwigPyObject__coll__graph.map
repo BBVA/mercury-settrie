@@ -1,5 +1,10 @@
 <map id="SwigPyObject" name="SwigPyObject">
-<area shape="rect" id="node1" title=" " alt="" coords="5,95,116,121"/>
-<area shape="rect" id="node2" href="$structswig__type__info.html" title=" " alt="" coords="75,5,195,31"/>
-<area shape="rect" id="node3" href="$structswig__cast__info.html" title=" " alt="" coords="140,95,259,121"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,95,116,121"/>
+<area shape="rect" id="Node000002" href="$structswig__type__info.html" title=" " alt="" coords="75,5,195,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="118,43,105,56,72,97,68,93,101,53,114,39"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="210,9,222,18,214,26,196,28,195,23,211,21,217,18,208,14"/>
+<area shape="rect" id="Node000003" href="$structswig__cast__info.html" title=" " alt="" coords="140,95,259,121"/>
+<area shape="poly" id="edge4_Node000003_Node000002" title=" " alt="" coords="130,44,130,57,134,68,147,83,164,93,161,98,143,87,129,71,125,57,125,44"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="185,84,168,56,146,33,150,29,172,53,190,81"/>
+<area shape="poly" id="edge5_Node000003_Node000003" title=" " alt="" coords="274,99,285,108,277,116,259,119,258,114,275,111,280,108,271,104"/>
 </map>

@@ -6,5 +6,6 @@ var searchData=
   ['destroy_5fbinary_5fimage_3',['destroy_binary_image',['../py__settrie__wrap_8cpp.html#ab1ff5515808234d01e24e52cedf6f35f',1,'destroy_binary_image(int image_id):&#160;settrie.cpp'],['../settrie_8cpp.html#ab1ff5515808234d01e24e52cedf6f35f',1,'destroy_binary_image(int image_id):&#160;settrie.cpp']]],
   ['destroy_5fiterator_4',['destroy_iterator',['../py__settrie__wrap_8cpp.html#a58c2cbde0d2c4c1c6a521d4a28849764',1,'destroy_iterator(int iter_id):&#160;settrie.cpp'],['../settrie_8cpp.html#a58c2cbde0d2c4c1c6a521d4a28849764',1,'destroy_iterator(int iter_id):&#160;settrie.cpp']]],
   ['destroy_5fsettrie_5',['destroy_settrie',['../py__settrie__wrap_8cpp.html#ad5b3d49f3cdac771f72d3f6b7cfb8f88',1,'destroy_settrie(int st_id):&#160;settrie.cpp'],['../settrie_8cpp.html#ad5b3d49f3cdac771f72d3f6b7cfb8f88',1,'destroy_settrie(int st_id):&#160;settrie.cpp']]],
-  ['dvalue_6',['dvalue',['../structswig__const__info.html#a74e477f1dbf515bcb7e2ef07a1d34c35',1,'swig_const_info']]]
+  ['documentation_20for_20settrie_6',['[C++ documentation for Settrie]',['../index.html',1,'']]],
+  ['dvalue_7',['dvalue',['../structswig__const__info.html#a74e477f1dbf515bcb7e2ef07a1d34c35',1,'swig_const_info']]]
 ];

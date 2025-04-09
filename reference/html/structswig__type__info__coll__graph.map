@@ -1,4 +1,8 @@
 <map id="swig_type_info" name="swig_type_info">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,125,31"/>
-<area shape="rect" id="node2" href="$structswig__cast__info.html" title=" " alt="" coords="6,95,125,121"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,125,31"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="140,9,152,18,144,26,126,28,125,23,141,21,147,18,138,14"/>
+<area shape="rect" id="Node000002" href="$structswig__cast__info.html" title=" " alt="" coords="6,95,125,121"/>
+<area shape="poly" id="edge3_Node000002_Node000001" title=" " alt="" coords="41,41,32,55,32,69,40,82,51,93,48,97,36,85,27,70,27,53,36,38"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="65,81,65,55,64,31,69,31,71,55,70,81"/>
+<area shape="poly" id="edge4_Node000002_Node000002" title=" " alt="" coords="140,99,151,108,143,116,125,119,124,114,141,111,146,108,137,104"/>
 </map>

@@ -1,10 +1,17 @@
 <map id="settrie/st_main.h" name="settrie/st_main.h">
-<area shape="rect" id="node1" title=" " alt="" coords="225,5,357,31"/>
-<area shape="rect" id="node2" href="$settrie_8h.html" title=" " alt="" coords="253,79,329,104"/>
-<area shape="rect" id="node3" title=" " alt="" coords="5,152,91,177"/>
-<area shape="rect" id="node4" title=" " alt="" coords="115,152,202,177"/>
-<area shape="rect" id="node5" title=" " alt="" coords="227,152,277,177"/>
-<area shape="rect" id="node6" title=" " alt="" coords="301,152,360,177"/>
-<area shape="rect" id="node7" title=" " alt="" coords="385,152,447,177"/>
-<area shape="rect" id="node8" title=" " alt="" coords="472,152,539,177"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="225,5,357,31"/>
+<area shape="rect" id="Node000002" href="$settrie_8h.html" title=" " alt="" coords="253,79,329,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="293,31,293,65,288,65,288,31"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,152,91,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="253,106,101,151,99,146,251,101"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="115,152,202,177"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="271,106,193,148,191,143,268,102"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="227,152,277,177"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="287,106,267,141,262,139,282,103"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="301,152,360,177"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="300,103,320,139,315,141,295,106"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="385,152,447,177"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="312,102,385,143,382,147,309,106"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="472,152,539,177"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="326,101,460,146,458,151,324,107"/>
 </map>

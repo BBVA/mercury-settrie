@@ -17,8 +17,10 @@ var searchData=
   ['instance_14',['instance',['../settrie_8cpp.html#a998eb5dc4620e65d20743750e76062f2',1,'settrie.cpp']]],
   ['instance_5fiter_15',['instance_iter',['../settrie_8cpp.html#abb22027e7c6e9f03f4e765018c75501c',1,'settrie.cpp']]],
   ['instance_5fnum_16',['instance_num',['../settrie_8cpp.html#a904fce38a7b978b3756a515bcc539a11',1,'settrie.cpp']]],
-  ['iterator_17',['iterator',['../settrie_8cpp.html#a1ff388504293a3a62d6f0d9f76a27ef0',1,'settrie.cpp']]],
-  ['iterator_5fnext_18',['iterator_next',['../py__settrie__wrap_8cpp.html#acdc467f95203917237d73748d091dc68',1,'iterator_next(int iter_id):&#160;settrie.cpp'],['../settrie_8cpp.html#acdc467f95203917237d73748d091dc68',1,'iterator_next(int iter_id):&#160;settrie.cpp']]],
-  ['iterator_5fsize_19',['iterator_size',['../py__settrie__wrap_8cpp.html#a56fb3654e410546ba594b722e2dc2918',1,'iterator_size(int iter_id):&#160;settrie.cpp'],['../settrie_8cpp.html#a56fb3654e410546ba594b722e2dc2918',1,'iterator_size(int iter_id):&#160;settrie.cpp']]],
-  ['iterserver_20',['IterServer',['../settrie_8cpp.html#aeb902765eaed9ee8c1e50b938126baab',1,'settrie.cpp']]]
+  ['is_17',['And the main class is',['../index.html#classes_TOC',1,'']]],
+  ['is_20one_20namespace_18',['There is one namespace',['../index.html#names_TOC',1,'']]],
+  ['iterator_19',['iterator',['../settrie_8cpp.html#a1ff388504293a3a62d6f0d9f76a27ef0',1,'settrie.cpp']]],
+  ['iterator_5fnext_20',['iterator_next',['../py__settrie__wrap_8cpp.html#acdc467f95203917237d73748d091dc68',1,'iterator_next(int iter_id):&#160;settrie.cpp'],['../settrie_8cpp.html#acdc467f95203917237d73748d091dc68',1,'iterator_next(int iter_id):&#160;settrie.cpp']]],
+  ['iterator_5fsize_21',['iterator_size',['../py__settrie__wrap_8cpp.html#a56fb3654e410546ba594b722e2dc2918',1,'iterator_size(int iter_id):&#160;settrie.cpp'],['../settrie_8cpp.html#a56fb3654e410546ba594b722e2dc2918',1,'iterator_size(int iter_id):&#160;settrie.cpp']]],
+  ['iterserver_22',['IterServer',['../settrie_8cpp.html#aeb902765eaed9ee8c1e50b938126baab',1,'settrie.cpp']]]
 ];
