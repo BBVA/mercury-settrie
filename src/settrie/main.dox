@@ -1,0 +1,21 @@
+/**
+\mainpage [C++ documentation for Settrie]
+
+This site documents the C++ implementation only at development level.
+
+\n
+\section names_TOC There is one namespace
+
+1. \ref settrie
+
+\n
+\section classes_TOC And the main class is
+
+1. \ref SetTrie
+
+\n
+\section wrapper_sec Python wrapper
+
+Everything here is built into a Python package that can be found at: [Settrie repository](https://github.com/BBVA/mercury-settrie.git).\n
+
+*/
