@@ -11,7 +11,7 @@ from setuptools import setup, find_packages, Extension
 
 settrie_ext = Extension(name				= 'settrie._py_settrie',
 						sources				= ['src/settrie/settrie.cpp', 'src/settrie/py_settrie_wrap.cpp'],
-            			include_dirs		= ['src/settrie'],
+						include_dirs		= ['src/settrie'],
 						extra_compile_args	= ['-std=c++11', '-c', '-fpic', '-O3'])
 
 setup_args = dict(
