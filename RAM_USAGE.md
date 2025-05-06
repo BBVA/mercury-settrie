@@ -15,17 +15,16 @@ byt the `image_put()`/`image_get()` methods which can handle any number of `Imag
 that is not a limitation. The copy of the memory C++ buffers in Pytyhon becomes a list of strings, each string being a base64 encoded
 `ImageBlock`.
 
-Nevertheless, there are some choices in the C++ code that impose limits the authors considered reasonable to keep the source simple and
-are related with C++/Python serialization that can be tweaked (see below).
+Nevertheless, before version 1.5.0 there were some choices in the C++ code that imposed limits the authors considered reasonable to keep
+the source simple and were related with C++/Python serialization.
 
 
-## Known Limitations
+## Returning iterators with dynamic allocation
 
-The following structures are fixed in size:
+Version 1.5.1 introduced a new way to return iterators. This fixes the above mentioned issue.
 
 
-char answer_buffer [8192];
-char answer_block  [8208];	// 4K + final zero aligned to 16 bytes
+## Known limitations
 
-bool SetTrie::load (pBinaryImage &p_bi) {
-	char		buffer[8192];
+There are none known limitations. Memory allocation should only be limited by the available RAM. If you find any issues, please open
+an issue in: https://github.com/BBVA/mercury-settrie/issues
