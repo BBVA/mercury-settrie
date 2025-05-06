@@ -119,8 +119,20 @@ def binary_image_next(image_id):
 def destroy_binary_image(image_id):
     return _py_settrie.destroy_binary_image(image_id)
 
+def cleanup_globals():
+    return _py_settrie.cleanup_globals()
+
 # The source version file is <proj>/src/version.py, anything else is auto generated.
 __version__ = '1.5.1'
 from settrie.SetTrie import SetTrie
 from settrie.SetTrie import Result
 from settrie.create_tutorials import create_tutorials
+
+import atexit, weakref
+
+# Register cleanup at interpreter exit
+atexit.register(cleanup_globals)
+
+# Also register cleanup when module is garbage collected (in case of reloads)
+_sentinel = SetTrie()
+weakref.finalize(_sentinel, cleanup_globals)
