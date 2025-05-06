@@ -21,6 +21,7 @@
 	extern int binary_image_size (int image_id);
 	extern char *binary_image_next (int image_id);
 	extern void destroy_binary_image (int image_id);
+	extern void cleanup_globals();
 %}
 
 extern int new_settrie();
@@ -43,3 +44,4 @@ extern bool push_binary_image_block (int st_id, char *p_block);
 extern int binary_image_size (int image_id);
 extern char *binary_image_next (int image_id);
 extern void destroy_binary_image (int image_id);
+extern void cleanup_globals();
