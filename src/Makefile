@@ -76,7 +76,7 @@ doc_py:
 package: mode_release
 	g++ -c -fpic -O3 -std=c++11 -Isettrie -DNDEBUG -o settrie.o settrie/settrie.cpp
 	cd settrie && swig -python -o py_settrie_wrap.cpp py_settrie.i && mv py_settrie.py __init__.py && cat ../version.py >>__init__.py && cat imports.in >>__init__.py
-	g++ -c -fpic -O3 settrie/py_settrie_wrap.cpp -Dpython -I/usr/include/python3.8 -I/usr/include/python3.10
+	g++ -c -fpic -O3 settrie/py_settrie_wrap.cpp -Dpython -I/usr/include/python3.10 -I/usr/include/python3.11 -I/usr/include/python3.12
 	g++ -shared settrie.o py_settrie_wrap.o -o settrie/_py_settrie.so
 	@printf "\nPython 3.x package was built locally in the folder './settrie'.\n"
 	@printf "\nYou can run 'import settrie' for here or ./test.sh to test it!\n"

@@ -675,7 +675,8 @@ SetTrieServer	  instance = {};
 IterServer		  iterator = {};
 BinaryImageServer image	   = {};
 
-char answer_buffer [8192];
+int max_id_length	= 1024;
+char *p_answer		= nullptr;
 char answer_block  [8208];	// 4K + final zero aligned to 16 bytes
 
 const char b64chars[]	   = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
@@ -833,6 +834,31 @@ String python_set_as_string(char *p_char) {
 	return s;
 }
 
+
+/** Return a buffer to write an answer that is as big as max_id_length. max_id_length tracks the largest set id used by insert.
+*/
+char *get_answer_buffer () {
+	if (p_answer == nullptr)
+		p_answer = (char *) malloc(max_id_length + 16);
+
+	return p_answer;
+}
+
+
+/** Check if the current set id is larger than max_id_length. If so, reallocate the buffer to the new size.
+
+	\param size  The new size of the id.
+*/
+void inline set_answer_buffer_size (int size) {
+	if (size > max_id_length) {
+		if (p_answer != nullptr)
+			free(p_answer);
+
+		p_answer = (char *) malloc(size + 16);
+		max_id_length = size;
+	}
+}
+
 // -----------------------------------------------------------------------------------------------------------------------------------------
 
 /** Create a new SetTrie object that can be used via the Python interface.
@@ -877,8 +903,11 @@ void insert	(int st_id, char *set, char *str_id) {
 
 	SetTrieServer::iterator it = instance.find(st_id);
 
-	if (it != instance.end())
-		it->second->insert(python_set_as_string(set), String(str_id), ',');
+	if (it != instance.end()) {
+		String s = String(str_id);
+		it->second->insert(python_set_as_string(set), s, ',');
+		set_answer_buffer_size(s.length());
+	}
 }
 
 
@@ -893,12 +922,14 @@ char *find (int st_id, char *set) {
 
 	SetTrieServer::iterator it = instance.find(st_id);
 
-	answer_buffer[0] = 0;
+	char *p_ans = get_answer_buffer();
+
+	p_ans[0] = 0;
 
 	if (it != instance.end())
-		strcpy(answer_buffer, it->second->find(python_set_as_string(set), ',').c_str());
+		strcpy(p_ans, it->second->find(python_set_as_string(set), ',').c_str());
 
-	return answer_buffer;
+	return p_ans;
 }
 
 
@@ -1050,16 +1081,18 @@ char *set_name (int st_id, int set_id) {
 
 	SetTrieServer::iterator it = instance.find(st_id);
 
-	answer_buffer[0] = 0;
+	char *p_ans = get_answer_buffer();
+
+	p_ans[0] = 0;
 
 	if (it != instance.end()) {
 		IdMap::iterator jt = it->second->id.find(set_id);
 
 		if (jt != it->second->id.end())
-			strcpy(answer_buffer, jt->second.c_str());
+			strcpy(p_ans, jt->second.c_str());
 	}
 
-	return answer_buffer;
+	return p_ans;
 }
 
 
@@ -1129,17 +1162,19 @@ char *iterator_next (int iter_id) {
 
 	IterServer::iterator it = iterator.find(iter_id);
 
-	answer_buffer[0] = 0;
+	char *p_ans = get_answer_buffer();
+
+	p_ans[0] = 0;
 
 	if (it != iterator.end() && !it->second->empty()) {
 
 		String ss = it->second->back();
 		it->second->pop_back();
 
-		strcpy(answer_buffer, ss.c_str());
+		strcpy(p_ans, ss.c_str());
 	}
 
-	return answer_buffer;
+	return p_ans;
 }
 
 
@@ -1305,6 +1340,16 @@ char *binary_image_next (int image_id) {
 	it->second->erase(it->second->begin());
 
 	return p_ret;
+}
+
+
+/** Free the memory allocated for the answer buffer.
+*/
+void cleanup_globals () {
+	if (p_answer != nullptr) {
+		free(p_answer);
+		p_answer = nullptr;
+	}
 }
 
 #if defined TEST

@@ -18,9 +18,11 @@
 #     See the License for the specific language governing permissions and
 #     limitations under the License.
 
-import os, pickle, copy
+import copy, os, pickle, shutil
 
-from settrie import SetTrie, Result, destroy_settrie, next_set_id, elements, set_name
+from unittest.mock import patch
+
+from settrie import SetTrie, Result, destroy_settrie, next_set_id, elements, set_name, create_tutorials
 
 
 def test_basic():
@@ -387,6 +389,20 @@ def test_remove_purge():
     assert stt.purge() == 0
 
 
+def test_issue_23():
+    for i in [29487, 29488]:
+        x = SetTrie()
+        x.insert(set(['x']), 'x'*i)
+        assert type(list(x.subsets(set(['x'])))) == list
+
+
+def test_create_tutorials():
+    with patch('pkg_resources.resource_filename', return_value = '../notebooks'):
+        create_tutorials('.', silent = False)
+
+    shutil.rmtree('./settrie_tutorials')
+
+
 # test_basic()
 # test_one_page_save_load()
 # test_multi_page_save_load()
@@ -395,3 +411,5 @@ def test_remove_purge():
 # test_nested_iterator_calls()
 # test_nested_iterators()
 # test_remove_purge()
+# test_issue_23()
+# test_create_tutorials()
