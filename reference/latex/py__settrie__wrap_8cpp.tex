@@ -1,6 +1,7 @@
 \doxysection{settrie/py\+\_\+settrie\+\_\+wrap.cpp File Reference}
 \hypertarget{py__settrie__wrap_8cpp}{}\label{py__settrie__wrap_8cpp}\index{settrie/py\_settrie\_wrap.cpp@{settrie/py\_settrie\_wrap.cpp}}
 {\ttfamily \#include $<$Python.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
 {\ttfamily \#include $<$string.\+h$>$}\newline
 {\ttfamily \#include $<$limits.\+h$>$}\newline
 {\ttfamily \#include $<$float.\+h$>$}\newline
@@ -24,18 +25,20 @@ struct \mbox{\hyperlink{structswig__module__info}{swig\+\_\+module\+\_\+info}}
 \item 
 struct \mbox{\hyperlink{structswig__const__info}{swig\+\_\+const\+\_\+info}}
 \item 
+struct \mbox{\hyperlink{structswig__globalvar}{swig\+\_\+globalvar}}
+\item 
+struct \mbox{\hyperlink{structswig__varlinkobject}{swig\+\_\+varlinkobject}}
+\item 
 struct \mbox{\hyperlink{structSwigPyClientData}{Swig\+Py\+Client\+Data}}
 \item 
 struct \mbox{\hyperlink{structSwigPyObject}{Swig\+Py\+Object}}
 \item 
 struct \mbox{\hyperlink{structSwigPyPacked}{Swig\+Py\+Packed}}
-\item 
-struct \mbox{\hyperlink{structswig__globalvar}{swig\+\_\+globalvar}}
-\item 
-struct \mbox{\hyperlink{structswig__varlinkobject}{swig\+\_\+varlinkobject}}
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Macros}
 \begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{py__settrie__wrap_8cpp_a8180a5d9a951bc3a9c5852fce5fde4e8}{SWIG\+\_\+\+VERSION}}~0x040200
 \item 
 \#define \mbox{\hyperlink{py__settrie__wrap_8cpp_a8db301777472eabaccb1d609dcedb54e}{SWIGPYTHON}}
 \item 
@@ -57,6 +60,14 @@ struct \mbox{\hyperlink{structswig__varlinkobject}{swig\+\_\+varlinkobject}}
 \item 
 \#define \mbox{\hyperlink{py__settrie__wrap_8cpp_adcd6410456ea7a76147d3ad95b9bcb36}{SWIGSTDCALL}}
 \item 
+\#define \mbox{\hyperlink{py__settrie__wrap_8cpp_a163b0c8db0f7dad876951049234859a1}{SWIG\+\_\+\+NULLPTR}}~NULL
+\item 
+\#define \mbox{\hyperlink{py__settrie__wrap_8cpp_af89759ae0d1c7c97b041cdf570979866}{SWIG\+\_\+snprintf}}(O,  S,  F,  A)~sprintf(O,F,A)
+\item 
+\#define \mbox{\hyperlink{py__settrie__wrap_8cpp_a0e8b9bdfe67cfb21b1980f99b4cd3478}{SWIG\+\_\+snprintf2}}(O,  S,  F,  A,  B)~sprintf(O,F,A,B)
+\item 
+\#define \mbox{\hyperlink{py__settrie__wrap_8cpp_ac9efdaac9411d0868b715edccca3269d}{PY\+\_\+\+SSIZE\+\_\+\+T\+\_\+\+CLEAN}}
+\item 
 \#define \mbox{\hyperlink{py__settrie__wrap_8cpp_a4895907de5539551925ab5c03ea05d28}{SWIG\+\_\+\+RUNTIME\+\_\+\+VERSION}}~"{}4"{}
 \item 
 \#define \mbox{\hyperlink{py__settrie__wrap_8cpp_ac619a84edecccb5e00c1b4a3180b8c3a}{SWIG\+\_\+\+TYPE\+\_\+\+TABLE\+\_\+\+NAME}}
@@ -73,11 +84,17 @@ struct \mbox{\hyperlink{structswig__varlinkobject}{swig\+\_\+varlinkobject}}
 \item 
 \#define \mbox{\hyperlink{py__settrie__wrap_8cpp_a9a8dd7e2f7caadfb7b1ffd75653d2975}{SWIG\+\_\+\+POINTER\+\_\+\+NO\+\_\+\+NULL}}~0x4
 \item 
+\#define \mbox{\hyperlink{py__settrie__wrap_8cpp_a72516fc40752bfd12edac05ab80c239d}{SWIG\+\_\+\+POINTER\+\_\+\+CLEAR}}~0x8
+\item 
+\#define \mbox{\hyperlink{py__settrie__wrap_8cpp_a6c8e16c4ba354cab21dc9c3a5918b58e}{SWIG\+\_\+\+POINTER\+\_\+\+RELEASE}}~(\mbox{\hyperlink{py__settrie__wrap_8cpp_a72516fc40752bfd12edac05ab80c239d}{SWIG\+\_\+\+POINTER\+\_\+\+CLEAR}} \texorpdfstring{$\vert$}{|} \mbox{\hyperlink{py__settrie__wrap_8cpp_aa56139a289829795ed651d533826b65e}{SWIG\+\_\+\+POINTER\+\_\+\+DISOWN}})
+\item 
 \#define \mbox{\hyperlink{py__settrie__wrap_8cpp_a1a125b0e9c551bb9cdeb21b8e5be5b57}{SWIG\+\_\+\+POINTER\+\_\+\+OWN}}~0x1
 \item 
 \#define \mbox{\hyperlink{py__settrie__wrap_8cpp_af9ecbac56d4c5cd6104ae8f6bb82e9f7}{SWIG\+\_\+\+OK}}~(0)
 \item 
 \#define \mbox{\hyperlink{py__settrie__wrap_8cpp_acfa11a770d66f9ca6ba170b173c56c94}{SWIG\+\_\+\+ERROR}}~(-\/1)
+\item 
+\#define \mbox{\hyperlink{py__settrie__wrap_8cpp_ac3437dedff11d7079dde741a1996587f}{SWIG\+\_\+\+ERROR\+\_\+\+RELEASE\+\_\+\+NOT\+\_\+\+OWNED}}~(-\/200)
 \item 
 \#define \mbox{\hyperlink{py__settrie__wrap_8cpp_aea8ef410fde907633cb76d9d18131fa1}{SWIG\+\_\+\+Is\+OK}}(r)~(r $>$= 0)
 \item 
@@ -143,13 +160,13 @@ struct \mbox{\hyperlink{structswig__varlinkobject}{swig\+\_\+varlinkobject}}
 \item 
 \#define \mbox{\hyperlink{py__settrie__wrap_8cpp_a9b793ab094535913288a25a20906bc8e}{SWIG\+\_\+\+Python\+\_\+str\+\_\+\+From\+Format}}~Py\+String\+\_\+\+From\+Format
 \item 
-\#define \mbox{\hyperlink{py__settrie__wrap_8cpp_a866b998f49f1870f2a0af8e30c738d15}{SWIG\+\_\+\+Python\+\_\+str\+\_\+\+Del\+For\+Py3}}(x)
-\item 
 \#define \mbox{\hyperlink{py__settrie__wrap_8cpp_a3e72f1bb4b2af8f115a750f832d421b4}{Py\+Object\+\_\+\+DEL}}~Py\+Object\+\_\+\+Del
 \item 
 \#define \mbox{\hyperlink{py__settrie__wrap_8cpp_ae3360186a49695b175fca7590941bf26}{SWIGPY\+\_\+\+USE\+\_\+\+CAPSULE}}
 \item 
-\#define \mbox{\hyperlink{py__settrie__wrap_8cpp_a9569372a2f05c24acc013e50f0399a0b}{SWIGPY\+\_\+\+CAPSULE\+\_\+\+NAME}}~("{}swig\+\_\+runtime\+\_\+data"{} \mbox{\hyperlink{py__settrie__wrap_8cpp_a4895907de5539551925ab5c03ea05d28}{SWIG\+\_\+\+RUNTIME\+\_\+\+VERSION}} "{}.type\+\_\+pointer\+\_\+capsule"{} \mbox{\hyperlink{py__settrie__wrap_8cpp_ac619a84edecccb5e00c1b4a3180b8c3a}{SWIG\+\_\+\+TYPE\+\_\+\+TABLE\+\_\+\+NAME}})
+\#define \mbox{\hyperlink{py__settrie__wrap_8cpp_a37e64a0a5d70ca893bda748451d736fc}{SWIGPY\+\_\+\+CAPSULE\+\_\+\+ATTR\+\_\+\+NAME}}~"{}type\+\_\+pointer\+\_\+capsule"{} \mbox{\hyperlink{py__settrie__wrap_8cpp_ac619a84edecccb5e00c1b4a3180b8c3a}{SWIG\+\_\+\+TYPE\+\_\+\+TABLE\+\_\+\+NAME}}
+\item 
+\#define \mbox{\hyperlink{py__settrie__wrap_8cpp_a9569372a2f05c24acc013e50f0399a0b}{SWIGPY\+\_\+\+CAPSULE\+\_\+\+NAME}}~("{}swig\+\_\+runtime\+\_\+data"{} \mbox{\hyperlink{py__settrie__wrap_8cpp_a4895907de5539551925ab5c03ea05d28}{SWIG\+\_\+\+RUNTIME\+\_\+\+VERSION}} "{}."{} \mbox{\hyperlink{py__settrie__wrap_8cpp_a37e64a0a5d70ca893bda748451d736fc}{SWIGPY\+\_\+\+CAPSULE\+\_\+\+ATTR\+\_\+\+NAME}})
 \item 
 \#define \mbox{\hyperlink{py__settrie__wrap_8cpp_a0d2bc679367576eb4071b8c3bfe13edc}{Py\+Descr\+\_\+\+TYPE}}(x)~(((Py\+Descr\+Object \texorpdfstring{$\ast$}{*})(x))-\/$>$d\+\_\+type)
 \item 
@@ -225,6 +242,12 @@ struct \mbox{\hyperlink{structswig__varlinkobject}{swig\+\_\+varlinkobject}}
 \item 
 \#define \mbox{\hyperlink{py__settrie__wrap_8cpp_aa58fdef163810db36a21536e3fef11fc}{SWIG\+\_\+\+STATIC\+\_\+\+POINTER}}(var)~var = 0; if (!var) var
 \item 
+\#define \mbox{\hyperlink{py__settrie__wrap_8cpp_a840e0b11d64ac8d72e9f72d518cc67be}{SWIG\+\_\+newvarlink}}()~\mbox{\hyperlink{py__settrie__wrap_8cpp_a39bb7ee5bbfb28696698a91819af7bf3}{SWIG\+\_\+\+Python\+\_\+newvarlink}}()
+\item 
+\#define \mbox{\hyperlink{py__settrie__wrap_8cpp_a49a542a5f7eb7a97541accc2cde0eed9}{SWIG\+\_\+addvarlink}}(p,  name,  get\+\_\+attr,  set\+\_\+attr)~\mbox{\hyperlink{py__settrie__wrap_8cpp_a4c73e64d7b40edbc814d7235a4087e43}{SWIG\+\_\+\+Python\+\_\+addvarlink}}(p, name, get\+\_\+attr, set\+\_\+attr)
+\item 
+\#define \mbox{\hyperlink{py__settrie__wrap_8cpp_a9d393ea973fc8a2e2672e885ec06221b}{SWIG\+\_\+\+Install\+Constants}}(d,  constants)~\mbox{\hyperlink{py__settrie__wrap_8cpp_a26d87efa9c8072a9092913538ab5090c}{SWIG\+\_\+\+Python\+\_\+\+Install\+Constants}}(d, constants)
+\item 
 \#define \mbox{\hyperlink{py__settrie__wrap_8cpp_a4a923a6f2e1436eab52ac29421cb2831}{SWIG\+\_\+\+POINTER\+\_\+\+NOSHADOW}}~(\mbox{\hyperlink{py__settrie__wrap_8cpp_a1a125b0e9c551bb9cdeb21b8e5be5b57}{SWIG\+\_\+\+POINTER\+\_\+\+OWN}}      $<$$<$ 1)
 \item 
 \#define \mbox{\hyperlink{py__settrie__wrap_8cpp_a1d7a891b8fceac04d0954a0e7aaf7d1c}{SWIG\+\_\+\+POINTER\+\_\+\+NEW}}~(\mbox{\hyperlink{py__settrie__wrap_8cpp_a4a923a6f2e1436eab52ac29421cb2831}{SWIG\+\_\+\+POINTER\+\_\+\+NOSHADOW}} \texorpdfstring{$\vert$}{|} \mbox{\hyperlink{py__settrie__wrap_8cpp_a1a125b0e9c551bb9cdeb21b8e5be5b57}{SWIG\+\_\+\+POINTER\+\_\+\+OWN}})
@@ -243,7 +266,7 @@ struct \mbox{\hyperlink{structswig__varlinkobject}{swig\+\_\+varlinkobject}}
 \item 
 \#define \mbox{\hyperlink{py__settrie__wrap_8cpp_a567b84b185b0f14620c063787f998109}{SWIG\+\_\+exception\+\_\+fail}}(code,  msg)~do \{ \mbox{\hyperlink{py__settrie__wrap_8cpp_a01b485cfacae7d870729eea43fb17cb0}{SWIG\+\_\+\+Error}}(code, msg); \mbox{\hyperlink{py__settrie__wrap_8cpp_ababf56889b69e7a569556eb38cd4f157}{SWIG\+\_\+fail}}; \} while(0)
 \item 
-\#define \mbox{\hyperlink{py__settrie__wrap_8cpp_aca11636b220cff70dac286c268c95ee6}{SWIG\+\_\+contract\+\_\+assert}}(expr,  msg)~if (!(expr)) \{ \mbox{\hyperlink{py__settrie__wrap_8cpp_a01b485cfacae7d870729eea43fb17cb0}{SWIG\+\_\+\+Error}}(\mbox{\hyperlink{py__settrie__wrap_8cpp_a34d3d1c1310427d00140bf1cc8de3ef6}{SWIG\+\_\+\+Runtime\+Error}}, msg); \mbox{\hyperlink{py__settrie__wrap_8cpp_ababf56889b69e7a569556eb38cd4f157}{SWIG\+\_\+fail}}; \} else
+\#define \mbox{\hyperlink{py__settrie__wrap_8cpp_aca11636b220cff70dac286c268c95ee6}{SWIG\+\_\+contract\+\_\+assert}}(expr,  msg)~do \{ if (!(expr)) \{ \mbox{\hyperlink{py__settrie__wrap_8cpp_a01b485cfacae7d870729eea43fb17cb0}{SWIG\+\_\+\+Error}}(\mbox{\hyperlink{py__settrie__wrap_8cpp_a34d3d1c1310427d00140bf1cc8de3ef6}{SWIG\+\_\+\+Runtime\+Error}}, msg); \mbox{\hyperlink{py__settrie__wrap_8cpp_ababf56889b69e7a569556eb38cd4f157}{SWIG\+\_\+fail}}; \} \} while (0)
 \item 
 \#define \mbox{\hyperlink{py__settrie__wrap_8cpp_a4fea528f7738d5fc0e2f14911d2b9d38}{SWIGTYPE\+\_\+p\+\_\+char}}~swig\+\_\+types\mbox{[}0\mbox{]}
 \item 
@@ -257,19 +280,11 @@ struct \mbox{\hyperlink{structswig__varlinkobject}{swig\+\_\+varlinkobject}}
 \item 
 \#define \mbox{\hyperlink{py__settrie__wrap_8cpp_acff905e8f0880e6e5bba1495c416a6af}{SWIG\+\_\+name}}~"{}\+\_\+py\+\_\+settrie"{}
 \item 
-\#define \mbox{\hyperlink{py__settrie__wrap_8cpp_a82758940324a80fe482f130cc097c36e}{SWIGVERSION}}~0x040002
-\item 
-\#define \mbox{\hyperlink{py__settrie__wrap_8cpp_a8180a5d9a951bc3a9c5852fce5fde4e8}{SWIG\+\_\+\+VERSION}}~\mbox{\hyperlink{py__settrie__wrap_8cpp_a82758940324a80fe482f130cc097c36e}{SWIGVERSION}}
-\item 
 \#define \mbox{\hyperlink{py__settrie__wrap_8cpp_a6dc8f6b962375bf647fc53ecbeca2d20}{SWIG\+\_\+as\+\_\+voidptr}}(a)~(void \texorpdfstring{$\ast$}{*})((const void \texorpdfstring{$\ast$}{*})(a))
 \item 
 \#define \mbox{\hyperlink{py__settrie__wrap_8cpp_a46d91724837c8d2846b0b27f8bf1626c}{SWIG\+\_\+as\+\_\+voidptrptr}}(a)~((void)\mbox{\hyperlink{py__settrie__wrap_8cpp_a6dc8f6b962375bf647fc53ecbeca2d20}{SWIG\+\_\+as\+\_\+voidptr}}(\texorpdfstring{$\ast$}{*}a),(void\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*})(a))
 \item 
-\#define \mbox{\hyperlink{py__settrie__wrap_8cpp_a840e0b11d64ac8d72e9f72d518cc67be}{SWIG\+\_\+newvarlink}}()~\mbox{\hyperlink{py__settrie__wrap_8cpp_a39bb7ee5bbfb28696698a91819af7bf3}{SWIG\+\_\+\+Python\+\_\+newvarlink}}()
-\item 
-\#define \mbox{\hyperlink{py__settrie__wrap_8cpp_a49a542a5f7eb7a97541accc2cde0eed9}{SWIG\+\_\+addvarlink}}(p,  name,  get\+\_\+attr,  set\+\_\+attr)~\mbox{\hyperlink{py__settrie__wrap_8cpp_a4c73e64d7b40edbc814d7235a4087e43}{SWIG\+\_\+\+Python\+\_\+addvarlink}}(p, name, get\+\_\+attr, set\+\_\+attr)
-\item 
-\#define \mbox{\hyperlink{py__settrie__wrap_8cpp_a9d393ea973fc8a2e2672e885ec06221b}{SWIG\+\_\+\+Install\+Constants}}(d,  constants)~\mbox{\hyperlink{py__settrie__wrap_8cpp_a26d87efa9c8072a9092913538ab5090c}{SWIG\+\_\+\+Python\+\_\+\+Install\+Constants}}(d, constants)
+\#define \mbox{\hyperlink{py__settrie__wrap_8cpp_a691b8a3a4014e56e511bf6b0a7fdb697}{SWIG\+\_\+\+INIT\+\_\+\+CLIENT\+\_\+\+DATA\+\_\+\+TYPE}}~void \texorpdfstring{$\ast$}{*}
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Typedefs}
 \begin{DoxyCompactItemize}
@@ -301,7 +316,7 @@ typedef struct \mbox{\hyperlink{structswig__varlinkobject}{swig\+\_\+varlinkobje
 \item 
 \mbox{\hyperlink{py__settrie__wrap_8cpp_a42cd9c1d67d803040a3e78515945afcb}{SWIGRUNTIME}} \mbox{\hyperlink{structswig__cast__info}{swig\+\_\+cast\+\_\+info}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_ac1dbd2df27970f40895c52f0f0f1e47c}{SWIG\+\_\+\+Type\+Check}} (const char \texorpdfstring{$\ast$}{*}c, \mbox{\hyperlink{structswig__type__info}{swig\+\_\+type\+\_\+info}} \texorpdfstring{$\ast$}{*}ty)
 \item 
-\mbox{\hyperlink{py__settrie__wrap_8cpp_a42cd9c1d67d803040a3e78515945afcb}{SWIGRUNTIME}} \mbox{\hyperlink{structswig__cast__info}{swig\+\_\+cast\+\_\+info}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_a0bd9b9bda0c431597a804a27f8750746}{SWIG\+\_\+\+Type\+Check\+Struct}} (\mbox{\hyperlink{structswig__type__info}{swig\+\_\+type\+\_\+info}} \texorpdfstring{$\ast$}{*}from, \mbox{\hyperlink{structswig__type__info}{swig\+\_\+type\+\_\+info}} \texorpdfstring{$\ast$}{*}ty)
+\mbox{\hyperlink{py__settrie__wrap_8cpp_a42cd9c1d67d803040a3e78515945afcb}{SWIGRUNTIME}} \mbox{\hyperlink{structswig__cast__info}{swig\+\_\+cast\+\_\+info}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_abbaa545387a2275c4fa321794ba9730d}{SWIG\+\_\+\+Type\+Check\+Struct}} (const \mbox{\hyperlink{structswig__type__info}{swig\+\_\+type\+\_\+info}} \texorpdfstring{$\ast$}{*}from, \mbox{\hyperlink{structswig__type__info}{swig\+\_\+type\+\_\+info}} \texorpdfstring{$\ast$}{*}ty)
 \item 
 \mbox{\hyperlink{py__settrie__wrap_8cpp_affa7aa2bcce5bea24a20e5b184ae0533}{SWIGRUNTIMEINLINE}} void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_afffa0f94d47fd5cdf487592e5541c61a}{SWIG\+\_\+\+Type\+Cast}} (\mbox{\hyperlink{structswig__cast__info}{swig\+\_\+cast\+\_\+info}} \texorpdfstring{$\ast$}{*}ty, void \texorpdfstring{$\ast$}{*}ptr, int \texorpdfstring{$\ast$}{*}newmemory)
 \item 
@@ -331,7 +346,7 @@ typedef struct \mbox{\hyperlink{structswig__varlinkobject}{swig\+\_\+varlinkobje
 \item 
 \mbox{\hyperlink{py__settrie__wrap_8cpp_a42cd9c1d67d803040a3e78515945afcb}{SWIGRUNTIME}} const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_a97000accda334d49ad7b51fa562fd741}{SWIG\+\_\+\+Unpack\+Data\+Name}} (const char \texorpdfstring{$\ast$}{*}c, void \texorpdfstring{$\ast$}{*}ptr, size\+\_\+t sz, const char \texorpdfstring{$\ast$}{*}name)
 \item 
-\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_a490869adce66bc12597e3c1ac23fab48}{SWIG\+\_\+\+Python\+\_\+str\+\_\+\+As\+Char}} (Py\+Object \texorpdfstring{$\ast$}{*}str)
+\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_a86cd6fe27d8b17bc91470594d6efd0e6}{SWIG\+\_\+\+Py\+Unicode\+\_\+\+As\+UTF8\+And\+Size}} (Py\+Object \texorpdfstring{$\ast$}{*}str, Py\+\_\+ssize\+\_\+t \texorpdfstring{$\ast$}{*}psize, Py\+Object \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}pbytes)
 \item 
 \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_ada53ff51e4581c1caf6bf62482216fb4}{SWIG\+\_\+\+Python\+\_\+str\+\_\+\+From\+Char}} (const char \texorpdfstring{$\ast$}{*}c)
 \item 
@@ -354,6 +369,24 @@ typedef struct \mbox{\hyperlink{structswig__varlinkobject}{swig\+\_\+varlinkobje
 \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+\_\+ssize\+\_\+t \mbox{\hyperlink{py__settrie__wrap_8cpp_a1680d2920ae7c74f40eae9eb45cc2d75}{SWIG\+\_\+\+Python\+\_\+\+Unpack\+Tuple}} (Py\+Object \texorpdfstring{$\ast$}{*}args, const char \texorpdfstring{$\ast$}{*}name, Py\+\_\+ssize\+\_\+t min, Py\+\_\+ssize\+\_\+t max, Py\+Object \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}objs)
 \item 
 \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} int \mbox{\hyperlink{py__settrie__wrap_8cpp_a778bb54fcafd893705d10f59112e09c9}{SWIG\+\_\+\+Python\+\_\+\+Check\+No\+Keywords}} (Py\+Object \texorpdfstring{$\ast$}{*}kwargs, const char \texorpdfstring{$\ast$}{*}name)
+\item 
+\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_aa6cea954f09842d05a211d2bf4fd6b38}{swig\+\_\+varlink\+\_\+repr}} (Py\+Object \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{py__settrie__wrap_8cpp_a6a54164d0685c632e7540c5ad32a453a}{SWIGUNUSEDPARM}}(v))
+\item 
+\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_a687282f112e2292926b7b95b1bc2bbc9}{swig\+\_\+varlink\+\_\+str}} (Py\+Object \texorpdfstring{$\ast$}{*}o)
+\item 
+\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} void \mbox{\hyperlink{py__settrie__wrap_8cpp_ac8cbe883cdf0073a6af2b70d25dc6320}{swig\+\_\+varlink\+\_\+dealloc}} (Py\+Object \texorpdfstring{$\ast$}{*}o)
+\item 
+\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_adec75f6c43bfcae9a6ab46347a691f06}{swig\+\_\+varlink\+\_\+getattr}} (Py\+Object \texorpdfstring{$\ast$}{*}o, char \texorpdfstring{$\ast$}{*}n)
+\item 
+\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} int \mbox{\hyperlink{py__settrie__wrap_8cpp_a078139066494a54a76f2ebecb3199c7e}{swig\+\_\+varlink\+\_\+setattr}} (Py\+Object \texorpdfstring{$\ast$}{*}o, char \texorpdfstring{$\ast$}{*}n, Py\+Object \texorpdfstring{$\ast$}{*}p)
+\item 
+\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Type\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_a68ce51bbe950061053728997a2e8db34}{swig\+\_\+varlink\+\_\+type}} (void)
+\item 
+\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_a39bb7ee5bbfb28696698a91819af7bf3}{SWIG\+\_\+\+Python\+\_\+newvarlink}} (void)
+\item 
+\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} void \mbox{\hyperlink{py__settrie__wrap_8cpp_a4c73e64d7b40edbc814d7235a4087e43}{SWIG\+\_\+\+Python\+\_\+addvarlink}} (Py\+Object \texorpdfstring{$\ast$}{*}p, const char \texorpdfstring{$\ast$}{*}name, Py\+Object \texorpdfstring{$\ast$}{*}(\texorpdfstring{$\ast$}{*}get\+\_\+attr)(void), int(\texorpdfstring{$\ast$}{*}set\+\_\+attr)(Py\+Object \texorpdfstring{$\ast$}{*}p))
+\item 
+\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_af807d8c45ff784e9e36791b6270656dd}{SWIG\+\_\+globals}} (void)
 \item 
 \mbox{\hyperlink{py__settrie__wrap_8cpp_affa7aa2bcce5bea24a20e5b184ae0533}{SWIGRUNTIMEINLINE}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_a58444beab90053980c3b472b9cb921a1}{SWIG\+\_\+\+Py\+\_\+\+Void}} (void)
 \item 
@@ -441,13 +474,13 @@ typedef struct \mbox{\hyperlink{structswig__varlinkobject}{swig\+\_\+varlinkobje
 \item 
 \mbox{\hyperlink{py__settrie__wrap_8cpp_affa7aa2bcce5bea24a20e5b184ae0533}{SWIGRUNTIMEINLINE}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_ac1d35a8810ff559255a38f5a8dd2fc2e}{SWIG\+\_\+\+Python\+\_\+\+New\+Packed\+Obj}} (void \texorpdfstring{$\ast$}{*}ptr, size\+\_\+t sz, \mbox{\hyperlink{structswig__type__info}{swig\+\_\+type\+\_\+info}} \texorpdfstring{$\ast$}{*}type)
 \item 
+\mbox{\hyperlink{py__settrie__wrap_8cpp_a42cd9c1d67d803040a3e78515945afcb}{SWIGRUNTIME}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_a51a8e1c70787f88d12ba59d7c62e0ef5}{SWIG\+\_\+\+Python\+\_\+\+Type\+Cache}} (void)
+\item 
 \mbox{\hyperlink{py__settrie__wrap_8cpp_a42cd9c1d67d803040a3e78515945afcb}{SWIGRUNTIME}} \mbox{\hyperlink{structswig__module__info}{swig\+\_\+module\+\_\+info}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_a017395422615806bee5aee85c6c08827}{SWIG\+\_\+\+Python\+\_\+\+Get\+Module}} (void \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{py__settrie__wrap_8cpp_a6a54164d0685c632e7540c5ad32a453a}{SWIGUNUSEDPARM}}(clientdata))
 \item 
 \mbox{\hyperlink{py__settrie__wrap_8cpp_a42cd9c1d67d803040a3e78515945afcb}{SWIGRUNTIME}} void \mbox{\hyperlink{py__settrie__wrap_8cpp_a6719d81d1c641253fadca31bbae050d0}{SWIG\+\_\+\+Python\+\_\+\+Destroy\+Module}} (Py\+Object \texorpdfstring{$\ast$}{*}obj)
 \item 
 \mbox{\hyperlink{py__settrie__wrap_8cpp_a42cd9c1d67d803040a3e78515945afcb}{SWIGRUNTIME}} void \mbox{\hyperlink{py__settrie__wrap_8cpp_a97dcf2ac96af7ac919ccb8784322945d}{SWIG\+\_\+\+Python\+\_\+\+Set\+Module}} (\mbox{\hyperlink{structswig__module__info}{swig\+\_\+module\+\_\+info}} \texorpdfstring{$\ast$}{*}swig\+\_\+module)
-\item 
-\mbox{\hyperlink{py__settrie__wrap_8cpp_a42cd9c1d67d803040a3e78515945afcb}{SWIGRUNTIME}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_a51a8e1c70787f88d12ba59d7c62e0ef5}{SWIG\+\_\+\+Python\+\_\+\+Type\+Cache}} (void)
 \item 
 \mbox{\hyperlink{py__settrie__wrap_8cpp_a42cd9c1d67d803040a3e78515945afcb}{SWIGRUNTIME}} \mbox{\hyperlink{structswig__type__info}{swig\+\_\+type\+\_\+info}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_a849118cf6e81c481c06003b5324c397d}{SWIG\+\_\+\+Python\+\_\+\+Type\+Query}} (const char \texorpdfstring{$\ast$}{*}type)
 \item 
@@ -460,12 +493,6 @@ typedef struct \mbox{\hyperlink{structswig__varlinkobject}{swig\+\_\+varlinkobje
 \mbox{\hyperlink{py__settrie__wrap_8cpp_a42cd9c1d67d803040a3e78515945afcb}{SWIGRUNTIME}} void \mbox{\hyperlink{py__settrie__wrap_8cpp_ac487bf25fd5238c01ad35edf4dde586f}{SWIG\+\_\+\+Python\+\_\+\+Type\+Error}} (const char \texorpdfstring{$\ast$}{*}type, Py\+Object \texorpdfstring{$\ast$}{*}obj)
 \item 
 \mbox{\hyperlink{py__settrie__wrap_8cpp_a42cd9c1d67d803040a3e78515945afcb}{SWIGRUNTIME}} void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_a9585a9047da4331406bfc603efc994d9}{SWIG\+\_\+\+Python\+\_\+\+Must\+Get\+Ptr}} (Py\+Object \texorpdfstring{$\ast$}{*}obj, \mbox{\hyperlink{structswig__type__info}{swig\+\_\+type\+\_\+info}} \texorpdfstring{$\ast$}{*}ty, int \mbox{\hyperlink{py__settrie__wrap_8cpp_a6a54164d0685c632e7540c5ad32a453a}{SWIGUNUSEDPARM}}(argnum), int flags)
-\item 
-\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Method\+Def \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_af962454012da937393ddf1274fe41d15}{SWIG\+\_\+\+Python\+Get\+Proxy\+Doc}} (const char \texorpdfstring{$\ast$}{*}name)
-\item 
-\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_a5bf71c674913470905811da374788b66}{SWIG\+\_\+\+Py\+Instance\+Method\+\_\+\+New}} (Py\+Object \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{py__settrie__wrap_8cpp_a6a54164d0685c632e7540c5ad32a453a}{SWIGUNUSEDPARM}}(self), Py\+Object \texorpdfstring{$\ast$}{*}func)
-\item 
-\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_a8c952711ed159d7ba69972337e6e14fa}{SWIG\+\_\+\+Py\+Static\+Method\+\_\+\+New}} (Py\+Object \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{py__settrie__wrap_8cpp_a6a54164d0685c632e7540c5ad32a453a}{SWIGUNUSEDPARM}}(self), Py\+Object \texorpdfstring{$\ast$}{*}func)
 \item 
 int \mbox{\hyperlink{py__settrie__wrap_8cpp_a2e215d94498eeebdffc89585e6e06065}{new\+\_\+settrie}} ()
 \item 
@@ -507,6 +534,8 @@ char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_a1447ea0
 \item 
 void \mbox{\hyperlink{py__settrie__wrap_8cpp_ab1ff5515808234d01e24e52cedf6f35f}{destroy\+\_\+binary\+\_\+image}} (int image\+\_\+id)
 \item 
+void \mbox{\hyperlink{py__settrie__wrap_8cpp_aa87a00c5ff32c27f0b5fbe788a760832}{cleanup\+\_\+globals}} ()
+\item 
 \mbox{\hyperlink{py__settrie__wrap_8cpp_afc5b08bb3c3cd2e3fb2e34b775346153}{SWIGINTERNINLINE}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_a0309a66a24bb37dad8b124449056120d}{SWIG\+\_\+\+From\+\_\+int}} (int value)
 \item 
 \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} int \mbox{\hyperlink{py__settrie__wrap_8cpp_a14604bc0932d6a4a99475970ac783697}{SWIG\+\_\+\+As\+Val\+\_\+double}} (Py\+Object \texorpdfstring{$\ast$}{*}obj, double \texorpdfstring{$\ast$}{*}val)
@@ -527,71 +556,55 @@ void \mbox{\hyperlink{py__settrie__wrap_8cpp_ab1ff5515808234d01e24e52cedf6f35f}{
 \item 
 \mbox{\hyperlink{py__settrie__wrap_8cpp_afc5b08bb3c3cd2e3fb2e34b775346153}{SWIGINTERNINLINE}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_ab47e461b54c7f54f2d0d9c9f62c7008d}{SWIG\+\_\+\+From\+\_\+bool}} (bool value)
 \item 
-\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_a258b4f63688be34579f585fddf66e33f}{\+\_\+wrap\+\_\+new\+\_\+settrie}} (Py\+Object \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{py__settrie__wrap_8cpp_a6a54164d0685c632e7540c5ad32a453a}{SWIGUNUSEDPARM}}(self), Py\+Object \texorpdfstring{$\ast$}{*}args)
+\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_ab950fb947cb5cbefbdc0d79b7866e7ed}{\+\_\+wrap\+\_\+new\+\_\+settrie}} (Py\+Object \texorpdfstring{$\ast$}{*}self, Py\+Object \texorpdfstring{$\ast$}{*}args)
 \item 
-\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_ae966648c6f3170e22a159b25a9f01f69}{\+\_\+wrap\+\_\+destroy\+\_\+settrie}} (Py\+Object \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{py__settrie__wrap_8cpp_a6a54164d0685c632e7540c5ad32a453a}{SWIGUNUSEDPARM}}(self), Py\+Object \texorpdfstring{$\ast$}{*}args)
+\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_a6deadde809a6b98c0c2d409bf9148842}{\+\_\+wrap\+\_\+destroy\+\_\+settrie}} (Py\+Object \texorpdfstring{$\ast$}{*}self, Py\+Object \texorpdfstring{$\ast$}{*}args)
 \item 
-\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_a7125e04ea266f59b9b35ffeb7344a546}{\+\_\+wrap\+\_\+insert}} (Py\+Object \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{py__settrie__wrap_8cpp_a6a54164d0685c632e7540c5ad32a453a}{SWIGUNUSEDPARM}}(self), Py\+Object \texorpdfstring{$\ast$}{*}args)
+\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_aac4d8f0f075af0b0e94b3820f7f3c4fd}{\+\_\+wrap\+\_\+insert}} (Py\+Object \texorpdfstring{$\ast$}{*}self, Py\+Object \texorpdfstring{$\ast$}{*}args)
 \item 
-\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_af5be1b9dc90e52d5fa56d44266589f37}{\+\_\+wrap\+\_\+find}} (Py\+Object \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{py__settrie__wrap_8cpp_a6a54164d0685c632e7540c5ad32a453a}{SWIGUNUSEDPARM}}(self), Py\+Object \texorpdfstring{$\ast$}{*}args)
+\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_aa3b0ff620ab98f6b15abe4368eeedfaa}{\+\_\+wrap\+\_\+find}} (Py\+Object \texorpdfstring{$\ast$}{*}self, Py\+Object \texorpdfstring{$\ast$}{*}args)
 \item 
-\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_a55fe02271ef89ad2b499fb2c2685ae9f}{\+\_\+wrap\+\_\+supersets}} (Py\+Object \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{py__settrie__wrap_8cpp_a6a54164d0685c632e7540c5ad32a453a}{SWIGUNUSEDPARM}}(self), Py\+Object \texorpdfstring{$\ast$}{*}args)
+\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_a3713d3ae56f3016df678fdb32d3a835c}{\+\_\+wrap\+\_\+supersets}} (Py\+Object \texorpdfstring{$\ast$}{*}self, Py\+Object \texorpdfstring{$\ast$}{*}args)
 \item 
-\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_a548e2add882c802fe0a007d9ff042fd5}{\+\_\+wrap\+\_\+subsets}} (Py\+Object \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{py__settrie__wrap_8cpp_a6a54164d0685c632e7540c5ad32a453a}{SWIGUNUSEDPARM}}(self), Py\+Object \texorpdfstring{$\ast$}{*}args)
+\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_ab01814fad16fdb700e90751229e089a1}{\+\_\+wrap\+\_\+subsets}} (Py\+Object \texorpdfstring{$\ast$}{*}self, Py\+Object \texorpdfstring{$\ast$}{*}args)
 \item 
-\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_a42311ebaae869943c6d1a9a95074334c}{\+\_\+wrap\+\_\+elements}} (Py\+Object \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{py__settrie__wrap_8cpp_a6a54164d0685c632e7540c5ad32a453a}{SWIGUNUSEDPARM}}(self), Py\+Object \texorpdfstring{$\ast$}{*}args)
+\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_ae7515e3bf72864a22ec1139046d39469}{\+\_\+wrap\+\_\+elements}} (Py\+Object \texorpdfstring{$\ast$}{*}self, Py\+Object \texorpdfstring{$\ast$}{*}args)
 \item 
-\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_a5adf234e292f545d5b32f314004259bf}{\+\_\+wrap\+\_\+next\+\_\+set\+\_\+id}} (Py\+Object \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{py__settrie__wrap_8cpp_a6a54164d0685c632e7540c5ad32a453a}{SWIGUNUSEDPARM}}(self), Py\+Object \texorpdfstring{$\ast$}{*}args)
+\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_a7646cf4c4839dca2069ba5bc5b7c2f73}{\+\_\+wrap\+\_\+next\+\_\+set\+\_\+id}} (Py\+Object \texorpdfstring{$\ast$}{*}self, Py\+Object \texorpdfstring{$\ast$}{*}args)
 \item 
-\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_a3e5b559326a01e0c9fca9b7c816adc50}{\+\_\+wrap\+\_\+num\+\_\+sets}} (Py\+Object \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{py__settrie__wrap_8cpp_a6a54164d0685c632e7540c5ad32a453a}{SWIGUNUSEDPARM}}(self), Py\+Object \texorpdfstring{$\ast$}{*}args)
+\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_afb68c1013b1d884d471c7d3682526cdb}{\+\_\+wrap\+\_\+num\+\_\+sets}} (Py\+Object \texorpdfstring{$\ast$}{*}self, Py\+Object \texorpdfstring{$\ast$}{*}args)
 \item 
-\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_a30ae8ceae1cde25d674d49412f457a42}{\+\_\+wrap\+\_\+set\+\_\+name}} (Py\+Object \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{py__settrie__wrap_8cpp_a6a54164d0685c632e7540c5ad32a453a}{SWIGUNUSEDPARM}}(self), Py\+Object \texorpdfstring{$\ast$}{*}args)
+\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_a038cdc9ef0dbb03ee1e8843083fe8486}{\+\_\+wrap\+\_\+set\+\_\+name}} (Py\+Object \texorpdfstring{$\ast$}{*}self, Py\+Object \texorpdfstring{$\ast$}{*}args)
 \item 
-\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_ab6dbdcd1e198a5dc263e35b2d1027284}{\+\_\+wrap\+\_\+remove}} (Py\+Object \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{py__settrie__wrap_8cpp_a6a54164d0685c632e7540c5ad32a453a}{SWIGUNUSEDPARM}}(self), Py\+Object \texorpdfstring{$\ast$}{*}args)
+\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_af10db7155096b37f26792a13dcf1f77d}{\+\_\+wrap\+\_\+remove}} (Py\+Object \texorpdfstring{$\ast$}{*}self, Py\+Object \texorpdfstring{$\ast$}{*}args)
 \item 
-\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_a7fd987feae5d360bddab28d3edb4db29}{\+\_\+wrap\+\_\+purge}} (Py\+Object \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{py__settrie__wrap_8cpp_a6a54164d0685c632e7540c5ad32a453a}{SWIGUNUSEDPARM}}(self), Py\+Object \texorpdfstring{$\ast$}{*}args)
+\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_a06dd94010e83f423c662a7a1bb87ca59}{\+\_\+wrap\+\_\+purge}} (Py\+Object \texorpdfstring{$\ast$}{*}self, Py\+Object \texorpdfstring{$\ast$}{*}args)
 \item 
-\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_aefee5922962dc53ee6ac071b49b63c34}{\+\_\+wrap\+\_\+iterator\+\_\+size}} (Py\+Object \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{py__settrie__wrap_8cpp_a6a54164d0685c632e7540c5ad32a453a}{SWIGUNUSEDPARM}}(self), Py\+Object \texorpdfstring{$\ast$}{*}args)
+\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_a17acd4bff39159c1733fd168dfb3edf3}{\+\_\+wrap\+\_\+iterator\+\_\+size}} (Py\+Object \texorpdfstring{$\ast$}{*}self, Py\+Object \texorpdfstring{$\ast$}{*}args)
 \item 
-\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_ad8fc62020fd2b34edb8dc6fadedb751f}{\+\_\+wrap\+\_\+iterator\+\_\+next}} (Py\+Object \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{py__settrie__wrap_8cpp_a6a54164d0685c632e7540c5ad32a453a}{SWIGUNUSEDPARM}}(self), Py\+Object \texorpdfstring{$\ast$}{*}args)
+\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_a79732888f3cad213375a8a65db1214ba}{\+\_\+wrap\+\_\+iterator\+\_\+next}} (Py\+Object \texorpdfstring{$\ast$}{*}self, Py\+Object \texorpdfstring{$\ast$}{*}args)
 \item 
-\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_a500f29ab2fdec2516c0b542c8b21c99a}{\+\_\+wrap\+\_\+destroy\+\_\+iterator}} (Py\+Object \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{py__settrie__wrap_8cpp_a6a54164d0685c632e7540c5ad32a453a}{SWIGUNUSEDPARM}}(self), Py\+Object \texorpdfstring{$\ast$}{*}args)
+\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_ac669c39e3199d5d3a4da425b6159b114}{\+\_\+wrap\+\_\+destroy\+\_\+iterator}} (Py\+Object \texorpdfstring{$\ast$}{*}self, Py\+Object \texorpdfstring{$\ast$}{*}args)
 \item 
-\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_afa7607a2b8f297a071c017813a6d6c88}{\+\_\+wrap\+\_\+save\+\_\+as\+\_\+binary\+\_\+image}} (Py\+Object \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{py__settrie__wrap_8cpp_a6a54164d0685c632e7540c5ad32a453a}{SWIGUNUSEDPARM}}(self), Py\+Object \texorpdfstring{$\ast$}{*}args)
+\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_a98caaeb498900485a8da0f30aaad5daf}{\+\_\+wrap\+\_\+save\+\_\+as\+\_\+binary\+\_\+image}} (Py\+Object \texorpdfstring{$\ast$}{*}self, Py\+Object \texorpdfstring{$\ast$}{*}args)
 \item 
-\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_aa98cbe01d68cde517c5277b5d39f3d11}{\+\_\+wrap\+\_\+push\+\_\+binary\+\_\+image\+\_\+block}} (Py\+Object \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{py__settrie__wrap_8cpp_a6a54164d0685c632e7540c5ad32a453a}{SWIGUNUSEDPARM}}(self), Py\+Object \texorpdfstring{$\ast$}{*}args)
+\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_aae15f6b5453b4253222437b73c5c98cb}{\+\_\+wrap\+\_\+push\+\_\+binary\+\_\+image\+\_\+block}} (Py\+Object \texorpdfstring{$\ast$}{*}self, Py\+Object \texorpdfstring{$\ast$}{*}args)
 \item 
-\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_a50baf41b613f25958eb96469450f9aa4}{\+\_\+wrap\+\_\+binary\+\_\+image\+\_\+size}} (Py\+Object \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{py__settrie__wrap_8cpp_a6a54164d0685c632e7540c5ad32a453a}{SWIGUNUSEDPARM}}(self), Py\+Object \texorpdfstring{$\ast$}{*}args)
+\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_a6158c5bf1bf735bb2591764a79ad90e9}{\+\_\+wrap\+\_\+binary\+\_\+image\+\_\+size}} (Py\+Object \texorpdfstring{$\ast$}{*}self, Py\+Object \texorpdfstring{$\ast$}{*}args)
 \item 
-\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_afb9da82882a1d0a3d799666ac327d1bb}{\+\_\+wrap\+\_\+binary\+\_\+image\+\_\+next}} (Py\+Object \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{py__settrie__wrap_8cpp_a6a54164d0685c632e7540c5ad32a453a}{SWIGUNUSEDPARM}}(self), Py\+Object \texorpdfstring{$\ast$}{*}args)
+\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_ab2bb93bcfde5e518c2eef5569848bee9}{\+\_\+wrap\+\_\+binary\+\_\+image\+\_\+next}} (Py\+Object \texorpdfstring{$\ast$}{*}self, Py\+Object \texorpdfstring{$\ast$}{*}args)
 \item 
-\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_a1b7e49d1f0704dfe6b9596238b73dcc6}{\+\_\+wrap\+\_\+destroy\+\_\+binary\+\_\+image}} (Py\+Object \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{py__settrie__wrap_8cpp_a6a54164d0685c632e7540c5ad32a453a}{SWIGUNUSEDPARM}}(self), Py\+Object \texorpdfstring{$\ast$}{*}args)
+\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_a1d75f6ce004f86dbc0935478281dbb61}{\+\_\+wrap\+\_\+destroy\+\_\+binary\+\_\+image}} (Py\+Object \texorpdfstring{$\ast$}{*}self, Py\+Object \texorpdfstring{$\ast$}{*}args)
 \item 
-\mbox{\hyperlink{py__settrie__wrap_8cpp_a42cd9c1d67d803040a3e78515945afcb}{SWIGRUNTIME}} void \mbox{\hyperlink{py__settrie__wrap_8cpp_a7f8da48fe4dbc23aef01a714623b8a6b}{SWIG\+\_\+\+Initialize\+Module}} (void \texorpdfstring{$\ast$}{*}clientdata)
+\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_acd0acc2bb9411d17be309d16e0fb85b0}{\+\_\+wrap\+\_\+cleanup\+\_\+globals}} (Py\+Object \texorpdfstring{$\ast$}{*}self, Py\+Object \texorpdfstring{$\ast$}{*}args)
+\item 
+\mbox{\hyperlink{py__settrie__wrap_8cpp_a42cd9c1d67d803040a3e78515945afcb}{SWIGRUNTIME}} void \mbox{\hyperlink{py__settrie__wrap_8cpp_a0126098cf0f0b75c86589dd8977b44e6}{SWIG\+\_\+\+Initialize\+Module}} (\mbox{\hyperlink{py__settrie__wrap_8cpp_a691b8a3a4014e56e511bf6b0a7fdb697}{SWIG\+\_\+\+INIT\+\_\+\+CLIENT\+\_\+\+DATA\+\_\+\+TYPE}} clientdata)
 \item 
 \mbox{\hyperlink{py__settrie__wrap_8cpp_a42cd9c1d67d803040a3e78515945afcb}{SWIGRUNTIME}} void \mbox{\hyperlink{py__settrie__wrap_8cpp_abc08944d526c952dc121d3d1b84f0d16}{SWIG\+\_\+\+Propagate\+Client\+Data}} (void)
 \item 
-\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_ad3848e6ef99327ed383eee95539c4be2}{swig\+\_\+varlink\+\_\+repr}} (\mbox{\hyperlink{structswig__varlinkobject}{swig\+\_\+varlinkobject}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{py__settrie__wrap_8cpp_a6a54164d0685c632e7540c5ad32a453a}{SWIGUNUSEDPARM}}(v))
-\item 
-\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_a3f32486384c0abc5a12361d799440d7e}{swig\+\_\+varlink\+\_\+str}} (\mbox{\hyperlink{structswig__varlinkobject}{swig\+\_\+varlinkobject}} \texorpdfstring{$\ast$}{*}v)
-\item 
-\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} void \mbox{\hyperlink{py__settrie__wrap_8cpp_ad2b4927c9caa8562938bb95fa2323d5b}{swig\+\_\+varlink\+\_\+dealloc}} (\mbox{\hyperlink{structswig__varlinkobject}{swig\+\_\+varlinkobject}} \texorpdfstring{$\ast$}{*}v)
-\item 
-\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_a38df1361d299888d4240fc58617c195c}{swig\+\_\+varlink\+\_\+getattr}} (\mbox{\hyperlink{structswig__varlinkobject}{swig\+\_\+varlinkobject}} \texorpdfstring{$\ast$}{*}v, char \texorpdfstring{$\ast$}{*}n)
-\item 
-\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} int \mbox{\hyperlink{py__settrie__wrap_8cpp_a2ec84ff72b3bb939d9930127720a1104}{swig\+\_\+varlink\+\_\+setattr}} (\mbox{\hyperlink{structswig__varlinkobject}{swig\+\_\+varlinkobject}} \texorpdfstring{$\ast$}{*}v, char \texorpdfstring{$\ast$}{*}n, Py\+Object \texorpdfstring{$\ast$}{*}p)
-\item 
-\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Type\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_a68ce51bbe950061053728997a2e8db34}{swig\+\_\+varlink\+\_\+type}} (void)
-\item 
-\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_a39bb7ee5bbfb28696698a91819af7bf3}{SWIG\+\_\+\+Python\+\_\+newvarlink}} (void)
-\item 
-\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} void \mbox{\hyperlink{py__settrie__wrap_8cpp_a4c73e64d7b40edbc814d7235a4087e43}{SWIG\+\_\+\+Python\+\_\+addvarlink}} (Py\+Object \texorpdfstring{$\ast$}{*}p, const char \texorpdfstring{$\ast$}{*}name, Py\+Object \texorpdfstring{$\ast$}{*}(\texorpdfstring{$\ast$}{*}get\+\_\+attr)(void), int(\texorpdfstring{$\ast$}{*}set\+\_\+attr)(Py\+Object \texorpdfstring{$\ast$}{*}p))
-\item 
-\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{py__settrie__wrap_8cpp_af807d8c45ff784e9e36791b6270656dd}{SWIG\+\_\+globals}} (void)
-\item 
 \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} void \mbox{\hyperlink{py__settrie__wrap_8cpp_a26d87efa9c8072a9092913538ab5090c}{SWIG\+\_\+\+Python\+\_\+\+Install\+Constants}} (Py\+Object \texorpdfstring{$\ast$}{*}d, \mbox{\hyperlink{structswig__const__info}{swig\+\_\+const\+\_\+info}} constants\mbox{[}$\,$\mbox{]})
 \item 
-\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} void \mbox{\hyperlink{py__settrie__wrap_8cpp_addfee1cf672308dcdd030d489f804b5f}{SWIG\+\_\+\+Python\+\_\+\+Fix\+Methods}} (Py\+Method\+Def \texorpdfstring{$\ast$}{*}methods, \mbox{\hyperlink{structswig__const__info}{swig\+\_\+const\+\_\+info}} \texorpdfstring{$\ast$}{*}const\+\_\+table, \mbox{\hyperlink{structswig__type__info}{swig\+\_\+type\+\_\+info}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}types, \mbox{\hyperlink{structswig__type__info}{swig\+\_\+type\+\_\+info}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}types\+\_\+initial)
+\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} void \mbox{\hyperlink{py__settrie__wrap_8cpp_ac1460b9af454a008eb052a89bef47ee0}{SWIG\+\_\+\+Python\+\_\+\+Fix\+Methods}} (Py\+Method\+Def \texorpdfstring{$\ast$}{*}methods, const \mbox{\hyperlink{structswig__const__info}{swig\+\_\+const\+\_\+info}} \texorpdfstring{$\ast$}{*}const\+\_\+table, \mbox{\hyperlink{structswig__type__info}{swig\+\_\+type\+\_\+info}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}types, \mbox{\hyperlink{structswig__type__info}{swig\+\_\+type\+\_\+info}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}types\+\_\+initial)
 \end{DoxyCompactItemize}
 
 
@@ -601,6 +614,12 @@ void \mbox{\hyperlink{py__settrie__wrap_8cpp_ab1ff5515808234d01e24e52cedf6f35f}{
 \index{Py\_hash\_t@{Py\_hash\_t}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
 \doxysubsubsection{\texorpdfstring{Py\_hash\_t}{Py\_hash\_t}}
 {\footnotesize\ttfamily \#define Py\+\_\+hash\+\_\+t~long}
+
+\Hypertarget{py__settrie__wrap_8cpp_ac9efdaac9411d0868b715edccca3269d}\label{py__settrie__wrap_8cpp_ac9efdaac9411d0868b715edccca3269d} 
+\index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!PY\_SSIZE\_T\_CLEAN@{PY\_SSIZE\_T\_CLEAN}}
+\index{PY\_SSIZE\_T\_CLEAN@{PY\_SSIZE\_T\_CLEAN}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
+\doxysubsubsection{\texorpdfstring{PY\_SSIZE\_T\_CLEAN}{PY\_SSIZE\_T\_CLEAN}}
+{\footnotesize\ttfamily \#define PY\+\_\+\+SSIZE\+\_\+\+T\+\_\+\+CLEAN}
 
 \Hypertarget{py__settrie__wrap_8cpp_afd489119bf6e3552bdaa6bc365e35e59}\label{py__settrie__wrap_8cpp_afd489119bf6e3552bdaa6bc365e35e59} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!Py\_TYPE@{Py\_TYPE}}
@@ -738,7 +757,7 @@ void \mbox{\hyperlink{py__settrie__wrap_8cpp_ab1ff5515808234d01e24e52cedf6f35f}{
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!SWIG\_contract\_assert@{SWIG\_contract\_assert}}
 \index{SWIG\_contract\_assert@{SWIG\_contract\_assert}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
 \doxysubsubsection{\texorpdfstring{SWIG\_contract\_assert}{SWIG\_contract\_assert}}
-{\footnotesize\ttfamily \#define SWIG\+\_\+contract\+\_\+assert(\begin{DoxyParamCaption}\item[{}]{expr,  }\item[{}]{msg }\end{DoxyParamCaption})~if (!(expr)) \{ \mbox{\hyperlink{py__settrie__wrap_8cpp_a01b485cfacae7d870729eea43fb17cb0}{SWIG\+\_\+\+Error}}(\mbox{\hyperlink{py__settrie__wrap_8cpp_a34d3d1c1310427d00140bf1cc8de3ef6}{SWIG\+\_\+\+Runtime\+Error}}, msg); \mbox{\hyperlink{py__settrie__wrap_8cpp_ababf56889b69e7a569556eb38cd4f157}{SWIG\+\_\+fail}}; \} else}
+{\footnotesize\ttfamily \#define SWIG\+\_\+contract\+\_\+assert(\begin{DoxyParamCaption}\item[{}]{expr,  }\item[{}]{msg }\end{DoxyParamCaption})~do \{ if (!(expr)) \{ \mbox{\hyperlink{py__settrie__wrap_8cpp_a01b485cfacae7d870729eea43fb17cb0}{SWIG\+\_\+\+Error}}(\mbox{\hyperlink{py__settrie__wrap_8cpp_a34d3d1c1310427d00140bf1cc8de3ef6}{SWIG\+\_\+\+Runtime\+Error}}, msg); \mbox{\hyperlink{py__settrie__wrap_8cpp_ababf56889b69e7a569556eb38cd4f157}{SWIG\+\_\+fail}}; \} \} while (0)}
 
 \Hypertarget{py__settrie__wrap_8cpp_a9a8ddc29a77ad0d18dc7d6ca55dd7f92}\label{py__settrie__wrap_8cpp_a9a8ddc29a77ad0d18dc7d6ca55dd7f92} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!SWIG\_ConvertFunctionPtr@{SWIG\_ConvertFunctionPtr}}
@@ -806,6 +825,12 @@ void \mbox{\hyperlink{py__settrie__wrap_8cpp_ab1ff5515808234d01e24e52cedf6f35f}{
 \doxysubsubsection{\texorpdfstring{SWIG\_Error}{SWIG\_Error}}
 {\footnotesize\ttfamily \#define SWIG\+\_\+\+Error(\begin{DoxyParamCaption}\item[{}]{code,  }\item[{}]{msg }\end{DoxyParamCaption})~\mbox{\hyperlink{py__settrie__wrap_8cpp_aab548920dbf42ee6139485ca36c72c1e}{SWIG\+\_\+\+Python\+\_\+\+Set\+Error\+Msg}}(\mbox{\hyperlink{py__settrie__wrap_8cpp_a21d4e75f4bb2519f73467e922c7b51d7}{SWIG\+\_\+\+Error\+Type}}(code), msg)}
 
+\Hypertarget{py__settrie__wrap_8cpp_ac3437dedff11d7079dde741a1996587f}\label{py__settrie__wrap_8cpp_ac3437dedff11d7079dde741a1996587f} 
+\index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!SWIG\_ERROR\_RELEASE\_NOT\_OWNED@{SWIG\_ERROR\_RELEASE\_NOT\_OWNED}}
+\index{SWIG\_ERROR\_RELEASE\_NOT\_OWNED@{SWIG\_ERROR\_RELEASE\_NOT\_OWNED}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
+\doxysubsubsection{\texorpdfstring{SWIG\_ERROR\_RELEASE\_NOT\_OWNED}{SWIG\_ERROR\_RELEASE\_NOT\_OWNED}}
+{\footnotesize\ttfamily \#define SWIG\+\_\+\+ERROR\+\_\+\+RELEASE\+\_\+\+NOT\+\_\+\+OWNED~(-\/200)}
+
 \Hypertarget{py__settrie__wrap_8cpp_a21d4e75f4bb2519f73467e922c7b51d7}\label{py__settrie__wrap_8cpp_a21d4e75f4bb2519f73467e922c7b51d7} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!SWIG\_ErrorType@{SWIG\_ErrorType}}
 \index{SWIG\_ErrorType@{SWIG\_ErrorType}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
@@ -841,6 +866,12 @@ void \mbox{\hyperlink{py__settrie__wrap_8cpp_ab1ff5515808234d01e24e52cedf6f35f}{
 \index{SWIG\_init@{SWIG\_init}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
 \doxysubsubsection{\texorpdfstring{SWIG\_init}{SWIG\_init}}
 {\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_aea3c8b056dcc8c1ab93f6b825cd1371b}{SWIGEXPORT}} void SWIG\+\_\+init(\begin{DoxyParamCaption}\item[{}]{void }\end{DoxyParamCaption})~init\+\_\+py\+\_\+settrie}
+
+\Hypertarget{py__settrie__wrap_8cpp_a691b8a3a4014e56e511bf6b0a7fdb697}\label{py__settrie__wrap_8cpp_a691b8a3a4014e56e511bf6b0a7fdb697} 
+\index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!SWIG\_INIT\_CLIENT\_DATA\_TYPE@{SWIG\_INIT\_CLIENT\_DATA\_TYPE}}
+\index{SWIG\_INIT\_CLIENT\_DATA\_TYPE@{SWIG\_INIT\_CLIENT\_DATA\_TYPE}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
+\doxysubsubsection{\texorpdfstring{SWIG\_INIT\_CLIENT\_DATA\_TYPE}{SWIG\_INIT\_CLIENT\_DATA\_TYPE}}
+{\footnotesize\ttfamily \#define SWIG\+\_\+\+INIT\+\_\+\+CLIENT\+\_\+\+DATA\+\_\+\+TYPE~void \texorpdfstring{$\ast$}{*}}
 
 \Hypertarget{py__settrie__wrap_8cpp_a9d393ea973fc8a2e2672e885ec06221b}\label{py__settrie__wrap_8cpp_a9d393ea973fc8a2e2672e885ec06221b} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!SWIG\_InstallConstants@{SWIG\_InstallConstants}}
@@ -956,6 +987,12 @@ void \mbox{\hyperlink{py__settrie__wrap_8cpp_ab1ff5515808234d01e24e52cedf6f35f}{
 \doxysubsubsection{\texorpdfstring{SWIG\_newvarlink}{SWIG\_newvarlink}}
 {\footnotesize\ttfamily \#define SWIG\+\_\+newvarlink(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~\mbox{\hyperlink{py__settrie__wrap_8cpp_a39bb7ee5bbfb28696698a91819af7bf3}{SWIG\+\_\+\+Python\+\_\+newvarlink}}()}
 
+\Hypertarget{py__settrie__wrap_8cpp_a163b0c8db0f7dad876951049234859a1}\label{py__settrie__wrap_8cpp_a163b0c8db0f7dad876951049234859a1} 
+\index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!SWIG\_NULLPTR@{SWIG\_NULLPTR}}
+\index{SWIG\_NULLPTR@{SWIG\_NULLPTR}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
+\doxysubsubsection{\texorpdfstring{SWIG\_NULLPTR}{SWIG\_NULLPTR}}
+{\footnotesize\ttfamily \#define SWIG\+\_\+\+NULLPTR~NULL}
+
 \Hypertarget{py__settrie__wrap_8cpp_aa11fe417abd4c5a02d31cc1a51dee007}\label{py__settrie__wrap_8cpp_aa11fe417abd4c5a02d31cc1a51dee007} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!SWIG\_NullReferenceError@{SWIG\_NullReferenceError}}
 \index{SWIG\_NullReferenceError@{SWIG\_NullReferenceError}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
@@ -985,6 +1022,12 @@ void \mbox{\hyperlink{py__settrie__wrap_8cpp_ab1ff5515808234d01e24e52cedf6f35f}{
 \index{swig\_owntype@{swig\_owntype}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
 \doxysubsubsection{\texorpdfstring{swig\_owntype}{swig\_owntype}}
 {\footnotesize\ttfamily \#define swig\+\_\+owntype~int}
+
+\Hypertarget{py__settrie__wrap_8cpp_a72516fc40752bfd12edac05ab80c239d}\label{py__settrie__wrap_8cpp_a72516fc40752bfd12edac05ab80c239d} 
+\index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!SWIG\_POINTER\_CLEAR@{SWIG\_POINTER\_CLEAR}}
+\index{SWIG\_POINTER\_CLEAR@{SWIG\_POINTER\_CLEAR}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
+\doxysubsubsection{\texorpdfstring{SWIG\_POINTER\_CLEAR}{SWIG\_POINTER\_CLEAR}}
+{\footnotesize\ttfamily \#define SWIG\+\_\+\+POINTER\+\_\+\+CLEAR~0x8}
 
 \Hypertarget{py__settrie__wrap_8cpp_aa56139a289829795ed651d533826b65e}\label{py__settrie__wrap_8cpp_aa56139a289829795ed651d533826b65e} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!SWIG\_POINTER\_DISOWN@{SWIG\_POINTER\_DISOWN}}
@@ -1028,6 +1071,12 @@ void \mbox{\hyperlink{py__settrie__wrap_8cpp_ab1ff5515808234d01e24e52cedf6f35f}{
 \doxysubsubsection{\texorpdfstring{SWIG\_POINTER\_OWN}{SWIG\_POINTER\_OWN}}
 {\footnotesize\ttfamily \#define SWIG\+\_\+\+POINTER\+\_\+\+OWN~0x1}
 
+\Hypertarget{py__settrie__wrap_8cpp_a6c8e16c4ba354cab21dc9c3a5918b58e}\label{py__settrie__wrap_8cpp_a6c8e16c4ba354cab21dc9c3a5918b58e} 
+\index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!SWIG\_POINTER\_RELEASE@{SWIG\_POINTER\_RELEASE}}
+\index{SWIG\_POINTER\_RELEASE@{SWIG\_POINTER\_RELEASE}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
+\doxysubsubsection{\texorpdfstring{SWIG\_POINTER\_RELEASE}{SWIG\_POINTER\_RELEASE}}
+{\footnotesize\ttfamily \#define SWIG\+\_\+\+POINTER\+\_\+\+RELEASE~(\mbox{\hyperlink{py__settrie__wrap_8cpp_a72516fc40752bfd12edac05ab80c239d}{SWIG\+\_\+\+POINTER\+\_\+\+CLEAR}} \texorpdfstring{$\vert$}{|} \mbox{\hyperlink{py__settrie__wrap_8cpp_aa56139a289829795ed651d533826b65e}{SWIG\+\_\+\+POINTER\+\_\+\+DISOWN}})}
+
 \Hypertarget{py__settrie__wrap_8cpp_a45cd68c9cc0396e2f8c16cc1b50f8c6f}\label{py__settrie__wrap_8cpp_a45cd68c9cc0396e2f8c16cc1b50f8c6f} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!SWIG\_PY\_BINARY@{SWIG\_PY\_BINARY}}
 \index{SWIG\_PY\_BINARY@{SWIG\_PY\_BINARY}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
@@ -1069,12 +1118,6 @@ void \mbox{\hyperlink{py__settrie__wrap_8cpp_ab1ff5515808234d01e24e52cedf6f35f}{
 \index{SWIG\_Python\_Raise@{SWIG\_Python\_Raise}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
 \doxysubsubsection{\texorpdfstring{SWIG\_Python\_Raise}{SWIG\_Python\_Raise}}
 {\footnotesize\ttfamily \#define SWIG\+\_\+\+Python\+\_\+\+Raise(\begin{DoxyParamCaption}\item[{}]{obj,  }\item[{}]{type,  }\item[{}]{desc }\end{DoxyParamCaption})~\mbox{\hyperlink{py__settrie__wrap_8cpp_a92b9f2ba549f0c2e0c5118436f6c786c}{SWIG\+\_\+\+Python\+\_\+\+Set\+Error\+Obj}}(\mbox{\hyperlink{py__settrie__wrap_8cpp_a9038462b33db6480e0733a9d6bf4add1}{SWIG\+\_\+\+Python\+\_\+\+Exception\+Type}}(desc), obj)}
-
-\Hypertarget{py__settrie__wrap_8cpp_a866b998f49f1870f2a0af8e30c738d15}\label{py__settrie__wrap_8cpp_a866b998f49f1870f2a0af8e30c738d15} 
-\index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!SWIG\_Python\_str\_DelForPy3@{SWIG\_Python\_str\_DelForPy3}}
-\index{SWIG\_Python\_str\_DelForPy3@{SWIG\_Python\_str\_DelForPy3}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
-\doxysubsubsection{\texorpdfstring{SWIG\_Python\_str\_DelForPy3}{SWIG\_Python\_str\_DelForPy3}}
-{\footnotesize\ttfamily \#define SWIG\+\_\+\+Python\+\_\+str\+\_\+\+Del\+For\+Py3(\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})}
 
 \Hypertarget{py__settrie__wrap_8cpp_a9b793ab094535913288a25a20906bc8e}\label{py__settrie__wrap_8cpp_a9b793ab094535913288a25a20906bc8e} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!SWIG\_Python\_str\_FromFormat@{SWIG\_Python\_str\_FromFormat}}
@@ -1135,6 +1178,18 @@ void \mbox{\hyperlink{py__settrie__wrap_8cpp_ab1ff5515808234d01e24e52cedf6f35f}{
 \index{SWIG\_SetModule@{SWIG\_SetModule}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
 \doxysubsubsection{\texorpdfstring{SWIG\_SetModule}{SWIG\_SetModule}}
 {\footnotesize\ttfamily \#define SWIG\+\_\+\+Set\+Module(\begin{DoxyParamCaption}\item[{}]{clientdata,  }\item[{}]{pointer }\end{DoxyParamCaption})~\mbox{\hyperlink{py__settrie__wrap_8cpp_a97dcf2ac96af7ac919ccb8784322945d}{SWIG\+\_\+\+Python\+\_\+\+Set\+Module}}(pointer)}
+
+\Hypertarget{py__settrie__wrap_8cpp_af89759ae0d1c7c97b041cdf570979866}\label{py__settrie__wrap_8cpp_af89759ae0d1c7c97b041cdf570979866} 
+\index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!SWIG\_snprintf@{SWIG\_snprintf}}
+\index{SWIG\_snprintf@{SWIG\_snprintf}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
+\doxysubsubsection{\texorpdfstring{SWIG\_snprintf}{SWIG\_snprintf}}
+{\footnotesize\ttfamily \#define SWIG\+\_\+snprintf(\begin{DoxyParamCaption}\item[{}]{O,  }\item[{}]{S,  }\item[{}]{F,  }\item[{}]{A }\end{DoxyParamCaption})~sprintf(O,F,A)}
+
+\Hypertarget{py__settrie__wrap_8cpp_a0e8b9bdfe67cfb21b1980f99b4cd3478}\label{py__settrie__wrap_8cpp_a0e8b9bdfe67cfb21b1980f99b4cd3478} 
+\index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!SWIG\_snprintf2@{SWIG\_snprintf2}}
+\index{SWIG\_snprintf2@{SWIG\_snprintf2}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
+\doxysubsubsection{\texorpdfstring{SWIG\_snprintf2}{SWIG\_snprintf2}}
+{\footnotesize\ttfamily \#define SWIG\+\_\+snprintf2(\begin{DoxyParamCaption}\item[{}]{O,  }\item[{}]{S,  }\item[{}]{F,  }\item[{}]{A,  }\item[{}]{B }\end{DoxyParamCaption})~sprintf(O,F,A,B)}
 
 \Hypertarget{py__settrie__wrap_8cpp_aa58fdef163810db36a21536e3fef11fc}\label{py__settrie__wrap_8cpp_aa58fdef163810db36a21536e3fef11fc} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!SWIG\_STATIC\_POINTER@{SWIG\_STATIC\_POINTER}}
@@ -1206,7 +1261,7 @@ void \mbox{\hyperlink{py__settrie__wrap_8cpp_ab1ff5515808234d01e24e52cedf6f35f}{
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!SWIG\_VERSION@{SWIG\_VERSION}}
 \index{SWIG\_VERSION@{SWIG\_VERSION}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
 \doxysubsubsection{\texorpdfstring{SWIG\_VERSION}{SWIG\_VERSION}}
-{\footnotesize\ttfamily \#define SWIG\+\_\+\+VERSION~\mbox{\hyperlink{py__settrie__wrap_8cpp_a82758940324a80fe482f130cc097c36e}{SWIGVERSION}}}
+{\footnotesize\ttfamily \#define SWIG\+\_\+\+VERSION~0x040200}
 
 \Hypertarget{py__settrie__wrap_8cpp_aea3c8b056dcc8c1ab93f6b825cd1371b}\label{py__settrie__wrap_8cpp_aea3c8b056dcc8c1ab93f6b825cd1371b} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!SWIGEXPORT@{SWIGEXPORT}}
@@ -1232,11 +1287,17 @@ void \mbox{\hyperlink{py__settrie__wrap_8cpp_ab1ff5515808234d01e24e52cedf6f35f}{
 \doxysubsubsection{\texorpdfstring{SWIGINTERNINLINE}{SWIGINTERNINLINE}}
 {\footnotesize\ttfamily \#define SWIGINTERNINLINE~\mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} \mbox{\hyperlink{py__settrie__wrap_8cpp_a6d0a7c65b3712775e92c8bdb7acdd0ee}{SWIGINLINE}}}
 
+\Hypertarget{py__settrie__wrap_8cpp_a37e64a0a5d70ca893bda748451d736fc}\label{py__settrie__wrap_8cpp_a37e64a0a5d70ca893bda748451d736fc} 
+\index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!SWIGPY\_CAPSULE\_ATTR\_NAME@{SWIGPY\_CAPSULE\_ATTR\_NAME}}
+\index{SWIGPY\_CAPSULE\_ATTR\_NAME@{SWIGPY\_CAPSULE\_ATTR\_NAME}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
+\doxysubsubsection{\texorpdfstring{SWIGPY\_CAPSULE\_ATTR\_NAME}{SWIGPY\_CAPSULE\_ATTR\_NAME}}
+{\footnotesize\ttfamily \#define SWIGPY\+\_\+\+CAPSULE\+\_\+\+ATTR\+\_\+\+NAME~"{}type\+\_\+pointer\+\_\+capsule"{} \mbox{\hyperlink{py__settrie__wrap_8cpp_ac619a84edecccb5e00c1b4a3180b8c3a}{SWIG\+\_\+\+TYPE\+\_\+\+TABLE\+\_\+\+NAME}}}
+
 \Hypertarget{py__settrie__wrap_8cpp_a9569372a2f05c24acc013e50f0399a0b}\label{py__settrie__wrap_8cpp_a9569372a2f05c24acc013e50f0399a0b} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!SWIGPY\_CAPSULE\_NAME@{SWIGPY\_CAPSULE\_NAME}}
 \index{SWIGPY\_CAPSULE\_NAME@{SWIGPY\_CAPSULE\_NAME}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
 \doxysubsubsection{\texorpdfstring{SWIGPY\_CAPSULE\_NAME}{SWIGPY\_CAPSULE\_NAME}}
-{\footnotesize\ttfamily \#define SWIGPY\+\_\+\+CAPSULE\+\_\+\+NAME~("{}swig\+\_\+runtime\+\_\+data"{} \mbox{\hyperlink{py__settrie__wrap_8cpp_a4895907de5539551925ab5c03ea05d28}{SWIG\+\_\+\+RUNTIME\+\_\+\+VERSION}} "{}.type\+\_\+pointer\+\_\+capsule"{} \mbox{\hyperlink{py__settrie__wrap_8cpp_ac619a84edecccb5e00c1b4a3180b8c3a}{SWIG\+\_\+\+TYPE\+\_\+\+TABLE\+\_\+\+NAME}})}
+{\footnotesize\ttfamily \#define SWIGPY\+\_\+\+CAPSULE\+\_\+\+NAME~("{}swig\+\_\+runtime\+\_\+data"{} \mbox{\hyperlink{py__settrie__wrap_8cpp_a4895907de5539551925ab5c03ea05d28}{SWIG\+\_\+\+RUNTIME\+\_\+\+VERSION}} "{}."{} \mbox{\hyperlink{py__settrie__wrap_8cpp_a37e64a0a5d70ca893bda748451d736fc}{SWIGPY\+\_\+\+CAPSULE\+\_\+\+ATTR\+\_\+\+NAME}})}
 
 \Hypertarget{py__settrie__wrap_8cpp_ae3360186a49695b175fca7590941bf26}\label{py__settrie__wrap_8cpp_ae3360186a49695b175fca7590941bf26} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!SWIGPY\_USE\_CAPSULE@{SWIGPY\_USE\_CAPSULE}}
@@ -1292,12 +1353,6 @@ void \mbox{\hyperlink{py__settrie__wrap_8cpp_ab1ff5515808234d01e24e52cedf6f35f}{
 \doxysubsubsection{\texorpdfstring{SWIGUNUSEDPARM}{SWIGUNUSEDPARM}}
 {\footnotesize\ttfamily \#define SWIGUNUSEDPARM(\begin{DoxyParamCaption}\item[{}]{p }\end{DoxyParamCaption})~p \mbox{\hyperlink{py__settrie__wrap_8cpp_a6ee41cd160d397aa76668bf4db65e2d1}{SWIGUNUSED}}}
 
-\Hypertarget{py__settrie__wrap_8cpp_a82758940324a80fe482f130cc097c36e}\label{py__settrie__wrap_8cpp_a82758940324a80fe482f130cc097c36e} 
-\index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!SWIGVERSION@{SWIGVERSION}}
-\index{SWIGVERSION@{SWIGVERSION}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
-\doxysubsubsection{\texorpdfstring{SWIGVERSION}{SWIGVERSION}}
-{\footnotesize\ttfamily \#define SWIGVERSION~0x040002}
-
 
 
 \doxysubsection{Typedef Documentation}
@@ -1352,125 +1407,131 @@ void \mbox{\hyperlink{py__settrie__wrap_8cpp_ab1ff5515808234d01e24e52cedf6f35f}{
 
 
 \doxysubsection{Function Documentation}
-\Hypertarget{py__settrie__wrap_8cpp_afb9da82882a1d0a3d799666ac327d1bb}\label{py__settrie__wrap_8cpp_afb9da82882a1d0a3d799666ac327d1bb} 
+\Hypertarget{py__settrie__wrap_8cpp_ab2bb93bcfde5e518c2eef5569848bee9}\label{py__settrie__wrap_8cpp_ab2bb93bcfde5e518c2eef5569848bee9} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!\_wrap\_binary\_image\_next@{\_wrap\_binary\_image\_next}}
 \index{\_wrap\_binary\_image\_next@{\_wrap\_binary\_image\_next}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
 \doxysubsubsection{\texorpdfstring{\_wrap\_binary\_image\_next()}{\_wrap\_binary\_image\_next()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \+\_\+wrap\+\_\+binary\+\_\+image\+\_\+next (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{SWIGUNUSEDPARMself,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \+\_\+wrap\+\_\+binary\+\_\+image\+\_\+next (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{self,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
 
-\Hypertarget{py__settrie__wrap_8cpp_a50baf41b613f25958eb96469450f9aa4}\label{py__settrie__wrap_8cpp_a50baf41b613f25958eb96469450f9aa4} 
+\Hypertarget{py__settrie__wrap_8cpp_a6158c5bf1bf735bb2591764a79ad90e9}\label{py__settrie__wrap_8cpp_a6158c5bf1bf735bb2591764a79ad90e9} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!\_wrap\_binary\_image\_size@{\_wrap\_binary\_image\_size}}
 \index{\_wrap\_binary\_image\_size@{\_wrap\_binary\_image\_size}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
 \doxysubsubsection{\texorpdfstring{\_wrap\_binary\_image\_size()}{\_wrap\_binary\_image\_size()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \+\_\+wrap\+\_\+binary\+\_\+image\+\_\+size (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{SWIGUNUSEDPARMself,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \+\_\+wrap\+\_\+binary\+\_\+image\+\_\+size (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{self,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
 
-\Hypertarget{py__settrie__wrap_8cpp_a1b7e49d1f0704dfe6b9596238b73dcc6}\label{py__settrie__wrap_8cpp_a1b7e49d1f0704dfe6b9596238b73dcc6} 
+\Hypertarget{py__settrie__wrap_8cpp_acd0acc2bb9411d17be309d16e0fb85b0}\label{py__settrie__wrap_8cpp_acd0acc2bb9411d17be309d16e0fb85b0} 
+\index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!\_wrap\_cleanup\_globals@{\_wrap\_cleanup\_globals}}
+\index{\_wrap\_cleanup\_globals@{\_wrap\_cleanup\_globals}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
+\doxysubsubsection{\texorpdfstring{\_wrap\_cleanup\_globals()}{\_wrap\_cleanup\_globals()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \+\_\+wrap\+\_\+cleanup\+\_\+globals (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{self,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+
+\Hypertarget{py__settrie__wrap_8cpp_a1d75f6ce004f86dbc0935478281dbb61}\label{py__settrie__wrap_8cpp_a1d75f6ce004f86dbc0935478281dbb61} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!\_wrap\_destroy\_binary\_image@{\_wrap\_destroy\_binary\_image}}
 \index{\_wrap\_destroy\_binary\_image@{\_wrap\_destroy\_binary\_image}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
 \doxysubsubsection{\texorpdfstring{\_wrap\_destroy\_binary\_image()}{\_wrap\_destroy\_binary\_image()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \+\_\+wrap\+\_\+destroy\+\_\+binary\+\_\+image (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{SWIGUNUSEDPARMself,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \+\_\+wrap\+\_\+destroy\+\_\+binary\+\_\+image (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{self,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
 
-\Hypertarget{py__settrie__wrap_8cpp_a500f29ab2fdec2516c0b542c8b21c99a}\label{py__settrie__wrap_8cpp_a500f29ab2fdec2516c0b542c8b21c99a} 
+\Hypertarget{py__settrie__wrap_8cpp_ac669c39e3199d5d3a4da425b6159b114}\label{py__settrie__wrap_8cpp_ac669c39e3199d5d3a4da425b6159b114} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!\_wrap\_destroy\_iterator@{\_wrap\_destroy\_iterator}}
 \index{\_wrap\_destroy\_iterator@{\_wrap\_destroy\_iterator}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
 \doxysubsubsection{\texorpdfstring{\_wrap\_destroy\_iterator()}{\_wrap\_destroy\_iterator()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \+\_\+wrap\+\_\+destroy\+\_\+iterator (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{SWIGUNUSEDPARMself,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \+\_\+wrap\+\_\+destroy\+\_\+iterator (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{self,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
 
-\Hypertarget{py__settrie__wrap_8cpp_ae966648c6f3170e22a159b25a9f01f69}\label{py__settrie__wrap_8cpp_ae966648c6f3170e22a159b25a9f01f69} 
+\Hypertarget{py__settrie__wrap_8cpp_a6deadde809a6b98c0c2d409bf9148842}\label{py__settrie__wrap_8cpp_a6deadde809a6b98c0c2d409bf9148842} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!\_wrap\_destroy\_settrie@{\_wrap\_destroy\_settrie}}
 \index{\_wrap\_destroy\_settrie@{\_wrap\_destroy\_settrie}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
 \doxysubsubsection{\texorpdfstring{\_wrap\_destroy\_settrie()}{\_wrap\_destroy\_settrie()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \+\_\+wrap\+\_\+destroy\+\_\+settrie (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{SWIGUNUSEDPARMself,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \+\_\+wrap\+\_\+destroy\+\_\+settrie (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{self,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
 
-\Hypertarget{py__settrie__wrap_8cpp_a42311ebaae869943c6d1a9a95074334c}\label{py__settrie__wrap_8cpp_a42311ebaae869943c6d1a9a95074334c} 
+\Hypertarget{py__settrie__wrap_8cpp_ae7515e3bf72864a22ec1139046d39469}\label{py__settrie__wrap_8cpp_ae7515e3bf72864a22ec1139046d39469} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!\_wrap\_elements@{\_wrap\_elements}}
 \index{\_wrap\_elements@{\_wrap\_elements}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
 \doxysubsubsection{\texorpdfstring{\_wrap\_elements()}{\_wrap\_elements()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \+\_\+wrap\+\_\+elements (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{SWIGUNUSEDPARMself,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \+\_\+wrap\+\_\+elements (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{self,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
 
-\Hypertarget{py__settrie__wrap_8cpp_af5be1b9dc90e52d5fa56d44266589f37}\label{py__settrie__wrap_8cpp_af5be1b9dc90e52d5fa56d44266589f37} 
+\Hypertarget{py__settrie__wrap_8cpp_aa3b0ff620ab98f6b15abe4368eeedfaa}\label{py__settrie__wrap_8cpp_aa3b0ff620ab98f6b15abe4368eeedfaa} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!\_wrap\_find@{\_wrap\_find}}
 \index{\_wrap\_find@{\_wrap\_find}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
 \doxysubsubsection{\texorpdfstring{\_wrap\_find()}{\_wrap\_find()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \+\_\+wrap\+\_\+find (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{SWIGUNUSEDPARMself,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \+\_\+wrap\+\_\+find (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{self,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
 
-\Hypertarget{py__settrie__wrap_8cpp_a7125e04ea266f59b9b35ffeb7344a546}\label{py__settrie__wrap_8cpp_a7125e04ea266f59b9b35ffeb7344a546} 
+\Hypertarget{py__settrie__wrap_8cpp_aac4d8f0f075af0b0e94b3820f7f3c4fd}\label{py__settrie__wrap_8cpp_aac4d8f0f075af0b0e94b3820f7f3c4fd} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!\_wrap\_insert@{\_wrap\_insert}}
 \index{\_wrap\_insert@{\_wrap\_insert}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
 \doxysubsubsection{\texorpdfstring{\_wrap\_insert()}{\_wrap\_insert()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \+\_\+wrap\+\_\+insert (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{SWIGUNUSEDPARMself,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \+\_\+wrap\+\_\+insert (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{self,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
 
-\Hypertarget{py__settrie__wrap_8cpp_ad8fc62020fd2b34edb8dc6fadedb751f}\label{py__settrie__wrap_8cpp_ad8fc62020fd2b34edb8dc6fadedb751f} 
+\Hypertarget{py__settrie__wrap_8cpp_a79732888f3cad213375a8a65db1214ba}\label{py__settrie__wrap_8cpp_a79732888f3cad213375a8a65db1214ba} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!\_wrap\_iterator\_next@{\_wrap\_iterator\_next}}
 \index{\_wrap\_iterator\_next@{\_wrap\_iterator\_next}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
 \doxysubsubsection{\texorpdfstring{\_wrap\_iterator\_next()}{\_wrap\_iterator\_next()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \+\_\+wrap\+\_\+iterator\+\_\+next (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{SWIGUNUSEDPARMself,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \+\_\+wrap\+\_\+iterator\+\_\+next (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{self,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
 
-\Hypertarget{py__settrie__wrap_8cpp_aefee5922962dc53ee6ac071b49b63c34}\label{py__settrie__wrap_8cpp_aefee5922962dc53ee6ac071b49b63c34} 
+\Hypertarget{py__settrie__wrap_8cpp_a17acd4bff39159c1733fd168dfb3edf3}\label{py__settrie__wrap_8cpp_a17acd4bff39159c1733fd168dfb3edf3} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!\_wrap\_iterator\_size@{\_wrap\_iterator\_size}}
 \index{\_wrap\_iterator\_size@{\_wrap\_iterator\_size}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
 \doxysubsubsection{\texorpdfstring{\_wrap\_iterator\_size()}{\_wrap\_iterator\_size()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \+\_\+wrap\+\_\+iterator\+\_\+size (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{SWIGUNUSEDPARMself,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \+\_\+wrap\+\_\+iterator\+\_\+size (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{self,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
 
-\Hypertarget{py__settrie__wrap_8cpp_a258b4f63688be34579f585fddf66e33f}\label{py__settrie__wrap_8cpp_a258b4f63688be34579f585fddf66e33f} 
+\Hypertarget{py__settrie__wrap_8cpp_ab950fb947cb5cbefbdc0d79b7866e7ed}\label{py__settrie__wrap_8cpp_ab950fb947cb5cbefbdc0d79b7866e7ed} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!\_wrap\_new\_settrie@{\_wrap\_new\_settrie}}
 \index{\_wrap\_new\_settrie@{\_wrap\_new\_settrie}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
 \doxysubsubsection{\texorpdfstring{\_wrap\_new\_settrie()}{\_wrap\_new\_settrie()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \+\_\+wrap\+\_\+new\+\_\+settrie (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{SWIGUNUSEDPARMself,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \+\_\+wrap\+\_\+new\+\_\+settrie (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{self,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
 
-\Hypertarget{py__settrie__wrap_8cpp_a5adf234e292f545d5b32f314004259bf}\label{py__settrie__wrap_8cpp_a5adf234e292f545d5b32f314004259bf} 
+\Hypertarget{py__settrie__wrap_8cpp_a7646cf4c4839dca2069ba5bc5b7c2f73}\label{py__settrie__wrap_8cpp_a7646cf4c4839dca2069ba5bc5b7c2f73} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!\_wrap\_next\_set\_id@{\_wrap\_next\_set\_id}}
 \index{\_wrap\_next\_set\_id@{\_wrap\_next\_set\_id}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
 \doxysubsubsection{\texorpdfstring{\_wrap\_next\_set\_id()}{\_wrap\_next\_set\_id()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \+\_\+wrap\+\_\+next\+\_\+set\+\_\+id (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{SWIGUNUSEDPARMself,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \+\_\+wrap\+\_\+next\+\_\+set\+\_\+id (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{self,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
 
-\Hypertarget{py__settrie__wrap_8cpp_a3e5b559326a01e0c9fca9b7c816adc50}\label{py__settrie__wrap_8cpp_a3e5b559326a01e0c9fca9b7c816adc50} 
+\Hypertarget{py__settrie__wrap_8cpp_afb68c1013b1d884d471c7d3682526cdb}\label{py__settrie__wrap_8cpp_afb68c1013b1d884d471c7d3682526cdb} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!\_wrap\_num\_sets@{\_wrap\_num\_sets}}
 \index{\_wrap\_num\_sets@{\_wrap\_num\_sets}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
 \doxysubsubsection{\texorpdfstring{\_wrap\_num\_sets()}{\_wrap\_num\_sets()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \+\_\+wrap\+\_\+num\+\_\+sets (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{SWIGUNUSEDPARMself,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \+\_\+wrap\+\_\+num\+\_\+sets (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{self,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
 
-\Hypertarget{py__settrie__wrap_8cpp_a7fd987feae5d360bddab28d3edb4db29}\label{py__settrie__wrap_8cpp_a7fd987feae5d360bddab28d3edb4db29} 
+\Hypertarget{py__settrie__wrap_8cpp_a06dd94010e83f423c662a7a1bb87ca59}\label{py__settrie__wrap_8cpp_a06dd94010e83f423c662a7a1bb87ca59} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!\_wrap\_purge@{\_wrap\_purge}}
 \index{\_wrap\_purge@{\_wrap\_purge}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
 \doxysubsubsection{\texorpdfstring{\_wrap\_purge()}{\_wrap\_purge()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \+\_\+wrap\+\_\+purge (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{SWIGUNUSEDPARMself,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \+\_\+wrap\+\_\+purge (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{self,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
 
-\Hypertarget{py__settrie__wrap_8cpp_aa98cbe01d68cde517c5277b5d39f3d11}\label{py__settrie__wrap_8cpp_aa98cbe01d68cde517c5277b5d39f3d11} 
+\Hypertarget{py__settrie__wrap_8cpp_aae15f6b5453b4253222437b73c5c98cb}\label{py__settrie__wrap_8cpp_aae15f6b5453b4253222437b73c5c98cb} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!\_wrap\_push\_binary\_image\_block@{\_wrap\_push\_binary\_image\_block}}
 \index{\_wrap\_push\_binary\_image\_block@{\_wrap\_push\_binary\_image\_block}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
 \doxysubsubsection{\texorpdfstring{\_wrap\_push\_binary\_image\_block()}{\_wrap\_push\_binary\_image\_block()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \+\_\+wrap\+\_\+push\+\_\+binary\+\_\+image\+\_\+block (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{SWIGUNUSEDPARMself,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \+\_\+wrap\+\_\+push\+\_\+binary\+\_\+image\+\_\+block (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{self,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
 
-\Hypertarget{py__settrie__wrap_8cpp_ab6dbdcd1e198a5dc263e35b2d1027284}\label{py__settrie__wrap_8cpp_ab6dbdcd1e198a5dc263e35b2d1027284} 
+\Hypertarget{py__settrie__wrap_8cpp_af10db7155096b37f26792a13dcf1f77d}\label{py__settrie__wrap_8cpp_af10db7155096b37f26792a13dcf1f77d} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!\_wrap\_remove@{\_wrap\_remove}}
 \index{\_wrap\_remove@{\_wrap\_remove}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
 \doxysubsubsection{\texorpdfstring{\_wrap\_remove()}{\_wrap\_remove()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \+\_\+wrap\+\_\+remove (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{SWIGUNUSEDPARMself,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \+\_\+wrap\+\_\+remove (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{self,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
 
-\Hypertarget{py__settrie__wrap_8cpp_afa7607a2b8f297a071c017813a6d6c88}\label{py__settrie__wrap_8cpp_afa7607a2b8f297a071c017813a6d6c88} 
+\Hypertarget{py__settrie__wrap_8cpp_a98caaeb498900485a8da0f30aaad5daf}\label{py__settrie__wrap_8cpp_a98caaeb498900485a8da0f30aaad5daf} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!\_wrap\_save\_as\_binary\_image@{\_wrap\_save\_as\_binary\_image}}
 \index{\_wrap\_save\_as\_binary\_image@{\_wrap\_save\_as\_binary\_image}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
 \doxysubsubsection{\texorpdfstring{\_wrap\_save\_as\_binary\_image()}{\_wrap\_save\_as\_binary\_image()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \+\_\+wrap\+\_\+save\+\_\+as\+\_\+binary\+\_\+image (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{SWIGUNUSEDPARMself,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \+\_\+wrap\+\_\+save\+\_\+as\+\_\+binary\+\_\+image (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{self,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
 
-\Hypertarget{py__settrie__wrap_8cpp_a30ae8ceae1cde25d674d49412f457a42}\label{py__settrie__wrap_8cpp_a30ae8ceae1cde25d674d49412f457a42} 
+\Hypertarget{py__settrie__wrap_8cpp_a038cdc9ef0dbb03ee1e8843083fe8486}\label{py__settrie__wrap_8cpp_a038cdc9ef0dbb03ee1e8843083fe8486} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!\_wrap\_set\_name@{\_wrap\_set\_name}}
 \index{\_wrap\_set\_name@{\_wrap\_set\_name}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
 \doxysubsubsection{\texorpdfstring{\_wrap\_set\_name()}{\_wrap\_set\_name()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \+\_\+wrap\+\_\+set\+\_\+name (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{SWIGUNUSEDPARMself,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \+\_\+wrap\+\_\+set\+\_\+name (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{self,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
 
-\Hypertarget{py__settrie__wrap_8cpp_a548e2add882c802fe0a007d9ff042fd5}\label{py__settrie__wrap_8cpp_a548e2add882c802fe0a007d9ff042fd5} 
+\Hypertarget{py__settrie__wrap_8cpp_ab01814fad16fdb700e90751229e089a1}\label{py__settrie__wrap_8cpp_ab01814fad16fdb700e90751229e089a1} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!\_wrap\_subsets@{\_wrap\_subsets}}
 \index{\_wrap\_subsets@{\_wrap\_subsets}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
 \doxysubsubsection{\texorpdfstring{\_wrap\_subsets()}{\_wrap\_subsets()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \+\_\+wrap\+\_\+subsets (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{SWIGUNUSEDPARMself,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \+\_\+wrap\+\_\+subsets (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{self,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
 
-\Hypertarget{py__settrie__wrap_8cpp_a55fe02271ef89ad2b499fb2c2685ae9f}\label{py__settrie__wrap_8cpp_a55fe02271ef89ad2b499fb2c2685ae9f} 
+\Hypertarget{py__settrie__wrap_8cpp_a3713d3ae56f3016df678fdb32d3a835c}\label{py__settrie__wrap_8cpp_a3713d3ae56f3016df678fdb32d3a835c} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!\_wrap\_supersets@{\_wrap\_supersets}}
 \index{\_wrap\_supersets@{\_wrap\_supersets}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
 \doxysubsubsection{\texorpdfstring{\_wrap\_supersets()}{\_wrap\_supersets()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \+\_\+wrap\+\_\+supersets (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{SWIGUNUSEDPARMself,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} \+\_\+wrap\+\_\+supersets (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{self,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
 
 \Hypertarget{py__settrie__wrap_8cpp_a1447ea0f5f4735a0503baba5e9bcdc9b}\label{py__settrie__wrap_8cpp_a1447ea0f5f4735a0503baba5e9bcdc9b} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!binary\_image\_next@{binary\_image\_next}}
@@ -1504,7 +1565,13 @@ Return the number of unread binary images blocks in an iterator returned by a \d
 \begin{DoxyReturn}{Returns}
 The number of unread blocks in the iterator. 
 \end{DoxyReturn}
-\Hypertarget{py__settrie__wrap_8cpp_ab1ff5515808234d01e24e52cedf6f35f}\label{py__settrie__wrap_8cpp_ab1ff5515808234d01e24e52cedf6f35f} 
+\Hypertarget{py__settrie__wrap_8cpp_aa87a00c5ff32c27f0b5fbe788a760832}\label{py__settrie__wrap_8cpp_aa87a00c5ff32c27f0b5fbe788a760832} 
+\index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!cleanup\_globals@{cleanup\_globals}}
+\index{cleanup\_globals@{cleanup\_globals}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
+\doxysubsubsection{\texorpdfstring{cleanup\_globals()}{cleanup\_globals()}}
+{\footnotesize\ttfamily void cleanup\+\_\+globals (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [extern]}}
+
+Free the memory allocated for the answer buffer. \Hypertarget{py__settrie__wrap_8cpp_ab1ff5515808234d01e24e52cedf6f35f}\label{py__settrie__wrap_8cpp_ab1ff5515808234d01e24e52cedf6f35f} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!destroy\_binary\_image@{destroy\_binary\_image}}
 \index{destroy\_binary\_image@{destroy\_binary\_image}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
 \doxysubsubsection{\texorpdfstring{destroy\_binary\_image()}{destroy\_binary\_image()}}
@@ -1857,11 +1924,11 @@ Find all the supersets of a given Python set (serialized by a str() call) stored
 \doxysubsubsection{\texorpdfstring{SWIG\_globals()}{SWIG\_globals()}}
 {\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} SWIG\+\_\+globals (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
 
-\Hypertarget{py__settrie__wrap_8cpp_a7f8da48fe4dbc23aef01a714623b8a6b}\label{py__settrie__wrap_8cpp_a7f8da48fe4dbc23aef01a714623b8a6b} 
+\Hypertarget{py__settrie__wrap_8cpp_a0126098cf0f0b75c86589dd8977b44e6}\label{py__settrie__wrap_8cpp_a0126098cf0f0b75c86589dd8977b44e6} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!SWIG\_InitializeModule@{SWIG\_InitializeModule}}
 \index{SWIG\_InitializeModule@{SWIG\_InitializeModule}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
 \doxysubsubsection{\texorpdfstring{SWIG\_InitializeModule()}{SWIG\_InitializeModule()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a42cd9c1d67d803040a3e78515945afcb}{SWIGRUNTIME}} void SWIG\+\_\+\+Initialize\+Module (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{clientdata }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a42cd9c1d67d803040a3e78515945afcb}{SWIGRUNTIME}} void SWIG\+\_\+\+Initialize\+Module (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{py__settrie__wrap_8cpp_a691b8a3a4014e56e511bf6b0a7fdb697}{SWIG\+\_\+\+INIT\+\_\+\+CLIENT\+\_\+\+DATA\+\_\+\+TYPE}}}]{clientdata }\end{DoxyParamCaption})}
 
 \Hypertarget{py__settrie__wrap_8cpp_a93c4c0e7df4ace78aab2f2efd289de52}\label{py__settrie__wrap_8cpp_a93c4c0e7df4ace78aab2f2efd289de52} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!SWIG\_MangledTypeQueryModule@{SWIG\_MangledTypeQueryModule}}
@@ -1904,18 +1971,6 @@ Find all the supersets of a given Python set (serialized by a str() call) stored
 \index{SWIG\_Py\_Void@{SWIG\_Py\_Void}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
 \doxysubsubsection{\texorpdfstring{SWIG\_Py\_Void()}{SWIG\_Py\_Void()}}
 {\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_affa7aa2bcce5bea24a20e5b184ae0533}{SWIGRUNTIMEINLINE}} Py\+Object \texorpdfstring{$\ast$}{*} SWIG\+\_\+\+Py\+\_\+\+Void (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
-
-\Hypertarget{py__settrie__wrap_8cpp_a5bf71c674913470905811da374788b66}\label{py__settrie__wrap_8cpp_a5bf71c674913470905811da374788b66} 
-\index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!SWIG\_PyInstanceMethod\_New@{SWIG\_PyInstanceMethod\_New}}
-\index{SWIG\_PyInstanceMethod\_New@{SWIG\_PyInstanceMethod\_New}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
-\doxysubsubsection{\texorpdfstring{SWIG\_PyInstanceMethod\_New()}{SWIG\_PyInstanceMethod\_New()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} SWIG\+\_\+\+Py\+Instance\+Method\+\_\+\+New (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{SWIGUNUSEDPARMself,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{func }\end{DoxyParamCaption})}
-
-\Hypertarget{py__settrie__wrap_8cpp_a8c952711ed159d7ba69972337e6e14fa}\label{py__settrie__wrap_8cpp_a8c952711ed159d7ba69972337e6e14fa} 
-\index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!SWIG\_PyStaticMethod\_New@{SWIG\_PyStaticMethod\_New}}
-\index{SWIG\_PyStaticMethod\_New@{SWIG\_PyStaticMethod\_New}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
-\doxysubsubsection{\texorpdfstring{SWIG\_PyStaticMethod\_New()}{SWIG\_PyStaticMethod\_New()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} SWIG\+\_\+\+Py\+Static\+Method\+\_\+\+New (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{SWIGUNUSEDPARMself,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{func }\end{DoxyParamCaption})}
 
 \Hypertarget{py__settrie__wrap_8cpp_afddb1b639fb789e0f8aa35e8e5f2635f}\label{py__settrie__wrap_8cpp_afddb1b639fb789e0f8aa35e8e5f2635f} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!SWIG\_Python\_AcquirePtr@{SWIG\_Python\_AcquirePtr}}
@@ -2001,11 +2056,11 @@ Find all the supersets of a given Python set (serialized by a str() call) stored
 \doxysubsubsection{\texorpdfstring{SWIG\_Python\_ExceptionType()}{SWIG\_Python\_ExceptionType()}}
 {\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_affa7aa2bcce5bea24a20e5b184ae0533}{SWIGRUNTIMEINLINE}} Py\+Object \texorpdfstring{$\ast$}{*} SWIG\+\_\+\+Python\+\_\+\+Exception\+Type (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structswig__type__info}{swig\+\_\+type\+\_\+info}} \texorpdfstring{$\ast$}{*}}]{desc }\end{DoxyParamCaption})}
 
-\Hypertarget{py__settrie__wrap_8cpp_addfee1cf672308dcdd030d489f804b5f}\label{py__settrie__wrap_8cpp_addfee1cf672308dcdd030d489f804b5f} 
+\Hypertarget{py__settrie__wrap_8cpp_ac1460b9af454a008eb052a89bef47ee0}\label{py__settrie__wrap_8cpp_ac1460b9af454a008eb052a89bef47ee0} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!SWIG\_Python\_FixMethods@{SWIG\_Python\_FixMethods}}
 \index{SWIG\_Python\_FixMethods@{SWIG\_Python\_FixMethods}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
 \doxysubsubsection{\texorpdfstring{SWIG\_Python\_FixMethods()}{SWIG\_Python\_FixMethods()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} void SWIG\+\_\+\+Python\+\_\+\+Fix\+Methods (\begin{DoxyParamCaption}\item[{Py\+Method\+Def \texorpdfstring{$\ast$}{*}}]{methods,  }\item[{\mbox{\hyperlink{structswig__const__info}{swig\+\_\+const\+\_\+info}} \texorpdfstring{$\ast$}{*}}]{const\+\_\+table,  }\item[{\mbox{\hyperlink{structswig__type__info}{swig\+\_\+type\+\_\+info}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{types,  }\item[{\mbox{\hyperlink{structswig__type__info}{swig\+\_\+type\+\_\+info}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{types\+\_\+initial }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} void SWIG\+\_\+\+Python\+\_\+\+Fix\+Methods (\begin{DoxyParamCaption}\item[{Py\+Method\+Def \texorpdfstring{$\ast$}{*}}]{methods,  }\item[{const \mbox{\hyperlink{structswig__const__info}{swig\+\_\+const\+\_\+info}} \texorpdfstring{$\ast$}{*}}]{const\+\_\+table,  }\item[{\mbox{\hyperlink{structswig__type__info}{swig\+\_\+type\+\_\+info}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{types,  }\item[{\mbox{\hyperlink{structswig__type__info}{swig\+\_\+type\+\_\+info}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{types\+\_\+initial }\end{DoxyParamCaption})}
 
 \Hypertarget{py__settrie__wrap_8cpp_a017395422615806bee5aee85c6c08827}\label{py__settrie__wrap_8cpp_a017395422615806bee5aee85c6c08827} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!SWIG\_Python\_GetModule@{SWIG\_Python\_GetModule}}
@@ -2097,12 +2152,6 @@ Find all the supersets of a given Python set (serialized by a str() call) stored
 \doxysubsubsection{\texorpdfstring{SWIG\_Python\_SetSwigThis()}{SWIG\_Python\_SetSwigThis()}}
 {\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a42cd9c1d67d803040a3e78515945afcb}{SWIGRUNTIME}} int SWIG\+\_\+\+Python\+\_\+\+Set\+Swig\+This (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{inst,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{swig\+\_\+this }\end{DoxyParamCaption})}
 
-\Hypertarget{py__settrie__wrap_8cpp_a490869adce66bc12597e3c1ac23fab48}\label{py__settrie__wrap_8cpp_a490869adce66bc12597e3c1ac23fab48} 
-\index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!SWIG\_Python\_str\_AsChar@{SWIG\_Python\_str\_AsChar}}
-\index{SWIG\_Python\_str\_AsChar@{SWIG\_Python\_str\_AsChar}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
-\doxysubsubsection{\texorpdfstring{SWIG\_Python\_str\_AsChar()}{SWIG\_Python\_str\_AsChar()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} char \texorpdfstring{$\ast$}{*} SWIG\+\_\+\+Python\+\_\+str\+\_\+\+As\+Char (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{str }\end{DoxyParamCaption})}
-
 \Hypertarget{py__settrie__wrap_8cpp_ada53ff51e4581c1caf6bf62482216fb4}\label{py__settrie__wrap_8cpp_ada53ff51e4581c1caf6bf62482216fb4} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!SWIG\_Python\_str\_FromChar@{SWIG\_Python\_str\_FromChar}}
 \index{SWIG\_Python\_str\_FromChar@{SWIG\_Python\_str\_FromChar}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
@@ -2139,11 +2188,11 @@ Find all the supersets of a given Python set (serialized by a str() call) stored
 \doxysubsubsection{\texorpdfstring{SWIG\_Python\_UnpackTuple()}{SWIG\_Python\_UnpackTuple()}}
 {\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+\_\+ssize\+\_\+t SWIG\+\_\+\+Python\+\_\+\+Unpack\+Tuple (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{args,  }\item[{const char \texorpdfstring{$\ast$}{*}}]{name,  }\item[{Py\+\_\+ssize\+\_\+t}]{min,  }\item[{Py\+\_\+ssize\+\_\+t}]{max,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{objs }\end{DoxyParamCaption})}
 
-\Hypertarget{py__settrie__wrap_8cpp_af962454012da937393ddf1274fe41d15}\label{py__settrie__wrap_8cpp_af962454012da937393ddf1274fe41d15} 
-\index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!SWIG\_PythonGetProxyDoc@{SWIG\_PythonGetProxyDoc}}
-\index{SWIG\_PythonGetProxyDoc@{SWIG\_PythonGetProxyDoc}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
-\doxysubsubsection{\texorpdfstring{SWIG\_PythonGetProxyDoc()}{SWIG\_PythonGetProxyDoc()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Method\+Def \texorpdfstring{$\ast$}{*} SWIG\+\_\+\+Python\+Get\+Proxy\+Doc (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{name }\end{DoxyParamCaption})}
+\Hypertarget{py__settrie__wrap_8cpp_a86cd6fe27d8b17bc91470594d6efd0e6}\label{py__settrie__wrap_8cpp_a86cd6fe27d8b17bc91470594d6efd0e6} 
+\index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!SWIG\_PyUnicode\_AsUTF8AndSize@{SWIG\_PyUnicode\_AsUTF8AndSize}}
+\index{SWIG\_PyUnicode\_AsUTF8AndSize@{SWIG\_PyUnicode\_AsUTF8AndSize}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
+\doxysubsubsection{\texorpdfstring{SWIG\_PyUnicode\_AsUTF8AndSize()}{SWIG\_PyUnicode\_AsUTF8AndSize()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} const char \texorpdfstring{$\ast$}{*} SWIG\+\_\+\+Py\+Unicode\+\_\+\+As\+UTF8\+And\+Size (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{str,  }\item[{Py\+\_\+ssize\+\_\+t \texorpdfstring{$\ast$}{*}}]{psize,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{pbytes }\end{DoxyParamCaption})}
 
 \Hypertarget{py__settrie__wrap_8cpp_ac3a66f5e4a274b17e1f7f5180250d1c8}\label{py__settrie__wrap_8cpp_ac3a66f5e4a274b17e1f7f5180250d1c8} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!SWIG\_This@{SWIG\_This}}
@@ -2163,11 +2212,11 @@ Find all the supersets of a given Python set (serialized by a str() call) stored
 \doxysubsubsection{\texorpdfstring{SWIG\_TypeCheck()}{SWIG\_TypeCheck()}}
 {\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a42cd9c1d67d803040a3e78515945afcb}{SWIGRUNTIME}} \mbox{\hyperlink{structswig__cast__info}{swig\+\_\+cast\+\_\+info}} \texorpdfstring{$\ast$}{*} SWIG\+\_\+\+Type\+Check (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{c,  }\item[{\mbox{\hyperlink{structswig__type__info}{swig\+\_\+type\+\_\+info}} \texorpdfstring{$\ast$}{*}}]{ty }\end{DoxyParamCaption})}
 
-\Hypertarget{py__settrie__wrap_8cpp_a0bd9b9bda0c431597a804a27f8750746}\label{py__settrie__wrap_8cpp_a0bd9b9bda0c431597a804a27f8750746} 
+\Hypertarget{py__settrie__wrap_8cpp_abbaa545387a2275c4fa321794ba9730d}\label{py__settrie__wrap_8cpp_abbaa545387a2275c4fa321794ba9730d} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!SWIG\_TypeCheckStruct@{SWIG\_TypeCheckStruct}}
 \index{SWIG\_TypeCheckStruct@{SWIG\_TypeCheckStruct}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
 \doxysubsubsection{\texorpdfstring{SWIG\_TypeCheckStruct()}{SWIG\_TypeCheckStruct()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a42cd9c1d67d803040a3e78515945afcb}{SWIGRUNTIME}} \mbox{\hyperlink{structswig__cast__info}{swig\+\_\+cast\+\_\+info}} \texorpdfstring{$\ast$}{*} SWIG\+\_\+\+Type\+Check\+Struct (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structswig__type__info}{swig\+\_\+type\+\_\+info}} \texorpdfstring{$\ast$}{*}}]{from,  }\item[{\mbox{\hyperlink{structswig__type__info}{swig\+\_\+type\+\_\+info}} \texorpdfstring{$\ast$}{*}}]{ty }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a42cd9c1d67d803040a3e78515945afcb}{SWIGRUNTIME}} \mbox{\hyperlink{structswig__cast__info}{swig\+\_\+cast\+\_\+info}} \texorpdfstring{$\ast$}{*} SWIG\+\_\+\+Type\+Check\+Struct (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structswig__type__info}{swig\+\_\+type\+\_\+info}} \texorpdfstring{$\ast$}{*}}]{from,  }\item[{\mbox{\hyperlink{structswig__type__info}{swig\+\_\+type\+\_\+info}} \texorpdfstring{$\ast$}{*}}]{ty }\end{DoxyParamCaption})}
 
 \Hypertarget{py__settrie__wrap_8cpp_a4b0a40223812f7d43bc2f0c2342fe2f7}\label{py__settrie__wrap_8cpp_a4b0a40223812f7d43bc2f0c2342fe2f7} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!SWIG\_TypeClientData@{SWIG\_TypeClientData}}
@@ -2241,35 +2290,35 @@ Find all the supersets of a given Python set (serialized by a str() call) stored
 \doxysubsubsection{\texorpdfstring{SWIG\_UnpackVoidPtr()}{SWIG\_UnpackVoidPtr()}}
 {\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a42cd9c1d67d803040a3e78515945afcb}{SWIGRUNTIME}} const char \texorpdfstring{$\ast$}{*} SWIG\+\_\+\+Unpack\+Void\+Ptr (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{c,  }\item[{void \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{ptr,  }\item[{const char \texorpdfstring{$\ast$}{*}}]{name }\end{DoxyParamCaption})}
 
-\Hypertarget{py__settrie__wrap_8cpp_ad2b4927c9caa8562938bb95fa2323d5b}\label{py__settrie__wrap_8cpp_ad2b4927c9caa8562938bb95fa2323d5b} 
+\Hypertarget{py__settrie__wrap_8cpp_ac8cbe883cdf0073a6af2b70d25dc6320}\label{py__settrie__wrap_8cpp_ac8cbe883cdf0073a6af2b70d25dc6320} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!swig\_varlink\_dealloc@{swig\_varlink\_dealloc}}
 \index{swig\_varlink\_dealloc@{swig\_varlink\_dealloc}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
 \doxysubsubsection{\texorpdfstring{swig\_varlink\_dealloc()}{swig\_varlink\_dealloc()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} void swig\+\_\+varlink\+\_\+dealloc (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structswig__varlinkobject}{swig\+\_\+varlinkobject}} \texorpdfstring{$\ast$}{*}}]{v }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} void swig\+\_\+varlink\+\_\+dealloc (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{o }\end{DoxyParamCaption})}
 
-\Hypertarget{py__settrie__wrap_8cpp_a38df1361d299888d4240fc58617c195c}\label{py__settrie__wrap_8cpp_a38df1361d299888d4240fc58617c195c} 
+\Hypertarget{py__settrie__wrap_8cpp_adec75f6c43bfcae9a6ab46347a691f06}\label{py__settrie__wrap_8cpp_adec75f6c43bfcae9a6ab46347a691f06} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!swig\_varlink\_getattr@{swig\_varlink\_getattr}}
 \index{swig\_varlink\_getattr@{swig\_varlink\_getattr}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
 \doxysubsubsection{\texorpdfstring{swig\_varlink\_getattr()}{swig\_varlink\_getattr()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} swig\+\_\+varlink\+\_\+getattr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structswig__varlinkobject}{swig\+\_\+varlinkobject}} \texorpdfstring{$\ast$}{*}}]{v,  }\item[{char \texorpdfstring{$\ast$}{*}}]{n }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} swig\+\_\+varlink\+\_\+getattr (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{o,  }\item[{char \texorpdfstring{$\ast$}{*}}]{n }\end{DoxyParamCaption})}
 
-\Hypertarget{py__settrie__wrap_8cpp_ad3848e6ef99327ed383eee95539c4be2}\label{py__settrie__wrap_8cpp_ad3848e6ef99327ed383eee95539c4be2} 
+\Hypertarget{py__settrie__wrap_8cpp_aa6cea954f09842d05a211d2bf4fd6b38}\label{py__settrie__wrap_8cpp_aa6cea954f09842d05a211d2bf4fd6b38} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!swig\_varlink\_repr@{swig\_varlink\_repr}}
 \index{swig\_varlink\_repr@{swig\_varlink\_repr}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
 \doxysubsubsection{\texorpdfstring{swig\_varlink\_repr()}{swig\_varlink\_repr()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} swig\+\_\+varlink\+\_\+repr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structswig__varlinkobject}{swig\+\_\+varlinkobject}} \texorpdfstring{$\ast$}{*}}]{SWIGUNUSEDPARMv }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} swig\+\_\+varlink\+\_\+repr (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{SWIGUNUSEDPARMv }\end{DoxyParamCaption})}
 
-\Hypertarget{py__settrie__wrap_8cpp_a2ec84ff72b3bb939d9930127720a1104}\label{py__settrie__wrap_8cpp_a2ec84ff72b3bb939d9930127720a1104} 
+\Hypertarget{py__settrie__wrap_8cpp_a078139066494a54a76f2ebecb3199c7e}\label{py__settrie__wrap_8cpp_a078139066494a54a76f2ebecb3199c7e} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!swig\_varlink\_setattr@{swig\_varlink\_setattr}}
 \index{swig\_varlink\_setattr@{swig\_varlink\_setattr}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
 \doxysubsubsection{\texorpdfstring{swig\_varlink\_setattr()}{swig\_varlink\_setattr()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} int swig\+\_\+varlink\+\_\+setattr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structswig__varlinkobject}{swig\+\_\+varlinkobject}} \texorpdfstring{$\ast$}{*}}]{v,  }\item[{char \texorpdfstring{$\ast$}{*}}]{n,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{p }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} int swig\+\_\+varlink\+\_\+setattr (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{o,  }\item[{char \texorpdfstring{$\ast$}{*}}]{n,  }\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{p }\end{DoxyParamCaption})}
 
-\Hypertarget{py__settrie__wrap_8cpp_a3f32486384c0abc5a12361d799440d7e}\label{py__settrie__wrap_8cpp_a3f32486384c0abc5a12361d799440d7e} 
+\Hypertarget{py__settrie__wrap_8cpp_a687282f112e2292926b7b95b1bc2bbc9}\label{py__settrie__wrap_8cpp_a687282f112e2292926b7b95b1bc2bbc9} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!swig\_varlink\_str@{swig\_varlink\_str}}
 \index{swig\_varlink\_str@{swig\_varlink\_str}!py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}}
 \doxysubsubsection{\texorpdfstring{swig\_varlink\_str()}{swig\_varlink\_str()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} swig\+\_\+varlink\+\_\+str (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structswig__varlinkobject}{swig\+\_\+varlinkobject}} \texorpdfstring{$\ast$}{*}}]{v }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{py__settrie__wrap_8cpp_a8f2319f775e5b9d5906c9ef25d9b819a}{SWIGINTERN}} Py\+Object \texorpdfstring{$\ast$}{*} swig\+\_\+varlink\+\_\+str (\begin{DoxyParamCaption}\item[{Py\+Object \texorpdfstring{$\ast$}{*}}]{o }\end{DoxyParamCaption})}
 
 \Hypertarget{py__settrie__wrap_8cpp_a68ce51bbe950061053728997a2e8db34}\label{py__settrie__wrap_8cpp_a68ce51bbe950061053728997a2e8db34} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!swig\_varlink\_type@{swig\_varlink\_type}}

@@ -1,13 +1,15 @@
 <map id="settrie/py_settrie_wrap.cpp" name="settrie/py_settrie_wrap.cpp">
-<area shape="rect" id="Node000001" title=" " alt="" coords="171,5,305,45"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="215,5,349,45"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="5,93,84,119"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="193,48,87,91,85,86,191,43"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="108,93,179,119"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="217,48,170,86,167,82,213,43"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="203,93,273,119"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="241,46,241,79,235,79,235,46"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="297,93,360,119"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="262,44,307,82,303,86,258,48"/>
-<area shape="rect" id="Node000006" title=" " alt="" coords="384,93,452,119"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="282,43,380,85,378,90,280,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="226,48,93,92,91,87,224,43"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="109,93,175,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="250,48,176,89,174,84,247,43"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="200,93,271,119"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="273,47,252,83,247,80,268,44"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="295,93,365,119"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="296,44,318,80,313,83,291,47"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="389,93,452,119"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="317,43,389,84,387,89,314,48"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="476,93,544,119"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="337,43,464,86,463,91,336,48"/>
 </map>

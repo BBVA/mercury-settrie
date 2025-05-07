@@ -1,7 +1,10 @@
 var searchData=
 [
-  ['set_5fattr_0',['set_attr',['../structswig__globalvar.html#acff619325c0e354df88508d64c1608e6',1,'swig_globalvar']]],
-  ['size_1',['size',['../structswig__module__info.html#aaf8907cf8509ee0464af8c9dfd909042',1,'swig_module_info::size'],['../structSwigPyPacked.html#aed2bfb8fb3c9f804c386215db63921cb',1,'SwigPyPacked::size'],['../structImageBlock.html#a48354b392d1c4165199f91bb42035b6a',1,'ImageBlock::size']]],
-  ['state_2',['state',['../structSetNode.html#add0afde051e97bd50839387ca3b84cdb',1,'SetNode']]],
-  ['str_3',['str',['../structswig__type__info.html#abbe7cc58a083feb4329b748643324064',1,'swig_type_info']]]
+  ['p_5fanswer_0',['p_answer',['../settrie_8cpp.html#ad043843eb7abe86eb0a5cd7f31f357da',1,'settrie.cpp']]],
+  ['pack_1',['pack',['../structSwigPyPacked.html#af5122bcb9e73bf2dec4ce5f58f004e1b',1,'SwigPyPacked']]],
+  ['prev_2',['prev',['../structswig__cast__info.html#afc685bcf38a5a06c6601775138c5999c',1,'swig_cast_info']]],
+  ['ptr_3',['ptr',['../structSwigPyObject.html#a41b1d569a8ba4fa9b1d87579c144891b',1,'SwigPyObject']]],
+  ['ptype_4',['ptype',['../structswig__const__info.html#aedd46d173c5b5ed4ee60ad5660233557',1,'swig_const_info']]],
+  ['pvalue_5',['pvalue',['../structswig__const__info.html#abbc43512c364bff11fac5961c1155090',1,'swig_const_info']]],
+  ['pytype_6',['pytype',['../structSwigPyClientData.html#a1f172e51bb27f670dacdf8247843b4c2',1,'SwigPyClientData']]]
 ];

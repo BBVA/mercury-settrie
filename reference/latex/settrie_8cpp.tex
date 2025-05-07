@@ -5,8 +5,7 @@
 {\ttfamily \#include $<$sstream$>$}\newline
 {\ttfamily \#include $<$string.\+h$>$}\newline
 {\ttfamily \#include "{}settrie.\+h"{}}\newline
-Include dependency graph for settrie.\+cpp\+:
-\nopagebreak
+Include dependency graph for settrie.\+cpp\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -48,6 +47,10 @@ bool \mbox{\hyperlink{settrie_8cpp_a824686b1b9a5de641bbeaad372e299a0}{string\+\_
 \item 
 \mbox{\hyperlink{settrie_8h_afbeda3fd1bdc8c37d01bdf9f5c8274ff}{String}} \mbox{\hyperlink{settrie_8cpp_a978b99946914087b89781781d2ec49cb}{python\+\_\+set\+\_\+as\+\_\+string}} (char \texorpdfstring{$\ast$}{*}p\+\_\+char)
 \item 
+char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{settrie_8cpp_a4d54df66621d54fccf95d06d31ead93a}{get\+\_\+answer\+\_\+buffer}} ()
+\item 
+void \mbox{\hyperlink{settrie_8cpp_aad2d84c7bef5a0a4dc98184ab9246233}{set\+\_\+answer\+\_\+buffer\+\_\+size}} (int size)
+\item 
 int \mbox{\hyperlink{settrie_8cpp_a2e215d94498eeebdffc89585e6e06065}{new\+\_\+settrie}} ()
 \item 
 void \mbox{\hyperlink{settrie_8cpp_ad5b3d49f3cdac771f72d3f6b7cfb8f88}{destroy\+\_\+settrie}} (int st\+\_\+id)
@@ -87,6 +90,8 @@ bool \mbox{\hyperlink{settrie_8cpp_a77b967a5cb92850951a315b13c08c8c5}{push\+\_\+
 int \mbox{\hyperlink{settrie_8cpp_ad09d202d845463d9ad0450a7d9d175b9}{binary\+\_\+image\+\_\+size}} (int image\+\_\+id)
 \item 
 char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{settrie_8cpp_a1447ea0f5f4735a0503baba5e9bcdc9b}{binary\+\_\+image\+\_\+next}} (int image\+\_\+id)
+\item 
+void \mbox{\hyperlink{settrie_8cpp_aa87a00c5ff32c27f0b5fbe788a760832}{cleanup\+\_\+globals}} ()
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Variables}
 \begin{DoxyCompactItemize}
@@ -101,7 +106,9 @@ int \mbox{\hyperlink{settrie_8cpp_abb22027e7c6e9f03f4e765018c75501c}{instance\+\
 \item 
 \mbox{\hyperlink{settrie_8cpp_afe560789669a8dbab1aefb1a0e5ccd6c}{Binary\+Image\+Server}} \mbox{\hyperlink{settrie_8cpp_aa15ca750c1f18e56d3a75eee54c1ca5b}{image}} = \{\}
 \item 
-char \mbox{\hyperlink{settrie_8cpp_a3ce3af741592ed7c6bbc6bca94a81ca7}{answer\+\_\+buffer}} \mbox{[}8192\mbox{]}
+int \mbox{\hyperlink{settrie_8cpp_a92dc52210d23608a4b5c584372cec08c}{max\+\_\+id\+\_\+length}} = 1024
+\item 
+char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{settrie_8cpp_ad043843eb7abe86eb0a5cd7f31f357da}{p\+\_\+answer}} = nullptr
 \item 
 char \mbox{\hyperlink{settrie_8cpp_a87c6228e206d40acd8bb922514f65270}{answer\+\_\+block}} \mbox{[}8208\mbox{]}
 \item 
@@ -190,7 +197,13 @@ Return the number of unread binary images blocks in an iterator returned by a \d
 \begin{DoxyReturn}{Returns}
 The number of unread blocks in the iterator. 
 \end{DoxyReturn}
-\Hypertarget{settrie_8cpp_ab1ff5515808234d01e24e52cedf6f35f}\label{settrie_8cpp_ab1ff5515808234d01e24e52cedf6f35f} 
+\Hypertarget{settrie_8cpp_aa87a00c5ff32c27f0b5fbe788a760832}\label{settrie_8cpp_aa87a00c5ff32c27f0b5fbe788a760832} 
+\index{settrie.cpp@{settrie.cpp}!cleanup\_globals@{cleanup\_globals}}
+\index{cleanup\_globals@{cleanup\_globals}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{cleanup\_globals()}{cleanup\_globals()}}
+{\footnotesize\ttfamily void cleanup\+\_\+globals (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Free the memory allocated for the answer buffer. \Hypertarget{settrie_8cpp_ab1ff5515808234d01e24e52cedf6f35f}\label{settrie_8cpp_ab1ff5515808234d01e24e52cedf6f35f} 
 \index{settrie.cpp@{settrie.cpp}!destroy\_binary\_image@{destroy\_binary\_image}}
 \index{destroy\_binary\_image@{destroy\_binary\_image}!settrie.cpp@{settrie.cpp}}
 \doxysubsubsection{\texorpdfstring{destroy\_binary\_image()}{destroy\_binary\_image()}}
@@ -265,7 +278,13 @@ Find a Python set (serialized by a str() call) for a complete match inside a \do
 \begin{DoxyReturn}{Returns}
 The str\+\_\+id string that was given to the set when it was inserted. 
 \end{DoxyReturn}
-\Hypertarget{settrie_8cpp_ad453096538f0f4eb0578b41765d5da79}\label{settrie_8cpp_ad453096538f0f4eb0578b41765d5da79} 
+\Hypertarget{settrie_8cpp_a4d54df66621d54fccf95d06d31ead93a}\label{settrie_8cpp_a4d54df66621d54fccf95d06d31ead93a} 
+\index{settrie.cpp@{settrie.cpp}!get\_answer\_buffer@{get\_answer\_buffer}}
+\index{get\_answer\_buffer@{get\_answer\_buffer}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{get\_answer\_buffer()}{get\_answer\_buffer()}}
+{\footnotesize\ttfamily char \texorpdfstring{$\ast$}{*} get\+\_\+answer\+\_\+buffer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Return a buffer to write an answer that is as big as max\+\_\+id\+\_\+length. max\+\_\+id\+\_\+length tracks the largest set id used by insert. \Hypertarget{settrie_8cpp_ad453096538f0f4eb0578b41765d5da79}\label{settrie_8cpp_ad453096538f0f4eb0578b41765d5da79} 
 \index{settrie.cpp@{settrie.cpp}!image\_block\_as\_string@{image\_block\_as\_string}}
 \index{image\_block\_as\_string@{image\_block\_as\_string}!settrie.cpp@{settrie.cpp}}
 \doxysubsubsection{\texorpdfstring{image\_block\_as\_string()}{image\_block\_as\_string()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
@@ -485,6 +504,19 @@ Saves a \doxylink{classSetTrie}{Set\+Trie} object as a Binary\+Image.
 \begin{DoxyReturn}{Returns}
 0 on error, or a binary\+\_\+image\+\_\+id \texorpdfstring{$>$}{>} 0 which is the same as st\+\_\+id and must be destroyed using \doxylink{settrie_8cpp_ab1ff5515808234d01e24e52cedf6f35f}{destroy\+\_\+binary\+\_\+image()} 
 \end{DoxyReturn}
+\Hypertarget{settrie_8cpp_aad2d84c7bef5a0a4dc98184ab9246233}\label{settrie_8cpp_aad2d84c7bef5a0a4dc98184ab9246233} 
+\index{settrie.cpp@{settrie.cpp}!set\_answer\_buffer\_size@{set\_answer\_buffer\_size}}
+\index{set\_answer\_buffer\_size@{set\_answer\_buffer\_size}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{set\_answer\_buffer\_size()}{set\_answer\_buffer\_size()}}
+{\footnotesize\ttfamily void set\+\_\+answer\+\_\+buffer\+\_\+size (\begin{DoxyParamCaption}\item[{int}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Check if the current set id is larger than max\+\_\+id\+\_\+length. If so, reallocate the buffer to the new size.
+
+
+\begin{DoxyParams}{Parameters}
+{\em size} & The new size of the id. \\
+\hline
+\end{DoxyParams}
 \Hypertarget{settrie_8cpp_aaab9be65216fd6ac61c05647b52ea7a1}\label{settrie_8cpp_aaab9be65216fd6ac61c05647b52ea7a1} 
 \index{settrie.cpp@{settrie.cpp}!set\_name@{set\_name}}
 \index{set\_name@{set\_name}!settrie.cpp@{settrie.cpp}}
@@ -554,12 +586,6 @@ Find all the supersets of a given Python set (serialized by a str() call) stored
 \doxysubsubsection{\texorpdfstring{answer\_block}{answer\_block}}
 {\footnotesize\ttfamily char answer\+\_\+block\mbox{[}8208\mbox{]}}
 
-\Hypertarget{settrie_8cpp_a3ce3af741592ed7c6bbc6bca94a81ca7}\label{settrie_8cpp_a3ce3af741592ed7c6bbc6bca94a81ca7} 
-\index{settrie.cpp@{settrie.cpp}!answer\_buffer@{answer\_buffer}}
-\index{answer\_buffer@{answer\_buffer}!settrie.cpp@{settrie.cpp}}
-\doxysubsubsection{\texorpdfstring{answer\_buffer}{answer\_buffer}}
-{\footnotesize\ttfamily char answer\+\_\+buffer\mbox{[}8192\mbox{]}}
-
 \Hypertarget{settrie_8cpp_a63970901e1960b660aeaf8737ca44f4c}\label{settrie_8cpp_a63970901e1960b660aeaf8737ca44f4c} 
 \index{settrie.cpp@{settrie.cpp}!b64chars@{b64chars}}
 \index{b64chars@{b64chars}!settrie.cpp@{settrie.cpp}}
@@ -601,4 +627,16 @@ Find all the supersets of a given Python set (serialized by a str() call) stored
 \index{iterator@{iterator}!settrie.cpp@{settrie.cpp}}
 \doxysubsubsection{\texorpdfstring{iterator}{iterator}}
 {\footnotesize\ttfamily \mbox{\hyperlink{settrie_8cpp_aeb902765eaed9ee8c1e50b938126baab}{Iter\+Server}} iterator = \{\}}
+
+\Hypertarget{settrie_8cpp_a92dc52210d23608a4b5c584372cec08c}\label{settrie_8cpp_a92dc52210d23608a4b5c584372cec08c} 
+\index{settrie.cpp@{settrie.cpp}!max\_id\_length@{max\_id\_length}}
+\index{max\_id\_length@{max\_id\_length}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{max\_id\_length}{max\_id\_length}}
+{\footnotesize\ttfamily int max\+\_\+id\+\_\+length = 1024}
+
+\Hypertarget{settrie_8cpp_ad043843eb7abe86eb0a5cd7f31f357da}\label{settrie_8cpp_ad043843eb7abe86eb0a5cd7f31f357da} 
+\index{settrie.cpp@{settrie.cpp}!p\_answer@{p\_answer}}
+\index{p\_answer@{p\_answer}!settrie.cpp@{settrie.cpp}}
+\doxysubsubsection{\texorpdfstring{p\_answer}{p\_answer}}
+{\footnotesize\ttfamily char\texorpdfstring{$\ast$}{*} p\+\_\+answer = nullptr}
 
