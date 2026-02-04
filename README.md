@@ -50,6 +50,21 @@ The API is very easy to use. You can see this benchmark notebook for reference.
 
 ## Install
 
+> [!IMPORTANT]
+> This package contains a C++ extension. You need Python development headers installed to build it from source.
+>
+> If you experience installation issues, you can try:
+>
+> **Linux (Ubuntu/Debian)**
+> `sudo apt install python3-dev build-essential`
+>
+> **macOS**
+> `xcode-select --install`
+>
+> **Windows**
+> Install *Microsoft C++ Build Tools* (Desktop development with C++):
+> https://visualstudio.microsoft.com/visual-cpp-build-tools/
+
 ```bash
 pip install mercury-settrie
 ```
