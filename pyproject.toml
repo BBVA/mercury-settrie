@@ -7,7 +7,7 @@ name			= 'mercury-settrie'
 version			= '1.5.1'
 description		= 'A SetTrie is a container of sets that performs efficient subset and superset queries.'
 license			= {file = "LICENSE.txt"}
-requires-python = '>=3.8'
+requires-python = '>=3.10'
 classifiers		= ['Programming Language :: Python :: 3',
 					'License :: OSI Approved :: Apache Software License',
 					'Operating System :: OS Independent']
