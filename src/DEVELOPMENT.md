@@ -9,7 +9,8 @@
   * catch2 (Already included in source code)
   * doxygen 1.9.5 or better (to render C++ documentation)
   * mkdocs 1.4.2 or better (to render Python documentation)
-  * swig 4.0.2
+  * swig 4.2.0 or better
+  * lcov and genhtml (for C++ coverage reports)
   * python 3.x with appropriate paths to python.h (see Makefile)
 
 ### Setting the IDE:
@@ -76,4 +77,3 @@ have to do some guesswork.
 
 An easier way to contribute is to create a new issue. If the idea is accepted, we will create a branch for you and start working on
 how to implement it.
-

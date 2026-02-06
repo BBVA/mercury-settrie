@@ -1,20 +1,23 @@
 help:
 	@echo ""
 	@echo "make [void],"
-	@echo "make help    : Show this help."
+	@echo "make help     : Show this help."
 	@echo ""
-	@echo "make settrie : Make the command line settrie executable"
-	@echo "make test    : Make the DEBUG&TEST settrie executable."
-	@echo "make doc_cpp : Build the settrie C++ documentation."
-	@echo "make doc_py  : Build the settrie Python documentation."
+	@echo "make settrie  : Make the command line settrie executable"
+	@echo "make test     : Make the DEBUG&TEST settrie executable."
+	@echo "make test_cov : Make the DEBUG&TEST reels executable with coverage analysis."
+	@echo "make doc_cpp  : Build the settrie C++ documentation."
+	@echo "make doc_py   : Build the settrie Python documentation."
 	@echo ""
-	@echo "make clean   : Clean up all files not stored in the repo."
-	@echo "make package : Clean, compile all and build the Python settrie package."
+	@echo "make clean    : Clean up all files not stored in the repo."
+	@echo "make package  : Clean, compile all and build the Python settrie package."
+	@echo "make analyze  : Make, run, analyze the coverage and generate html report."
 
 	@echo ""
 
 RFLAGS := -DNDEBUG -O3
 TFLAGS := -DDEBUG -DTEST -g
+CFLAGS := -DDEBUG -DTEST -g --coverage -fprofile-update=atomic
 
 ifneq ("$(wildcard mode_release)","")
 	CPPFLAGS := $(RFLAGS)
@@ -22,6 +25,10 @@ endif
 
 ifneq ("$(wildcard mode_test)","")
 	CPPFLAGS := $(TFLAGS)
+endif
+
+ifneq ("$(wildcard mode_cov)","")
+	CPPFLAGS := $(CFLAGS)
 endif
 
 CXXFLAGS := -std=c++11 -Isettrie -Icatch2
@@ -43,6 +50,12 @@ mode_test:
 	@touch mode_test
 	$(eval CPPFLAGS = $(TFLAGS))
 
+mode_cov:
+	@echo "Switching to mode DEBUG&TEST with coverage analysis ..."
+	@make clean
+	@touch mode_cov
+	$(eval CPPFLAGS = $(CFLAGS))
+
 settrie: mode_release st_main.o settrie.o
 	@echo "Making settrie as settrie_cli ..."
 	g++ -o settrie_cli st_main.o settrie.o
@@ -51,12 +64,17 @@ test: mode_test st_main.o settrie.o
 	@echo "Making settrie as settrie_test ..."
 	g++ -o settrie_test st_main.o settrie.o
 
+test_cov: mode_cov st_main.o settrie.o
+	@echo "Making settrie as settrie_cov ..."
+	g++ --coverage -o settrie_cov st_main.o settrie.o
+
 .PHONY : clean
 clean:
 	@echo "Cleaning up all files not stored in the repo ..."
-	@rm -f *.o settrie_cli settrie_test mode_* errors.log .coverage
+	@rm -f *.o *.gcno *.gcda settrie_cli settrie_test settrie_cov mode_* errors.log .coverage
 	@rm -f settrie/*.so settrie/*.o
 	@rm -f logs/*
+	@rm -rf coverage.info coverage_html
 	@find . | grep __pycache__ | xargs rm -rf
 	@find . | grep .ipynb_checkpoints | xargs rm -rf
 	@rm -rf ../reference ../build ../dist ../mercury_settrie.egg-info mercury_settrie.egg-info ../.pytest_cache
@@ -76,7 +94,15 @@ doc_py:
 package: mode_release
 	g++ -c -fpic -O3 -std=c++11 -Isettrie -DNDEBUG -o settrie.o settrie/settrie.cpp
 	cd settrie && swig -python -o py_settrie_wrap.cpp py_settrie.i && mv py_settrie.py __init__.py && cat ../version.py >>__init__.py && cat imports.in >>__init__.py
-	g++ -c -fpic -O3 settrie/py_settrie_wrap.cpp -Dpython -I/usr/include/python3.10 -I/usr/include/python3.11 -I/usr/include/python3.12
+	g++ -c -fpic -O3 settrie/py_settrie_wrap.cpp -Dpython -I/usr/include/python3.10 -I/usr/include/python3.11 -I/usr/include/python3.12 -I/usr/include/python3.13
 	g++ -shared settrie.o py_settrie_wrap.o -o settrie/_py_settrie.so
 	@printf "\nPython 3.x package was built locally in the folder './settrie'.\n"
 	@printf "\nYou can run 'import settrie' for here or ./test.sh to test it!\n"
+
+.PHONY	: analyze
+analyze: test_cov
+	@./settrie_cov
+	@lcov --capture --directory . --output-file coverage.info --rc geninfo_unexecuted_blocks=1
+	@lcov --remove coverage.info '/usr/include/*' '*catch2*' --output-file coverage.info
+	@genhtml coverage.info --output-directory coverage_html
+	@printf "\nCoverage report generated in the folder './coverage_html'.\n"

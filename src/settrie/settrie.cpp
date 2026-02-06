@@ -684,7 +684,7 @@ uint8_t	   b64inverse[256] = {0};
 
 char *image_block_as_string(uint8_t *p_in) {
 
-	char *p_out	  = (char *) &answer_block;
+	char *p_out	= (char *) &answer_block;
 
 	uint8_t v, w;
 	for (int i = 0; i < 2048; i++) {
@@ -1119,7 +1119,7 @@ extern int remove (int st_id, int set_id) {
 	\param st_id   The st_id returned by a previous new_settrie() call.
 	\param dry_run If nonzero, does nothing and returns the number of dirty nodes.
 
-	\return		   A positive num_dirty_nodes on dry_run, zero on successful completion or a negative error code.
+	\return		   A positive num_dirty_nodes on dry_run, zero on successful completion or a negative if nothing was done.
 */
 extern int purge (int st_id, int dry_run) {
 
@@ -1772,6 +1772,16 @@ SCENARIO("Test image_block_as_string() / string_as_image_block()") {
 	ImageBlock block2;
 
 	REQUIRE(string_as_image_block(block2, p_str));
+	char c = p_str[3]; p_str[3] = '_';
+	REQUIRE(!string_as_image_block(block2, p_str));
+	p_str[3] = c; c = p_str[2]; p_str[2] = ' ';
+	REQUIRE(!string_as_image_block(block2, p_str));
+	p_str[2] = c; c = p_str[1]; p_str[1] = ' ';
+	REQUIRE(!string_as_image_block(block2, p_str));
+	p_str[1] = c; c = p_str[0]; p_str[0] = ' ';
+	REQUIRE(!string_as_image_block(block2, p_str));
+	p_str[0] = c;
+	REQUIRE(string_as_image_block(block2, p_str));
 
 	for (int ofs = 0; ofs < 8; ofs++) {
 		block.size = IMAGE_BUFF_SIZE;
@@ -1950,6 +1960,12 @@ SCENARIO("Test SetTrie.save() / SetTrie.load()") {
 
 	REQUIRE(B.load(p_bi));
 
+	SetTrie C;
+
+	(*p_bi)[0].size = 123;	// Corrupt the image
+
+	REQUIRE(!C.load(p_bi));
+
 	delete p_bi;
 
 	REQUIRE(B.supersets("c e", ' ').size()	== 3);
@@ -1963,9 +1979,23 @@ SCENARIO("Test save_as_binary_image() / push_binary_image_block(), etc.") {
 
 	int a = new_settrie();
 	int b = new_settrie();
+	int c = new_settrie();
 
 	REQUIRE(a > 0);
 	REQUIRE(b > 0);
+	REQUIRE(c > 0);
+
+	GIVEN("I want to improve error coverage") {
+		destroy_iterator(7654321);
+		REQUIRE(iterator_size(7654321) == 0);
+		REQUIRE(binary_image_size(7654321) == 0);
+		REQUIRE(binary_image_next(7654321) != nullptr);
+		REQUIRE(strlen(binary_image_next(7654321)) == 0);
+		REQUIRE(push_binary_image_block(7654321, (char *) "") == false);
+		REQUIRE(push_binary_image_block(7654321, (char *) "test") == false);
+		REQUIRE(save_as_binary_image(7654321) == 0);
+		REQUIRE(supersets(7654321, (char *) "test") == 0);
+	}
 
 	GIVEN("I load something to use supersets()") {
 		insert(a, (char *) "a,b",				(char *) "sup01");
@@ -2098,6 +2128,7 @@ SCENARIO("Test save_as_binary_image() / push_binary_image_block(), etc.") {
 				REQUIRE(strlen(p_base64) == 8192);
 
 				REQUIRE(push_binary_image_block(b, p_base64));
+				REQUIRE(!push_binary_image_block(c, (char *) "_.invalid._"));
 			}
 			REQUIRE(binary_image_size(i_a) == 0);
 			destroy_binary_image(i_a);
@@ -2185,6 +2216,7 @@ SCENARIO("Test save_as_binary_image() / push_binary_image_block(), etc.") {
 			}
 		}
 	}
+	destroy_settrie(c);
 	destroy_settrie(b);
 	destroy_settrie(a);
 }
@@ -2224,6 +2256,7 @@ SCENARIO("Test python_set_as_string()") {
 	s = python_set_as_string((char *) "frozenset({1, 2, 345})");	REQUIRE(s == "1,2,345");
 	s = python_set_as_string((char *) "frozenset({1,  2, 345})");	REQUIRE(s == "1,2,345");
 	s = python_set_as_string((char *) "frozenset({1,  2, '345'})");	REQUIRE(s == "1,2,'345'");
+	s = python_set_as_string((char *) "frozenset({1, 2}");			REQUIRE(s == "");
 
 	// Replace commas inside quotes by \x82.
 
@@ -2376,10 +2409,12 @@ SCENARIO("Test the Python interface parts") {
 				int q1 = subsets(st3, (char *) "1,2,3,4,5,x,y");
 				int q2 = subsets(st3, (char *) "1,2,x,y");
 				int q3 = subsets(st3, (char *) "1,x,y");
+				int q4 = subsets(st3, (char *) "a,b,c");
 
 				REQUIRE(iterator_size(q1) == 5);
 				REQUIRE(iterator_size(q2) == 3);
 				REQUIRE(iterator_size(q3) == 2);
+				REQUIRE(q4 == 0);
 
 				int mask = 0;
 				String s;
@@ -2443,6 +2478,127 @@ SCENARIO("Test the Python interface parts") {
 	destroy_settrie(st1);
 	destroy_settrie(st2);
 	destroy_settrie(st3);
+}
+
+
+SCENARIO("Extended Python interface tests") {
+
+	GIVEN("I want to test the answer buffer") {
+		char *pt = get_answer_buffer();
+		REQUIRE(pt != nullptr);
+
+		set_answer_buffer_size(8000);
+		REQUIRE(get_answer_buffer() != nullptr);
+		REQUIRE(get_answer_buffer() != pt);
+		cleanup_globals();
+	}
+
+	int st1 = new_settrie();
+	int st2 = new_settrie();
+	int st3 = new_settrie();
+	int st4 = new_settrie();
+
+	REQUIRE(num_sets(7654321) == -1);
+	REQUIRE(subsets(7654321, (char *) "a,b") == 0);
+	REQUIRE(elements(7654321, 0) == 0);
+	REQUIRE(elements(7654321, 1) == 0);
+	REQUIRE(next_set_id(7654321, 0) == -3);
+
+	GIVEN("I load something to use remove/purge()") {
+		insert(st1, (char *) "set()",	  (char *) "empty_set");
+		insert(st1, (char *) "1,3,5",	  (char *) "find1");
+		insert(st1, (char *) "1,2,3,4,5", (char *) "find2");
+		insert(st1, (char *) "1,2,x",	  (char *) "find3");
+		insert(st2, (char *) "a,b",				  (char *) "sup01");
+		insert(st2, (char *) "a,c,d",			  (char *) "sup02");
+		insert(st2, (char *) "a,c,e",			  (char *) "sup03");
+		insert(st2, (char *) "a,c,d,e",			  (char *) "sup04");
+		insert(st2, (char *) "b,d",				  (char *) "sup05");
+		insert(st2, (char *) "c,d",				  (char *) "sup06");
+		insert(st2, (char *) "c,e",				  (char *) "sup07");
+		insert(st2, (char *) "c,d,e,f",			  (char *) "sup08");
+		insert(st2, (char *) "c,d,n",			  (char *) "sup09");
+		insert(st2, (char *) "c,d,e,f,x",		  (char *) "sup10");
+		insert(st2, (char *) "c,d,e,f,y",		  (char *) "sup11");
+		insert(st2, (char *) "c,d,e,f,y,z",		  (char *) "sup12");
+		insert(st2, (char *) "d,e",				  (char *) "sup13");
+		insert(st2, (char *) "e,a,b,d,f,n,x,y,z", (char *) "sup14");
+		insert(st2, (char *) "c",				  (char *) "sup15");
+		insert(st2, (char *) "e,y,z,c",			  (char *) "sup16");
+		insert(st3, (char *) "1,3,5",	  (char *) "sub1");
+		insert(st3, (char *) "1,2,3,4,5", (char *) "sub2");
+		insert(st3, (char *) "1,2,x",	  (char *) "sub3");
+		insert(st3, (char *) "1,x",		  (char *) "sub4");
+		insert(st3, (char *) "1,y",		  (char *) "sub5");
+
+		REQUIRE(num_sets(st1) == 4);
+		REQUIRE(num_sets(st2) == 16);
+		REQUIRE(num_sets(st3) == 5);
+		REQUIRE(num_sets(st4) == 0);
+
+		REQUIRE(next_set_id(st1, -1) == 0);		// The empty set.
+		REQUIRE(next_set_id(st2, -1) > 0);		// The first element.
+		REQUIRE(next_set_id(st3, -1) > 0);		// The first element.
+		REQUIRE(next_set_id(st4, -1) == -2);	// The object is empty.
+		WHEN("I check the set names and elements") {
+			int ix = next_set_id(st1, -1);
+			while (ix >= 0) {
+				int j = elements(st1, ix);
+
+				if (ix == 0) {
+					REQUIRE(j == 0);	// The empty set has no elements.
+				} else {
+					REQUIRE(j > 0);		// The other sets have some elements.
+					destroy_iterator(j);
+				}
+
+				ix = next_set_id(st1, ix);
+			}
+
+			ix = next_set_id(st2, -1);
+			while (ix >= 0) {
+				char *pt = set_name(st2, ix);
+				REQUIRE((pt[0] == 's' && pt[1] == 'u' && pt[2] == 'p'));
+				int j = elements(st2, ix);
+
+				destroy_iterator(j);
+
+				ix = next_set_id(st2, ix);
+			}
+		}
+	}
+
+	int rm_idx = -1;
+	int ix = next_set_id(st2, -1);
+	while (ix >= 0) {
+		char *pt = set_name(st2, ix);
+		if (strcmp(pt, "sup09") == 0)
+			rm_idx = ix;
+
+		ix = next_set_id(st2, ix);
+	}
+	if (rm_idx >= 0) {
+		REQUIRE(purge(7654321, false) == -1);
+		REQUIRE(purge(st2, false) == -1);		// Negative when nothing was done
+		REQUIRE(purge(st2, true) == 0);			// On dry run, 0 dirty nodes.
+
+		REQUIRE(remove(st2, rm_idx) == 0);
+		REQUIRE(remove(7654321, rm_idx) == -1);
+
+		int dirty = purge(st2, true);
+		REQUIRE(dirty > 0);						// On dry run, has dirty nodes.
+		REQUIRE(purge(st2, true)  == dirty);	// Which stay dirty until we actually purge.
+		REQUIRE(purge(st2, false) == 0);		// Successfully purged.
+		REQUIRE(purge(st2, true)  == 0);		// On dry run, 0 dirty nodes.
+		REQUIRE(purge(st2, false) == -1);		// Instructed to purge, but nothing to purge
+
+		destroy_settrie(87654321);
+	}
+
+	destroy_settrie(st1);
+	destroy_settrie(st2);
+	destroy_settrie(st3);
+	destroy_settrie(st4);
 }
 
 

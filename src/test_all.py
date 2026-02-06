@@ -397,10 +397,15 @@ def test_issue_23():
 
 
 def test_create_tutorials():
-    with patch('pkg_resources.resource_filename', return_value = '../notebooks'):
-        create_tutorials('.', silent = False)
+	# Silently remove the full tree './reels_tutorials/'
+	shutil.rmtree('./settrie_tutorials', ignore_errors = True)
 
-    shutil.rmtree('./settrie_tutorials')
+	create_tutorials('./')
+
+	assert os.path.isfile('./settrie_tutorials/settrie_benchmark.ipynb')
+
+	# Clean up
+	shutil.rmtree('./settrie_tutorials', ignore_errors = True)
 
 
 # test_basic()
