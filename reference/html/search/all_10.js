@@ -61,7 +61,7 @@ var searchData=
   ['swig_5fdeltmpmask_58',['SWIG_DelTmpMask',['../py__settrie__wrap_8cpp.html#ac08b44ea4ae9f73b19d915969f301a5d',1,'py_settrie_wrap.cpp']]],
   ['swig_5fdivisionbyzero_59',['SWIG_DivisionByZero',['../py__settrie__wrap_8cpp.html#ae4cc0f5599402526dd5c2fdb80d87517',1,'py_settrie_wrap.cpp']]],
   ['swig_5fdycast_5ffunc_60',['swig_dycast_func',['../py__settrie__wrap_8cpp.html#a9def33514f88f4c4012c02865e657fc9',1,'py_settrie_wrap.cpp']]],
-  ['swig_5ferror_61',['swig_error',['../py__settrie__wrap_8cpp.html#acfa11a770d66f9ca6ba170b173c56c94',1,'SWIG_ERROR:&#160;py_settrie_wrap.cpp'],['../py__settrie__wrap_8cpp.html#a01b485cfacae7d870729eea43fb17cb0',1,'SWIG_Error:&#160;py_settrie_wrap.cpp']]],
+  ['swig_5ferror_61',['swig_error',['../py__settrie__wrap_8cpp.html#a01b485cfacae7d870729eea43fb17cb0',1,'SWIG_Error:&#160;py_settrie_wrap.cpp'],['../py__settrie__wrap_8cpp.html#acfa11a770d66f9ca6ba170b173c56c94',1,'SWIG_ERROR:&#160;py_settrie_wrap.cpp']]],
   ['swig_5ferror_5frelease_5fnot_5fowned_62',['SWIG_ERROR_RELEASE_NOT_OWNED',['../py__settrie__wrap_8cpp.html#ac3437dedff11d7079dde741a1996587f',1,'py_settrie_wrap.cpp']]],
   ['swig_5ferrortype_63',['SWIG_ErrorType',['../py__settrie__wrap_8cpp.html#a21d4e75f4bb2519f73467e922c7b51d7',1,'py_settrie_wrap.cpp']]],
   ['swig_5fexception_5ffail_64',['SWIG_exception_fail',['../py__settrie__wrap_8cpp.html#a567b84b185b0f14620c063787f998109',1,'py_settrie_wrap.cpp']]],

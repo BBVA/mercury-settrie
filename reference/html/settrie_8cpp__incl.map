@@ -1,25 +1,25 @@
 <map id="settrie/settrie.cpp" name="settrie/settrie.cpp">
-<area shape="rect" id="Node000001" title=" " alt="" coords="177,5,314,31"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,85,104"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="214,33,92,76,90,71,212,28"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="110,79,183,104"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="231,33,175,73,172,68,228,29"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="208,79,283,104"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="248,31,248,65,243,65,243,31"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="307,79,378,104"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="263,29,317,68,314,72,259,33"/>
-<area shape="rect" id="Node000006" href="$settrie_8h.html" title=" " alt="" coords="402,79,478,104"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="278,28,396,71,395,76,276,33"/>
-<area shape="rect" id="Node000007" title=" " alt="" coords="153,152,239,177"/>
-<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="403,106,249,151,248,146,401,101"/>
-<area shape="rect" id="Node000008" title=" " alt="" coords="263,152,350,177"/>
-<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="420,106,342,148,339,143,417,102"/>
-<area shape="rect" id="Node000009" title=" " alt="" coords="375,152,425,177"/>
-<area shape="poly" id="edge8_Node000006_Node000009" title=" " alt="" coords="436,106,416,141,411,139,431,103"/>
-<area shape="rect" id="Node000010" title=" " alt="" coords="449,152,508,177"/>
-<area shape="poly" id="edge9_Node000006_Node000010" title=" " alt="" coords="449,103,468,139,464,141,444,106"/>
-<area shape="rect" id="Node000011" title=" " alt="" coords="533,152,595,177"/>
-<area shape="poly" id="edge10_Node000006_Node000011" title=" " alt="" coords="461,102,533,143,531,147,459,106"/>
-<area shape="rect" id="Node000012" title=" " alt="" coords="620,152,687,177"/>
-<area shape="poly" id="edge11_Node000006_Node000012" title=" " alt="" coords="475,101,608,145,606,151,473,107"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="165,5,288,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,77,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="198,33,85,76,83,71,196,28"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="101,79,168,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="214,33,162,72,159,68,210,29"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="192,79,261,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="229,31,229,65,224,65,224,31"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="286,79,351,104"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="243,29,295,68,291,72,240,33"/>
+<area shape="rect" id="Node000006" href="$settrie_8h.html" title=" " alt="" coords="376,79,445,104"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="257,28,369,71,367,76,255,33"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="148,152,223,177"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="377,106,236,150,234,145,375,101"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="247,152,326,177"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="392,106,320,147,317,143,389,102"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="350,152,397,177"/>
+<area shape="poly" id="edge8_Node000006_Node000009" title=" " alt="" coords="407,106,388,141,383,139,402,103"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="421,152,475,177"/>
+<area shape="poly" id="edge9_Node000006_Node000010" title=" " alt="" coords="419,103,438,139,433,141,414,106"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="500,152,559,177"/>
+<area shape="poly" id="edge10_Node000006_Node000011" title=" " alt="" coords="431,102,499,142,497,147,428,106"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="583,152,644,177"/>
+<area shape="poly" id="edge11_Node000006_Node000012" title=" " alt="" coords="444,102,570,146,569,151,442,107"/>
 </map>

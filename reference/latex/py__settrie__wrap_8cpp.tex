@@ -62,10 +62,6 @@ struct \mbox{\hyperlink{structSwigPyPacked}{Swig\+Py\+Packed}}
 \item 
 \#define \mbox{\hyperlink{py__settrie__wrap_8cpp_a163b0c8db0f7dad876951049234859a1}{SWIG\+\_\+\+NULLPTR}}~NULL
 \item 
-\#define \mbox{\hyperlink{py__settrie__wrap_8cpp_af89759ae0d1c7c97b041cdf570979866}{SWIG\+\_\+snprintf}}(O,  S,  F,  A)~sprintf(O,F,A)
-\item 
-\#define \mbox{\hyperlink{py__settrie__wrap_8cpp_a0e8b9bdfe67cfb21b1980f99b4cd3478}{SWIG\+\_\+snprintf2}}(O,  S,  F,  A,  B)~sprintf(O,F,A,B)
-\item 
 \#define \mbox{\hyperlink{py__settrie__wrap_8cpp_ac9efdaac9411d0868b715edccca3269d}{PY\+\_\+\+SSIZE\+\_\+\+T\+\_\+\+CLEAN}}
 \item 
 \#define \mbox{\hyperlink{py__settrie__wrap_8cpp_a4895907de5539551925ab5c03ea05d28}{SWIG\+\_\+\+RUNTIME\+\_\+\+VERSION}}~"{}4"{}
@@ -129,6 +125,10 @@ struct \mbox{\hyperlink{structSwigPyPacked}{Swig\+Py\+Packed}}
 \#define \mbox{\hyperlink{py__settrie__wrap_8cpp_a4f6f5e0444e44e48aef51f6620438a5f}{SWIG\+\_\+\+Add\+Cast}}(r)~(r)
 \item 
 \#define \mbox{\hyperlink{py__settrie__wrap_8cpp_a1faed8ca17e98c961611bc35fde708a9}{SWIG\+\_\+\+Check\+State}}(r)~(\mbox{\hyperlink{py__settrie__wrap_8cpp_aea8ef410fde907633cb76d9d18131fa1}{SWIG\+\_\+\+Is\+OK}}(r) ? 1 \+: 0)
+\item 
+\#define \mbox{\hyperlink{py__settrie__wrap_8cpp_af89759ae0d1c7c97b041cdf570979866}{SWIG\+\_\+snprintf}}(O,  S,  F,  A)~sprintf(O,F,A)
+\item 
+\#define \mbox{\hyperlink{py__settrie__wrap_8cpp_a0e8b9bdfe67cfb21b1980f99b4cd3478}{SWIG\+\_\+snprintf2}}(O,  S,  F,  A,  B)~sprintf(O,F,A,B)
 \item 
 \#define \mbox{\hyperlink{py__settrie__wrap_8cpp_a45817cd389e6f40d0ffb004ff0678031}{SWIG\+\_\+\+Unknown\+Error}}~-\/1
 \item 
@@ -1756,7 +1756,7 @@ Purges (reassigns node integer ids and frees RAM) after a series of \doxylink{se
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-A positive num\+\_\+dirty\+\_\+nodes on dry\+\_\+run, zero on successful completion or a negative error code. 
+A positive num\+\_\+dirty\+\_\+nodes on dry\+\_\+run, zero on successful completion or a negative if nothing was done. 
 \end{DoxyReturn}
 \Hypertarget{py__settrie__wrap_8cpp_a77b967a5cb92850951a315b13c08c8c5}\label{py__settrie__wrap_8cpp_a77b967a5cb92850951a315b13c08c8c5} 
 \index{py\_settrie\_wrap.cpp@{py\_settrie\_wrap.cpp}!push\_binary\_image\_block@{push\_binary\_image\_block}}
