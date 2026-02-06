@@ -123,7 +123,7 @@ def cleanup_globals():
     return _py_settrie.cleanup_globals()
 
 # The source version file is <proj>/src/version.py, anything else is auto generated.
-__version__ = '1.5.1'
+__version__ = '1.6.3'
 from settrie.SetTrie import SetTrie
 from settrie.SetTrie import Result
 from settrie.create_tutorials import create_tutorials

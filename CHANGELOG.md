@@ -1,9 +1,10 @@
-## Latest version 1.5.1
+## Latest version 1.6.3
 
 ## Deployed
 
 | Release  | Date | Main feature(s) |
 | -------- | ---- | --------------- |
+| 1.6.3 | 2026/02/09 | Adds support for C++ coverage using lcov and reporting using genhtml, extends testing, fixes issues with the pipeline and dependencies. Upgrades swig wrapper. Improves documentation and tutorial. |
 | 1.5.1 | 2025/05/07 | Fixes issue related with large set IDs: https://github.com/BBVA/mercury-settrie/issues/23 |
 | 1.4.8 | 2025/02/06 | Implements create_tutorials(), adds support for python 3.13, improves documentation. |
 | 1.4.7 | 2024/03/14 | Minor fix to remove(). |
